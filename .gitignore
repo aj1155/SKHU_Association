@@ -1,0 +1,42 @@
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+classes
+out
+gradlew.bat
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### oozie ###
+target/
+
+
+### front-end ###
+llpt-dashboard/npm-debug.log
+llpt-dashboard/client-config/coverage
+llpt-dashboard/.awcache
+llpt-dashboard/node_modules
+
+### ete ###
+*.swp
+.DS_Store
