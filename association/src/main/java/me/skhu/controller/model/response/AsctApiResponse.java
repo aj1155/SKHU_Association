@@ -1,8 +1,7 @@
 package me.skhu.controller.model.response;
 
 /**
- * Created by 1002731 on 2016. 12. 30..
- * Email : eenan@sk.com
+ * Created by Manki Kim on 2016. 12. 30..
  */
 public class AsctApiResponse<T> {
     //Common
