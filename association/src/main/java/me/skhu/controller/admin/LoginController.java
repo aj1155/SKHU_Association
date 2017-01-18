@@ -1,4 +1,4 @@
-package me.skhu.controller;
+package me.skhu.controller.admin;
 
 
 import me.skhu.controller.model.request.TokenManagerRequest;
@@ -10,14 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
 /**
  * Created by USER on 2017-01-06.
  */
-@RestController
 @RequestMapping(value = "/login")
 public class LoginController {
 

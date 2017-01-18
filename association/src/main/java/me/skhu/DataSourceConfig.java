@@ -1,8 +1,10 @@
 package me.skhu;
 
+import org.springframework.context.annotation.Configuration;
+
 /**
- * Created by 1002731 on 2016. 12. 30..
- * Email : eenan@sk.com
+ * Created by manki kim on 2016. 12. 30..
  */
+@Configuration
 public class DataSourceConfig {
 }
