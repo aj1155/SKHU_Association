@@ -26,3 +26,4 @@ nbdist/
 
 ### DataResource ###
 DB.yml
+/bin/

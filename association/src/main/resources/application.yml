@@ -1,3 +1,9 @@
 spring.application.name: asct
 
 dashboard.url: http://127.0.0.1
+
+spring:
+  mvc:
+    view:
+      suffix: .jsp
+      prefix: /WEB-INF/views/
