@@ -47,10 +47,9 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
-    /*Todo path로
     @Column(name = "image")
     private String image;
-    */
+
     @Column(name = "category_id")
     private int categoryId;
 
