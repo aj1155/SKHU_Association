@@ -7,18 +7,18 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by USER on 2017-01-18.
+ * Created by Manki Ki on 2017-01-18.
  */
 @Entity
 @Getter
 @Setter
 @Table(name = "user")
-public class User extends BaseEntity implements Serializable {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "login_id")
     private String loginId;
@@ -47,12 +47,10 @@ public class User extends BaseEntity implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "user_type")
-    private int userType;
-
+    /*Todo path로
     @Column(name = "image")
-    private  String image;
-
+    private String image;
+    */
     @Column(name = "category_id")
     private int categoryId;
 

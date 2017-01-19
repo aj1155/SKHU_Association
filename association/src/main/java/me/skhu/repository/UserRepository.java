@@ -10,6 +10,6 @@ import java.util.List;
  * Created by Manki Kim on 2017-01-18.
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findByCategoryId(int categoryId);
 }
