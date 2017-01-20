@@ -2,6 +2,7 @@ package me.skhu.controller.api;
 
 import me.skhu.controller.model.response.AsctApiResponse;
 import me.skhu.controller.model.response.UserResponse;
+import me.skhu.service.JwtTokenService;
 import me.skhu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,9 +22,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtTokenService jwtTokenService;
+
     @RequestMapping(value = {"/list/category/{categoryId}"},method = RequestMethod.GET)
-    public AsctApiResponse<List<UserResponse>> readUserByCategoryId(@PathVariable String cId){
-        List<UserResponse> list = this.userService.readUserByCategoryId(Integer.parseInt(cId));
+    public AsctApiResponse<List<UserResponse>> readUserByCategoryId(@PathVariable String categoryId){
+        List<UserResponse> list = this.userService.readUserByCategoryId(Integer.parseInt(categoryId));
         return new AsctApiResponse<>(list);
     }
 }

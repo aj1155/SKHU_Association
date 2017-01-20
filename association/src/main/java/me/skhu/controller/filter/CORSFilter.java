@@ -5,8 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by 1002731 on 2016. 12. 30..
- * Email : eenan@sk.com
+ * Created by manki Kim on 2016. 12. 30..
  */
 public class CORSFilter implements Filter {
 
@@ -26,7 +25,8 @@ public class CORSFilter implements Filter {
 
         HttpServletResponse response = (HttpServletResponse) res;
         response.addHeader("Access-Control-Max-Age", Integer.toString(1800));
-        response.addHeader("Access-Control-Allow-Origin", this.dashboardUrl);
+        //response.addHeader("Access-Control-Allow-Origin", this.dashboardUrl);
+        response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-requested-with");
         response.addHeader("Access-Control-Allow-Credentials", "true");

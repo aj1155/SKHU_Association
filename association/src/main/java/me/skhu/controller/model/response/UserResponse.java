@@ -37,7 +37,7 @@ public class UserResponse {
         this.status = user.getStatus();
         this.birth = user.getBirth();
         this.email = user.getEmail();
-        //this.image = user.getImage();
+        this.image = user.getImage();
         this.categoryId = user.getCategoryId();
         this.position = user.getPosition();
     }

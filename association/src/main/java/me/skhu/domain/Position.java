@@ -13,8 +13,8 @@ public class Position {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_type")
-    private int user_type;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "name")
     private String name;
