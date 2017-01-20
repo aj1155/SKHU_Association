@@ -1,6 +1,7 @@
 package me.skhu.service;
 
 import me.skhu.controller.model.request.UserRequest;
+import me.skhu.controller.model.response.AsctApiResponse;
 import me.skhu.controller.model.response.UserResponse;
 import me.skhu.domain.User;
 import me.skhu.repository.UserRepository;
@@ -56,11 +57,34 @@ public class UserService {
         return convertUserEntityToResponse(managers);
     }
 
+    public AsctApiResponse<UserResponse> update(UserRequest userRequest){
+        User user = new User(userRequest);
+        String msg = validateBeforeUpdate(user);
+        if(msg != null){
+            return new AsctApiResponse<>(AsctApiResponse.DUPLICATE_LOGINID);
+        }else{
+            userRepository.save(user);
+            return new AsctApiResponse<>(new UserResponse(user));
+        }
+    }
+
     private List<UserResponse> convertUserEntityToResponse(List<User> userList){
         List<UserResponse> userResponses = Optional.ofNullable(userList).orElse(Collections.emptyList()).stream()
                 .map(user -> new UserResponse(user)).distinct().collect(Collectors.toList());
 
         return userResponses;
+    }
+
+
+
+    /* 유효성 검사 */
+
+    private String validateBeforeUpdate(User user) {
+        User oldUser = userRepository.findOne(user.getId());
+        if (oldUser != null && user.getLoginId() != oldUser.getLoginId())
+            return "기존에 사용 중인 휴대번호 입니다.";
+
+        return null;
     }
 
 }

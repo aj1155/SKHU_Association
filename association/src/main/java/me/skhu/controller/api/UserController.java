@@ -27,7 +27,7 @@ public class UserController {
     @Autowired
     private JwtTokenService jwtTokenService;
 
-    /****** create *****/
+    /***** create *****/
     //Todo response로 Json util 형태로 보내주기
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public AsctApiResponse<UserResponse> create(@Valid UserRequest userRequest){
@@ -35,7 +35,7 @@ public class UserController {
         return new AsctApiResponse<>(user);
     }
 
-    /****** read *****/
+    /***** read *****/
 
     /* 카테고리별 user*/
     @RequestMapping(value = "/list/category/{categoryId}",method = RequestMethod.GET)
@@ -63,6 +63,14 @@ public class UserController {
     public AsctApiResponse<List<UserResponse>> readSeniorManager(@PathVariable String categoryId,@PathVariable String grade){
         List<UserResponse> list = this.userService.readSeniorManager(Integer.parseInt(categoryId),Integer.parseInt(grade));
         return new AsctApiResponse<>(list);
+    }
+
+    /***** update *****/
+
+    /* user 정보 업데이트 */
+    @RequestMapping(value = "/update",method = RequestMethod.PUT)
+    public AsctApiResponse<UserResponse> readSeniorManager(@Valid UserRequest userRequest){
+        return this.userService.update(userRequest);
     }
 
 
