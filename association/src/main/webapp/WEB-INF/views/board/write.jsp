@@ -9,9 +9,10 @@
 <title>게시판</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
-<link
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css"
-	rel="stylesheet" media="screen">
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/editor/js/HuskyEZCreator.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resources/editor/init.js" type="text/javascript"></script>
 <style>
 ul.pagination li>.page {
 	color: blue;
@@ -53,28 +54,18 @@ ul.pagination li>.page.active:active {
 						<span>파일:</span>
 						<input type="file"/>
 					</div>
-					<textarea id="body" name="body" style="width:1000px;height:400px;"></textarea>
+					<textarea id="body" name="body" class="smarteditor2" style="width:900px;min-height:300px;"></textarea>
 
-					<div style="float:right;">
-						<button type="submit" class="btn btn-primary">
-							<i class="icon-ok icon-white"></i> 저장하기
-						</button>
-						<button type="submit" class="btn">목록으로</button>
-					</div>
-
+					
 				</form>
 			</div>
 		</div>
 		<c:import url="../commons/sidebar.jsp" />
 	</div>
 	<!-- Scripts -->
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script> 
+	<script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 </body>
 </html>
