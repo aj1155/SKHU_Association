@@ -4,7 +4,16 @@ dashboard.url: http://127.0.0.1
 
 
 
-### Jwt settings ###
+### jwt Settings ###
 jwt.secret: a1g2y47dg3dj59fjhhsd7cnewy73j
 jwt.expiration: 604800
 jwt.tokenheader: X-Auth-Token
+<<<<<<< HEAD
+=======
+
+spring:
+  mvc:
+    view:
+      suffix: .jsp
+      prefix: /WEB-INF/views/
+>>>>>>> 63f00ac062a7ae0d9ad207377868ffb468df807a
