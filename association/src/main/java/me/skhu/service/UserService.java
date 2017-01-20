@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 /**
@@ -22,6 +23,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    /***** create *****/
+
+
     public UserResponse createUser(UserRequest userRequest){
         User user = new User();
         user.setName(userRequest.getUser_name());
@@ -31,6 +35,8 @@ public class UserService {
         userRepository.save(user);
         return new UserResponse(user);
     }
+
+    /***** read *****/
 
     public List<UserResponse> readUserByCategoryId(int categoryId){
         List<User> list = this.userRepository.findByCategoryId(categoryId);
@@ -56,6 +62,13 @@ public class UserService {
                 .collect(Collectors.toList());
         return convertUserEntityToResponse(managers);
     }
+    public int getMaxGrade(int categoryId){
+        List<User> list = this.userRepository.findByCategoryId(categoryId);
+        OptionalInt max = list.stream().mapToInt(User::getGrade).max();
+        return max.getAsInt();
+    }
+
+    /***** update *****/
 
     public AsctApiResponse<UserResponse> update(UserRequest userRequest){
         User user = new User(userRequest);

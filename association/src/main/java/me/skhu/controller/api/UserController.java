@@ -31,7 +31,7 @@ public class UserController {
     //Todo response로 Json util 형태로 보내주기
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public AsctApiResponse<UserResponse> create(@Valid UserRequest userRequest){
-        UserResponse user = userService.createUser(userRequest);
+        UserResponse user = this.userService.createUser(userRequest);
         return new AsctApiResponse<>(user);
     }
 
