@@ -7,8 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/editor/js/HuskyEZCreator.js" type="text/javascript"></script>

@@ -7,11 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판1</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
-<link
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css"
-	rel="stylesheet" media="screen">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <style>
 ul.pagination li>.page {
 	color: blue;
