@@ -19,13 +19,15 @@ public class BaseEntity {
 
     /* 처음 entity가 저장될때 생성일 주입 */
     @CreatedDate
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    @Column(name = "CREATED_DATE", updatable = false)
+    //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @Type(type = "java.lang.String")
+    @Column(name = "CREATE_DATE", updatable = false)
     private DateTime createdDate;
 
     /* 엔터티가 수정될때 수정일자를 주입 */
     @LastModifiedDate
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @Type(type = "java.lang.String")
     @Column(name = "LAST_MODIFIED_DATE")
     private DateTime lastModifiedDate;
 

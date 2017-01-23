@@ -20,7 +20,7 @@ public class Comment {
 	@NotNull
 	private int id;
 
-	@JoinColumn(name= "board_id")
+	@JoinColumn(name= "board_post_id")
 	@NotNull
 	@ManyToOne
 	private BoardPost boardPost;

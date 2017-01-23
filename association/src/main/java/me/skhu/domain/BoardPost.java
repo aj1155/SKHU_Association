@@ -6,15 +6,15 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 @Builder
-@Table(name = "boardpost")
+@Table(name = "board_post")
 @Entity
-public class BoardPost {
+public class BoardPost extends BaseEntity implements Serializable {
 
 	@Id
 	@NotNull
@@ -33,16 +33,8 @@ public class BoardPost {
 	private String content;
 
 	@NotNull
-	@Column(name = "create_time")
-	private Date createTime;
-
-	@NotNull
-	@Column(name = "modified_time")
-	private Date modifiedTime;
-
-	@NotNull
-	@Column(name = "board_id")
-	private int boardId;
+	@Column(name = "own_board_id")
+	private int ownBoardId;
 
 	@NotNull
 	@Column(name = "writer_id")
@@ -57,14 +49,11 @@ public class BoardPost {
 	private List<Comment> commentList;
 
 
-	public static BoardPost of(int id, String title, String content, Date createTime, Date modifiedTime, int boardId, int writer_id ,String writer_name){
+	public static BoardPost of(String title, String content, int boardId, int writer_id ,String writer_name){
 		return BoardPost.builder()
-				.id(id)
 				.title(title)
 				.content(content)
-				.createTime(createTime)
-				.modifiedTime(modifiedTime)
-				.boardId(boardId)
+				.ownBoardId(boardId)
 				.writer_id(writer_id)
 				.writer_name(writer_name)
 				.build();

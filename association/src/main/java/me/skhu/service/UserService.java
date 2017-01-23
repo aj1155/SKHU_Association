@@ -29,7 +29,7 @@ public class UserService {
     public UserResponse createUser(UserRequest userRequest){
         User user = User.ofCreate(userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
         userRepository.save(user);
-        return new UserResponse(user);
+        return UserResponse.ofUser(user);
     }
 
     /***** read *****/
@@ -73,13 +73,13 @@ public class UserService {
             return new AsctApiResponse<>(AsctApiResponse.DUPLICATE_LOGINID);
         }else{
             userRepository.save(user);
-            return new AsctApiResponse<>(new UserResponse(user));
+            return new AsctApiResponse<>(UserResponse.ofUser(user));
         }
     }
 
     private List<UserResponse> convertUserEntityToResponse(List<User> userList){
         List<UserResponse> userResponses = Optional.ofNullable(userList).orElse(Collections.emptyList()).stream()
-                .map(user -> new UserResponse(user)).distinct().collect(Collectors.toList());
+                .map(user -> UserResponse.ofUser(user)).distinct().collect(Collectors.toList());
 
         return userResponses;
     }

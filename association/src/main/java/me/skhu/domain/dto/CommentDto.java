@@ -14,7 +14,7 @@ public class CommentDto {
 
 	public static CommentDto of(Comment comment){
 		return CommentDto.builder()
-				.userName(comment.getUser().getName())
+				.userName(comment.getWriter_name())
 				.content(comment.getContent()).build();
 	}
 }
