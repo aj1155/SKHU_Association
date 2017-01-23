@@ -1,8 +1,8 @@
 package me.skhu.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import me.skhu.controller.model.request.UserRequest;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(name = "user")
 public class User implements Serializable {
 
@@ -59,15 +60,21 @@ public class User implements Serializable {
     private Position position;
 
 
-    public User(){
-
+    public static User ofCreate(String loginId,String name,String password){
+        return User.builder()
+                .name(name)
+                .loginId(loginId)
+                .password(password)
+                .build();
     }
 
-    public User(UserRequest userRequest){
-        this.id = userRequest.getId();
-        this.loginId = userRequest.getLogin_id();
-        this.name = userRequest.getUser_name();
-        this.password = userRequest.getPassword();
+    public static User ofUpdate(int id,String loginId,String name,String password){
+        return User.builder()
+                .id(id)
+                .name(name)
+                .loginId(loginId)
+                .password(password)
+                .build();
     }
 
 

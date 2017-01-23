@@ -1,21 +1,13 @@
 package me.skhu.domain;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -49,24 +41,33 @@ public class BoardPost {
 	private Date modifiedTime;
 
 	@NotNull
-	@JoinColumn(name = "board_id")
-	@ManyToOne
-	private Board board;
+	@Column(name = "board_id")
+	private int boardId;
 
 	@NotNull
-	@JoinColumn(name = "user_id")
-	@ManyToOne
-	private User user;
+	@Column(name = "writer_id")
+	private int writer_id;
 
-	public static BoardPost of(int id, String title, String content, Date createTime, Date modifiedTime, Board board, User user){
+	@NotNull
+	@Column(name = "writer_name")
+	private String writer_name;
+
+	@OneToMany(mappedBy="boardPost")
+	@Basic(fetch=FetchType.LAZY)
+	private List<Comment> commentList;
+
+
+	public static BoardPost of(int id, String title, String content, Date createTime, Date modifiedTime, int boardId, int writer_id ,String writer_name){
 		return BoardPost.builder()
 				.id(id)
 				.title(title)
 				.content(content)
 				.createTime(createTime)
 				.modifiedTime(modifiedTime)
-				.board(board)
-				.user(user).build();
+				.boardId(boardId)
+				.writer_id(writer_id)
+				.writer_name(writer_name)
+				.build();
 	}
 
 }

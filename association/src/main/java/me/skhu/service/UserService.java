@@ -27,11 +27,7 @@ public class UserService {
 
 
     public UserResponse createUser(UserRequest userRequest){
-        User user = new User();
-        user.setName(userRequest.getUser_name());
-        user.setLoginId(userRequest.getLogin_id());
-        user.setPassword(userRequest.getPassword());
-
+        User user = User.ofCreate(userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
         userRepository.save(user);
         return new UserResponse(user);
     }
@@ -71,7 +67,7 @@ public class UserService {
     /***** update *****/
 
     public AsctApiResponse<UserResponse> update(UserRequest userRequest){
-        User user = new User(userRequest);
+        User user = User.ofUpdate(userRequest.getId(),userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
         String msg = validateBeforeUpdate(user);
         if(msg != null){
             return new AsctApiResponse<>(AsctApiResponse.DUPLICATE_LOGINID);

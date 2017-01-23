@@ -1,10 +1,11 @@
-package me.skhu.domain;
+package me.skhu.domain.dto;
 
 import java.util.Date;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import me.skhu.domain.BoardPost;
 
 @Getter
 @Setter

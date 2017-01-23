@@ -1,19 +1,12 @@
 package me.skhu.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -35,16 +28,15 @@ public class Board {
 	@NotNull
 	private String name;
 
-	@JoinColumn(name = "category_id")
+	@Column(name = "category_id")
 	@NotNull
-	@ManyToOne
-	private Category category;
+	private int categoryId;
 
-	public static Board of(int id, int boardType, String name, Category category){
+	public static Board of(int id, int boardType, String name, int categoryId){
 		return Board.builder()
 				.id(id)
 				.boardType(boardType)
 				.name(name)
-				.category(category).build();
+				.categoryId(categoryId).build();
 	}
 }
