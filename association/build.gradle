@@ -31,6 +31,7 @@ dependencies {
 	compile("joda-time:joda-time")
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile("org.jadira.usertype:usertype.jodatime:2.0.1")
+	compile('org.springframework.boot:spring-boot-starter-security')
 	compile 'io.jsonwebtoken:jjwt:0.6.0'
 	compile("com.google.guava:guava:20.0")
 	compile("org.projectlombok:lombok:1.16.2")

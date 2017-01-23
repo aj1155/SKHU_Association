@@ -1,7 +1,7 @@
 package me.skhu.domain;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Builder
+@NoArgsConstructor
 @Table(name = "user")
 public class User implements Serializable {
 
@@ -60,27 +60,17 @@ public class User implements Serializable {
     private Position position;
 
 
-    public static User ofCreate(String loginId,String name,String password){
-        return User.builder()
-                .name(name)
-                .loginId(loginId)
-                .password(password)
-                .build();
+    //Todo 빌더 패턴 로직 생성성
+    public User(String loginId,String name,String password){
+        this.loginId = loginId;
+        this.name = name;
+        this.password = password;
     }
-
-    public static User ofUpdate(int id,String loginId,String name,String password){
-        return User.builder()
-                .id(id)
-                .name(name)
-                .loginId(loginId)
-                .password(password)
-                .build();
+    public User(int id,String loginId,String name,String password){
+        this.id = id;
+        this.loginId = loginId;
+        this.name = name;
+        this.password = password;
     }
-
-
-
-
-
-
 
 }

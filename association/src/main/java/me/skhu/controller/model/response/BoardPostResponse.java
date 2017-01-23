@@ -16,7 +16,6 @@ import java.util.List;
 @Builder
 public class BoardPostResponse {
 
-    private int id;
     private String title;
     private String content;
     private String writer_name;
@@ -24,8 +23,8 @@ public class BoardPostResponse {
 
     public static BoardPostResponse ofBoard(BoardPost boardPost){
         return BoardPostResponse.builder()
-                .id(boardPost.getId())
                 .title(boardPost.getTitle())
+                .content(boardPost.getContent())
                 .writer_name(boardPost.getWriter_name())
                 .commentList(boardPost.getCommentList())
                 .build();

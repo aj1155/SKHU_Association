@@ -14,12 +14,12 @@ import java.util.List;
 @Builder
 @Table(name = "board_post")
 @Entity
-public class BoardPost extends BaseEntity implements Serializable {
+public class BoardPost extends BaseEntity implements Serializable{
 
 	@Id
 	@NotNull
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	@Column(name = "ID")
 	private int id;
 
 	@NotNull
@@ -47,7 +47,6 @@ public class BoardPost extends BaseEntity implements Serializable {
 	@OneToMany(mappedBy="boardPost")
 	@Basic(fetch=FetchType.LAZY)
 	private List<Comment> commentList;
-
 
 	public static BoardPost of(String title, String content, int boardId, int writer_id ,String writer_name){
 		return BoardPost.builder()
