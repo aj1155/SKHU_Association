@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findByCategoryId(int categoryId);
+    List<User> findByCategoryIdAndGrade(int categoryId, int grade);
 }

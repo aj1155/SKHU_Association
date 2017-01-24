@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class UserRequest {
+
+    private int id;
     @NotNull
     private String login_id;
     @NotNull

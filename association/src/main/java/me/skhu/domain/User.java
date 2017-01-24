@@ -2,6 +2,7 @@ package me.skhu.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.skhu.controller.model.request.UserRequest;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -58,7 +59,16 @@ public class User implements Serializable {
     private Position position;
 
 
+    public User(){
 
+    }
+
+    public User(UserRequest userRequest){
+        this.id = userRequest.getId();
+        this.loginId = userRequest.getLogin_id();
+        this.name = userRequest.getUser_name();
+        this.password = userRequest.getPassword();
+    }
 
 
 

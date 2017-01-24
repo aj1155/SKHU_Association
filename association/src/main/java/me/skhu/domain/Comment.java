@@ -31,12 +31,12 @@ public class Comment {
 	@JoinColumn(name= "board_id")
 	@NotNull
 	@ManyToOne
-	private BoardPost boardPost;
+	private BoardPost boardPost;//TODO
 
 	@JoinColumn(name="user_id")
 	@NotNull
 	@OneToOne
-	private User user;
+	private User user;//TODO
 
 	@Column(name = "content")
 	@NotNull

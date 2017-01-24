@@ -9,6 +9,7 @@ public class AsctApiResponse<T> {
 
     public static final Integer INVALID_USERPASSWORD = 1002;
     public static final Integer INVALID_COOKIE = 1003;
+    public static final Integer DUPLICATE_LOGINID = 1004;
 
     public static final Integer EXCEPTION = 3001;
     public static final Integer NOT_FOUND = 3002;
