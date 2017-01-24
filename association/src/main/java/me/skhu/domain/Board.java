@@ -1,7 +1,6 @@
 package me.skhu.domain;
 
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +10,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@Builder
 @Table(name ="board")
 @Entity
 public class Board implements Serializable {
@@ -30,10 +28,10 @@ public class Board implements Serializable {
 	@NotNull
 	private int categoryId;
 
-	public static Board of(int id, BoardType boardType, String name, int categoryId){
-		return Board.builder()
-				.id(id)
-				.boardType(boardType)
-				.categoryId(categoryId).build();
+	public Board(int id, BoardType boardTypent,int categoryId){
+		this.id = id;
+		this.boardType = boardType;
+		this.categoryId = categoryId;
 	}
+
 }
