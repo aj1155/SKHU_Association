@@ -1,8 +1,9 @@
-package me.skhu.domain;
+package me.skhu.domain.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import me.skhu.domain.Admin;
 
 @Getter
 @Setter

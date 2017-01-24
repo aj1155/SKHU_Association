@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,25 +27,29 @@ public class Comment {
 	@NotNull
 	private int id;
 
-	@JoinColumn(name= "board_id")
+	@JoinColumn(name= "board_post_id")
 	@NotNull
 	@ManyToOne
 	private BoardPost boardPost;//TODO
-
-	@JoinColumn(name="user_id")
-	@NotNull
-	@OneToOne
-	private User user;//TODO
 
 	@Column(name = "content")
 	@NotNull
 	private String content;
 
-	public static Comment of(int id, BoardPost boardPost, User user, String content){
+	@NotNull
+	@Column(name = "writer_id")
+	private int writer_id;
+
+	@NotNull
+	@Column(name = "writer_name")
+	private String writer_name;
+
+	public static Comment of(int id, BoardPost boardPost, int writer_id,String writer_name, String content){
 		return Comment.builder()
 				.id(id)
 				.boardPost(boardPost)
-				.user(user)
+				.writer_id(writer_id)
+				.writer_name(writer_name)
 				.content(content).build();
 	}
 }

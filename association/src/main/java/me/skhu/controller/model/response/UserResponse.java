@@ -11,6 +11,7 @@ import me.skhu.domain.User;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @ToString
 public class UserResponse {
     private int id;
@@ -27,18 +28,21 @@ public class UserResponse {
     private int categoryId;
     private Position position;
 
-    public UserResponse(User user){
-        this.id = user.getId();
-        this.loginId = user.getLoginId();
-        this.name = user.getName();
-        this.grade = user.getGrade();
-        this.phoneNumber = user.getPhoneNumber();
-        this.companyNumber = user.getCompanyNumber();
-        this.status = user.getStatus();
-        this.birth = user.getBirth();
-        this.email = user.getEmail();
-        this.image = user.getImage();
-        this.categoryId = user.getCategoryId();
-        this.position = user.getPosition();
+
+    public static UserResponse ofUser(User user){
+        return UserResponse.builder()
+                .id(user.getId())
+                .loginId(user.getLoginId())
+                .name(user.getName())
+                .grade(user.getGrade())
+                .phoneNumber(user.getPhoneNumber())
+                .companyNumber(user.getCompanyNumber())
+                .status(user.getStatus())
+                .birth(user.getBirth())
+                .email(user.getEmail())
+                .image(user.getImage())
+                .categoryId(user.getCategoryId())
+                .position(user.getPosition())
+                .build();
     }
 }

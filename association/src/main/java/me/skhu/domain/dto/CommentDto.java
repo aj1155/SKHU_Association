@@ -1,8 +1,9 @@
-package me.skhu.domain;
+package me.skhu.domain.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import me.skhu.domain.Comment;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ public class CommentDto {
 
 	public static CommentDto of(Comment comment){
 		return CommentDto.builder()
-				.userName(comment.getUser().getName())
+				.userName(comment.getWriter_name())
 				.content(comment.getContent()).build();
 	}
 }

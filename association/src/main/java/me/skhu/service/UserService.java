@@ -27,13 +27,9 @@ public class UserService {
 
 
     public UserResponse createUser(UserRequest userRequest){
-        User user = new User();
-        user.setName(userRequest.getUser_name());
-        user.setLoginId(userRequest.getLogin_id());
-        user.setPassword(userRequest.getPassword());
-
+        User user = new User(userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
         userRepository.save(user);
-        return new UserResponse(user);
+        return UserResponse.ofUser(user);
     }
 
     /***** read *****/
@@ -71,19 +67,19 @@ public class UserService {
     /***** update *****/
 
     public AsctApiResponse<UserResponse> update(UserRequest userRequest){
-        User user = new User(userRequest);
+        User user = new User(userRequest.getId(),userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
         String msg = validateBeforeUpdate(user);
         if(msg != null){
             return new AsctApiResponse<>(AsctApiResponse.DUPLICATE_LOGINID);
         }else{
             userRepository.save(user);
-            return new AsctApiResponse<>(new UserResponse(user));
+            return new AsctApiResponse<>(UserResponse.ofUser(user));
         }
     }
 
     private List<UserResponse> convertUserEntityToResponse(List<User> userList){
         List<UserResponse> userResponses = Optional.ofNullable(userList).orElse(Collections.emptyList()).stream()
-                .map(user -> new UserResponse(user)).distinct().collect(Collectors.toList());
+                .map(user -> UserResponse.ofUser(user)).distinct().collect(Collectors.toList());
 
         return userResponses;
     }

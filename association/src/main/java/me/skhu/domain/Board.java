@@ -1,26 +1,20 @@
 package me.skhu.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Builder
 @Table(name ="board")
 @Entity
-public class Board {
+public class Board implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,22 +23,17 @@ public class Board {
 
 	@Column(name = "board_type")
 	@NotNull
-	private int boardType;
+	@Enumerated(EnumType.STRING)
+	private BoardType boardType;
 
-	@Column(name = "name")
+	@Column(name = "category_id")
 	@NotNull
-	private String name;
+	private int categoryId;
 
-	@JoinColumn(name = "category_id")
-	@NotNull
-	@ManyToOne
-	private Category category;
-
-	public static Board of(int id, int boardType, String name, Category category){
+	public static Board of(int id, BoardType boardType, String name, int categoryId){
 		return Board.builder()
 				.id(id)
 				.boardType(boardType)
-				.name(name)
-				.category(category).build();
+				.categoryId(categoryId).build();
 	}
 }

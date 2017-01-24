@@ -1,8 +1,8 @@
 package me.skhu.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import me.skhu.controller.model.request.UserRequest;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "user")
 public class User implements Serializable {
 
@@ -59,20 +60,17 @@ public class User implements Serializable {
     private Position position;
 
 
-    public User(){
-
+    //Todo 빌더 패턴 로직 생성성
+    public User(String loginId,String name,String password){
+        this.loginId = loginId;
+        this.name = name;
+        this.password = password;
     }
-
-    public User(UserRequest userRequest){
-        this.id = userRequest.getId();
-        this.loginId = userRequest.getLogin_id();
-        this.name = userRequest.getUser_name();
-        this.password = userRequest.getPassword();
+    public User(int id,String loginId,String name,String password){
+        this.id = id;
+        this.loginId = loginId;
+        this.name = name;
+        this.password = password;
     }
-
-
-
-
-
 
 }
