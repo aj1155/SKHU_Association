@@ -12,9 +12,9 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class BoardPostRequest {
 
+    private int id;
     @NotNull
     private String title;
-    @NotNull
     private String content;
     @NotNull
     private String writer_name;

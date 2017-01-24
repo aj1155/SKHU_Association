@@ -57,4 +57,15 @@ public class BoardPost extends BaseEntity implements Serializable{
 				.writer_name(writer_name)
 				.build();
 	}
+
+	public static BoardPost ofUpdate(int id,String title, String content, int boardId, int writer_id ,String writer_name){
+		return BoardPost.builder()
+				.id(id)
+				.title(title)
+				.content(content)
+				.ownBoardId(boardId)
+				.writer_id(writer_id)
+				.writer_name(writer_name)
+				.build();
+	}
 }

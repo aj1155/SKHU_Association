@@ -28,7 +28,7 @@ public class UserService {
 
     public UserResponse createUser(UserRequest userRequest){
         User user = User.ofCreate(userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
-        userRepository.save(user);
+        this.userRepository.save(user);
         return UserResponse.ofUser(user);
     }
 
@@ -72,7 +72,7 @@ public class UserService {
         if(msg != null){
             return new AsctApiResponse<>(AsctApiResponse.DUPLICATE_LOGINID);
         }else{
-            userRepository.save(user);
+            this.userRepository.save(user);
             return new AsctApiResponse<>(UserResponse.ofUser(user));
         }
     }
@@ -89,7 +89,7 @@ public class UserService {
     /* 유효성 검사 */
 
     private String validateBeforeUpdate(User user) {
-        User oldUser = userRepository.findOne(user.getId());
+        User oldUser = this.userRepository.findOne(user.getId());
         if (oldUser != null && user.getLoginId() != oldUser.getLoginId())
             return "기존에 사용 중인 휴대번호 입니다.";
 
