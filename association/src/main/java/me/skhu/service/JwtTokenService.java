@@ -4,6 +4,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import me.skhu.controller.model.request.UserRequest;
+import me.skhu.domain.User;
+import me.skhu.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,9 @@ import java.util.Map;
  */
 @Service
 public class JwtTokenService {
+
+    @Autowired
+    private UserRepository userRepository;
 
     // default 7 days
     @Value("${jwt.expiration}")
@@ -66,9 +72,14 @@ public class JwtTokenService {
     }
 
     private Map<String,Object> generateClaims(UserRequest userRequest){
+        User user = loginPassingDo(userRequest);
+        if(user == null) return null;
+
         Map<String,Object> userClaims = new HashMap<String,Object>();
-        userClaims.put("user_id",userRequest.getLogin_id());
-        userClaims.put("user_name",userRequest.getUser_name());
+        userClaims.put("user_id",user.getId());
+        userClaims.put("user_name",user.getName());
+        userClaims.put("image",user.getImage());
+
 
         return userClaims;
     }
@@ -84,5 +95,10 @@ public class JwtTokenService {
             claims = null;
         }
         return claims;
+    }
+
+    private User loginPassingDo(UserRequest userRequest){
+        User user = this.userRepository.findByLoginIdAndPassword(userRequest.getLogin_id(),userRequest.getPassword());
+        return (user==null)? null:user;
     }
 }
