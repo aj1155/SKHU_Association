@@ -29,7 +29,7 @@ public class UserController {
 
     /***** create *****/
     //Todo response로 Json util 형태로 보내주기
-    @RequestMapping(value = "/create",method = RequestMethod.POST)
+    @RequestMapping(value = "/",method = RequestMethod.POST)
     public AsctApiResponse<UserResponse> create(@Valid UserRequest userRequest){
         UserResponse user = this.userService.createUser(userRequest);
         return new AsctApiResponse<>(user);
@@ -38,14 +38,14 @@ public class UserController {
     /***** read *****/
 
     /* 카테고리별 user*/
-    @RequestMapping(value = "/list/category/{categoryId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/category/{categoryId}",method = RequestMethod.GET)
     public AsctApiResponse<List<UserResponse>> readUserByCategory(@PathVariable String categoryId){
         List<UserResponse> list = this.userService.readUserByCategoryId(Integer.parseInt(categoryId));
         return new AsctApiResponse<>(list);
     }
 
     /* 기수별 user*/
-    @RequestMapping(value = "/list/category/{categoryId}/grade/{grade}",method = RequestMethod.GET)
+    @RequestMapping(value = "/category/{categoryId}/grade/{grade}",method = RequestMethod.GET)
     public AsctApiResponse<List<UserResponse>> readUserByGrade(@PathVariable String categoryId,@PathVariable String grade){
         List<UserResponse> list = this.userService.readUserByGrade(Integer.parseInt(categoryId),Integer.parseInt(grade));
         return new AsctApiResponse<>(list);
@@ -68,7 +68,7 @@ public class UserController {
     /***** update *****/
 
     /* user 정보 업데이트 */
-    @RequestMapping(value = "/update",method = RequestMethod.PUT)
+    @RequestMapping(value = "/",method = RequestMethod.PUT)
     public AsctApiResponse<UserResponse> readSeniorManager(@Valid UserRequest userRequest){
         return this.userService.update(userRequest);
     }

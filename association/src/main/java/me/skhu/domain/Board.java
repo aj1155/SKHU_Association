@@ -1,15 +1,13 @@
 package me.skhu.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -32,10 +30,11 @@ public class Board implements Serializable {
 	@NotNull
 	private int categoryId;
 
-	public Board(int id, BoardType boardTypent,int categoryId){
-		this.id = id;
-		this.boardType = boardType;
-		this.categoryId = categoryId;
+	public static Board ofCreate(BoardType boardType,int categoryId){
+		return Board.builder()
+				.boardType(boardType)
+				.categoryId(categoryId)
+				.build();
 	}
 
 }
