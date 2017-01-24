@@ -1,7 +1,6 @@
 package me.skhu.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +11,9 @@ import java.util.Collection;
 @Setter
 @Table(name = "board_post")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BoardPost extends BaseEntity implements Serializable{
 
 	@Id
@@ -46,11 +48,13 @@ public class BoardPost extends BaseEntity implements Serializable{
 	@Basic(fetch=FetchType.LAZY)
 	private Collection<Comment> commentList;
 
-	public BoardPost(String title, String content, int boardId, int writer_id ,String writer_name){
-		this.title = title;
-		this.content = content;
-		this.ownBoardId = boardId;
-		this.writer_id = writer_id;
-		this.writer_name = writer_name;
+	public static BoardPost ofCreate(String title, String content, int boardId, int writer_id ,String writer_name){
+		return BoardPost.builder()
+				.title(title)
+				.content(content)
+				.ownBoardId(boardId)
+				.writer_id(writer_id)
+				.writer_name(writer_name)
+				.build();
 	}
 }
