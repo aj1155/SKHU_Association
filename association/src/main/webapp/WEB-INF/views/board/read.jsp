@@ -50,24 +50,24 @@ ul.pagination li>.page.active:active {
 					</tr>
 					<tr>
 						<td>작성자:</td>
-						<td style="width:500px;">일준</td>
-						<td style="width:80px;">작성일:</td>
-						<td>2017-01-13</td>
+						<td style="width:500px;">${boardPost.title }</td>
+						<td style="width:80px;">작성일</td>
+						<td>${boardPost.modifiedTime }</td>
 					</tr>
 					<tr>
 						<td>파일</td>
 						<td colspan="3">asb.jsp</td>
 					</tr>
 					<tr>
-						<td colspan="4"style="height:300px;">sdfdsfdsf</td>
+						<td colspan="4"style="height:300px;">${boardPost.content }</td>
 					</tr>
 				</table>
 				<div style="float:right;">
-					<button type="submit" class="btn btn-primary">
-						<i class="icon-ok icon-white"></i> 수정하기
+					<button class="btn btn-primary">
+						<i class="icon-ok icon-white"><a href="edit?id=${boardPost.id }"> 수정하기</a></i>
 					</button>
-					<button type="submit" class="btn">목록으로</button>
-					<button type="submit">삭제</button>
+					<button class="btn"><a href="list">목록으로</a></button>
+					<button type="submit"><a href="delete?id=${boardPost.id }">삭제</a></button>
 				</div>
 			</div>
 		</div>

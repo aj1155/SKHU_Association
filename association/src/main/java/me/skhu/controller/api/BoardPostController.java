@@ -1,16 +1,17 @@
 package me.skhu.controller.api;
 
-import me.skhu.controller.model.request.BoardPostRequest;
-import me.skhu.controller.model.response.AsctApiResponse;
-import me.skhu.controller.model.response.BoardPostResponse;
-import me.skhu.service.BoardPostService;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import me.skhu.controller.model.request.BoardPostRequest;
+import me.skhu.controller.model.response.AsctApiResponse;
+import me.skhu.controller.model.response.BoardPostResponse;
+import me.skhu.service.BoardPostService;
 
 /**
  * Created by Manki Kim on 2017-01-23.

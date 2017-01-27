@@ -45,17 +45,17 @@ ul.pagination li>.page.active:active {
 				<br />
 				<h4>글쓰기</h4>
 				<br/>
-				<form>
+				<form name="uploadFIle" method="POST"enctype="multipart/form-data">
 					<div style="display:inline-block;">
-						<span>제목:</span> <input type="text" name="title" />
+						<span>제목:</span> <input type="text" name="title" value="${boardPost.title }"/>
 					</div>
 					<div>
-						<span>파일:</span>
-						<input type="file"/>
+						<span>파일:</span> <input type="file" name="file"/>
+						<input type="file" name="file"/>
 					</div>
-					<textarea id="body" name="body" class="smarteditor2" style="width:900px;min-height:300px;"></textarea>
+					<textarea id="body" name="content" class="smarteditor2" style="width:900px;min-height:300px;">${boardPost.content }</textarea>
 
-					
+					<button type="submit">저장</button>
 				</form>
 			</div>
 		</div>

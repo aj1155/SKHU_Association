@@ -3,23 +3,24 @@ package me.skhu.domain.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import me.skhu.domain.File;
+import me.skhu.domain.Files;
 
 @Getter
 @Setter
 @Builder
-public class FileDto {
+public class FilesDto {
 
 	private int boardPostId;
 	private String name;
-	private String size;
+	private Long size;
 	private String path;
 
-	public static FileDto of(File file){
-		return FileDto.builder()
-				.boardPostId(file.getBoardPost().getId())
+	public static FilesDto of(Files file){
+		return FilesDto.builder()
+				.boardPostId(file.getBoardId())
 				.name(file.getName())
 				.size(file.getSize())
 				.path(file.getPath()).build();
 	}
+
 }

@@ -1,6 +1,11 @@
 package me.skhu.controller.model.response;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import me.skhu.domain.Position;
 import me.skhu.domain.User;
 

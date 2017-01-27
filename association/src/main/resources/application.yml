@@ -10,8 +10,7 @@ jwt.expiration: 604800
 jwt.tokenheader: X-Auth-Token
 
 spring:
-  mvc:
-    view:
-      suffix: .jsp
-      prefix: /WEB-INF/views/
-
+  http:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB

@@ -1,17 +1,23 @@
 package me.skhu.domain;
 
 
-import lombok.Builder;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-
 @Getter
 @Setter
-@Builder
 @Table(name ="board")
 @Entity
 public class Board implements Serializable {
@@ -30,10 +36,10 @@ public class Board implements Serializable {
 	@NotNull
 	private int categoryId;
 
-	public static Board of(int id, BoardType boardType, String name, int categoryId){
-		return Board.builder()
-				.id(id)
-				.boardType(boardType)
-				.categoryId(categoryId).build();
+	public Board(int id, BoardType boardTypent,int categoryId){
+		this.id = id;
+		this.boardType = boardType;
+		this.categoryId = categoryId;
 	}
+
 }

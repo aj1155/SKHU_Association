@@ -11,6 +11,7 @@ import me.skhu.domain.Admin;
 public class AdminDto {
 
 	private String loginId;
+	private String password;
 	private int categoryId;
 	private String categoryName;
 	private String email;
@@ -21,6 +22,7 @@ public class AdminDto {
 	public static AdminDto of(Admin admin){
 		return AdminDto.builder()
 				.loginId(admin.getLoginId())
+				.password(admin.getPassword())
 				.categoryId(admin.getCategory().getId())
 				.categoryName(admin.getCategory().getName())
 				.email(admin.getEmail())

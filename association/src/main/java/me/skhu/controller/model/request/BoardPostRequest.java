@@ -1,9 +1,9 @@
 package me.skhu.controller.model.request;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by Manki Kim on 2017-01-23.

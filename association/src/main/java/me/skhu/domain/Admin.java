@@ -10,8 +10,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -19,6 +21,8 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table(name = "admin")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

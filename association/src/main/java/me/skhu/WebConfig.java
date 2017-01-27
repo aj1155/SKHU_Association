@@ -1,8 +1,8 @@
 package me.skhu;
 
 
-import me.skhu.controller.filter.CORSFilter;
-import me.skhu.controller.interceptor.JwtInterceptor;
+import java.nio.charset.Charset;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,8 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import java.nio.charset.Charset;
+import me.skhu.controller.filter.CORSFilter;
+import me.skhu.controller.interceptor.JwtInterceptor;
 
 /**
  * Created by Manki Kim on 2016. 12. 30..
@@ -49,4 +50,5 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/api/**")
                 .excludePathPatterns("/auth/**");
     }
+
 }

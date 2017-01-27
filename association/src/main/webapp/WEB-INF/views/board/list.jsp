@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %> 
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
@@ -41,6 +41,7 @@ ul.pagination li>.page.active:active {
 				</header>
 				<br />
 				<h4>공지사항</h4>
+				<button><a href="create">글쓰기</a></button>
 				<div class="table-wrapper">
 					<table>
 						<thead>
@@ -52,68 +53,14 @@ ul.pagination li>.page.active:active {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>Item1</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item2</td>
-								<td>Vis ac commodo adipiscing arcu aliquet.</td>
-								<td>19.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item3</td>
-								<td>Morbi faucibus arcu accumsan lorem.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item4</td>
-								<td>Vitae integer tempus condimentum.</td>
-								<td>19.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-						</tbody>
-
+							<c:forEach var="list" items="${ list.boardPostList }" varStatus="status">
+				               <tr data-url="read?id=${list.id}">
+				                    <td>${ list.title }</td>
+				                    <td>${ list.content }</td>
+				                    <td>${ list.writer_name }</td>
+				                </tr>
+							</c:forEach>            
+				        </tbody>
 					</table>
 					<div class="pagination pagination-small pagination-centered">
 						<ul>
@@ -229,5 +176,6 @@ ul.pagination li>.page.active:active {
 		<script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/common.js"></script>
 </body>
 </html>
