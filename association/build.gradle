@@ -12,6 +12,7 @@ buildscript {
 
 apply plugin: 'war'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'idea'
 
 jar {
 	baseName = 'association'
@@ -36,6 +37,7 @@ dependencies {
 	compile("com.google.guava:guava:20.0")
 	compile("org.projectlombok:lombok:1.16.2")
 	compile("com.google.code.gson:gson:2.8.0")
+	compile("org.apache.httpcomponents:httpclient:4.5.2")
 	compile "org.igniterealtime.smack:smack-core:4.0.4"
 	compile "org.igniterealtime.smack:smack-tcp:4.0.4"
 	compile "com.googlecode.json-simple:json-simple:1.1"

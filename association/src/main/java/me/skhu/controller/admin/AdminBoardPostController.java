@@ -57,7 +57,7 @@ public class AdminBoardPostController {
 
 	@RequestMapping(value = "/delete")
     public String delete(@RequestParam("id") int id){
-    	boardPostService.delete(id);
+    	boardPostService.webDelete(id);
     	return "redirect:/boardpost/list";
     }
 

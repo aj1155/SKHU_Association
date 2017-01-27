@@ -10,6 +10,7 @@ import me.skhu.domain.BoardPost;
  * Created by Manki Kim on 2017-01-23.
  */
 public interface BoardPostRepository extends JpaRepository<BoardPost,Integer> {
+
 	@Override
 	List<BoardPost> findAll();
 
@@ -17,4 +18,7 @@ public interface BoardPostRepository extends JpaRepository<BoardPost,Integer> {
 
 	@Override
 	BoardPost save(BoardPost boardPost);
+
+    List<BoardPost> findByOwnBoardId(int ownBoardId);
+
 }

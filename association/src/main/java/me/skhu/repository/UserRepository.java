@@ -14,4 +14,6 @@ import me.skhu.domain.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findByCategoryId(int categoryId);
     List<User> findByCategoryIdAndGrade(int categoryId, int grade);
+
+    User findByLoginIdAndPassword(String login_id, String password);
 }

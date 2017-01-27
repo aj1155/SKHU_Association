@@ -13,9 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Table(name ="board")
@@ -36,10 +42,11 @@ public class Board implements Serializable {
 	@NotNull
 	private int categoryId;
 
-	public Board(int id, BoardType boardTypent,int categoryId){
-		this.id = id;
-		this.boardType = boardType;
-		this.categoryId = categoryId;
+	public static Board ofCreate(BoardType boardType,int categoryId){
+		return Board.builder()
+				.boardType(boardType)
+				.categoryId(categoryId)
+				.build();
 	}
 
 }

@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class BoardPost extends BaseEntity implements Serializable{
 
 	@Id
@@ -60,12 +62,25 @@ public class BoardPost extends BaseEntity implements Serializable{
 	@Basic(fetch=FetchType.LAZY)
 	private Collection<Comment> commentList;
 
-	public BoardPost(String title, String content, int boardId, int writer_id ,String writer_name){
-		this.title = title;
-		this.content = content;
-		this.ownBoardId = boardId;
-		this.writer_id = writer_id;
-		this.writer_name = writer_name;
+	public static BoardPost ofCreate(String title, String content, int boardId, int writer_id ,String writer_name){
+		return BoardPost.builder()
+				.title(title)
+				.content(content)
+				.ownBoardId(boardId)
+				.writer_id(writer_id)
+				.writer_name(writer_name)
+				.build();
+	}
+
+	public static BoardPost ofUpdate(int id,String title, String content, int boardId, int writer_id ,String writer_name){
+		return BoardPost.builder()
+				.id(id)
+				.title(title)
+				.content(content)
+				.ownBoardId(boardId)
+				.writer_id(writer_id)
+				.writer_name(writer_name)
+				.build();
 	}
 
 	public BoardPost(String title, String content){

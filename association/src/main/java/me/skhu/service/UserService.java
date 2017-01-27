@@ -28,8 +28,8 @@ public class UserService {
 
 
     public UserResponse createUser(UserRequest userRequest){
-        User user = new User(userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
-        userRepository.save(user);
+        User user = User.ofCreate(userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
+        this.userRepository.save(user);
         return UserResponse.ofUser(user);
     }
 
@@ -68,12 +68,12 @@ public class UserService {
     /***** update *****/
 
     public AsctApiResponse<UserResponse> update(UserRequest userRequest){
-        User user = new User(userRequest.getId(),userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
+        User user = User.ofUpdate(userRequest.getId(),userRequest.getLogin_id(),userRequest.getUser_name(),userRequest.getPassword());
         String msg = validateBeforeUpdate(user);
         if(msg != null){
             return new AsctApiResponse<>(AsctApiResponse.DUPLICATE_LOGINID);
         }else{
-            userRepository.save(user);
+            this.userRepository.save(user);
             return new AsctApiResponse<>(UserResponse.ofUser(user));
         }
     }
@@ -90,7 +90,7 @@ public class UserService {
     /* 유효성 검사 */
 
     private String validateBeforeUpdate(User user) {
-        User oldUser = userRepository.findOne(user.getId());
+        User oldUser = this.userRepository.findOne(user.getId());
         if (oldUser != null && user.getLoginId() != oldUser.getLoginId())
             return "기존에 사용 중인 휴대번호 입니다.";
 

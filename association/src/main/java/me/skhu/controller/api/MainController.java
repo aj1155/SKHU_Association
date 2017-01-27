@@ -12,6 +12,6 @@ public class MainController {
 
     @RequestMapping(value = "")
     public String main(){
-        return "roll your info";
+        return "회원정보를 정확이 기입한 후 로그인 해주세요";
     }
 }

@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +24,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 @Table(name = "user")
 public class User implements Serializable {
 
@@ -67,18 +71,20 @@ public class User implements Serializable {
     @JoinColumn(name="user_type")
     private Position position;
 
-
-    //Todo 빌더 패턴 로직 생성성
-    public User(String loginId,String name,String password){
-        this.loginId = loginId;
-        this.name = name;
-        this.password = password;
+    public static User ofCreate(String loginId,String name,String password){
+        return User.builder()
+                .loginId(loginId)
+                .name(name)
+                .password(password)
+                .build();
     }
-    public User(int id,String loginId,String name,String password){
-        this.id = id;
-        this.loginId = loginId;
-        this.name = name;
-        this.password = password;
+    public static User ofUpdate(int id,String loginId,String name,String password){
+        return User.builder()
+                .id(id)
+                .loginId(loginId)
+                .name(name)
+                .password(password)
+                .build();
     }
 
 }
