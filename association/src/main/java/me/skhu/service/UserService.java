@@ -1,18 +1,19 @@
 package me.skhu.service;
 
-import me.skhu.controller.model.request.UserRequest;
-import me.skhu.controller.model.response.AsctApiResponse;
-import me.skhu.controller.model.response.UserResponse;
-import me.skhu.domain.User;
-import me.skhu.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import me.skhu.controller.model.request.UserRequest;
+import me.skhu.controller.model.response.AsctApiResponse;
+import me.skhu.controller.model.response.UserResponse;
+import me.skhu.domain.User;
+import me.skhu.repository.UserRepository;
 
 /**
  * Created by Manki Kim on 2017-01-18.

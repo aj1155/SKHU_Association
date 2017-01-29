@@ -1,18 +1,20 @@
 package me.skhu.controller.api;
 
-import me.skhu.controller.model.request.UserRequest;
-import me.skhu.controller.model.response.AsctApiResponse;
-import me.skhu.controller.model.response.UserResponse;
-import me.skhu.service.JwtTokenService;
-import me.skhu.service.UserService;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
+import me.skhu.controller.model.request.UserRequest;
+import me.skhu.controller.model.response.AsctApiResponse;
+import me.skhu.controller.model.response.UserResponse;
+import me.skhu.service.JwtTokenService;
+import me.skhu.service.UserService;
 
 /**
  * Created by Manki Kim on 2017-01-18.

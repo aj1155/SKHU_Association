@@ -5,13 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -19,7 +19,9 @@ import lombok.Setter;
 @Builder
 @Table(name = "file")
 @Entity
-public class File {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Files {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,10 +29,9 @@ public class File {
 	@NotNull
 	private int id;
 
-	@JoinColumn(name = "board_id")
+	@Column(name = "board_id")
 	@NotNull
-	@ManyToOne
-	private BoardPost boardPost;
+	private int boardId;
 
 	@Column(name = "name")
 	@NotNull
@@ -38,18 +39,33 @@ public class File {
 
 	@Column(name = "size")
 	@NotNull
-	private String size;
+	private Long size;
 
 	@Column(name = "path")
 	@NotNull
 	private String path;
 
-	public static File of(int id, BoardPost boardPost, String name, String size, String path){
-		return File.builder()
+	public static Files of(int id, int boardId, String name, Long size, String path){
+		return Files.builder()
 				.id(id)
-				.boardPost(boardPost)
+				.boardId(boardId)
 				.name(name)
 				.size(size)
 				.path(path).build();
+	}
+
+	public Files of(int boardId, String name, Long size, String path){
+		return Files.builder()
+				.boardId(boardId)
+				.name(name)
+				.size(size)
+				.path(path).build();
+	}
+
+	public Files(int boardId, String name, Long size, String path){
+		this.boardId=boardId;
+		this.name=name;
+		this.size=size;
+		this.path=path;
 	}
 }

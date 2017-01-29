@@ -1,17 +1,26 @@
 package me.skhu.service;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 import me.skhu.controller.model.request.BoardPostRequest;
 import me.skhu.controller.model.response.BoardPostResponse;
 import me.skhu.domain.Board;
 import me.skhu.domain.BoardPost;
 import me.skhu.domain.BoardType;
+import me.skhu.domain.dto.BoardPostDto;
+import me.skhu.domain.dto.BoardPostListDto;
 import me.skhu.repository.BoardPostRepository;
 import me.skhu.repository.BoardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by Manki Kim on 2017-01-23.
@@ -21,6 +30,9 @@ public class BoardPostService {
 
     @Autowired
     private BoardPostRepository boardPostRepository;
+
+    @Autowired
+    private FileService fileService;
 
     @Autowired
     private BoardRepository boardRepository;
@@ -35,6 +47,33 @@ public class BoardPostService {
         return BoardPostResponse.ofBoard(boardPost);
     }
 
+    @Transactional(readOnly = false)
+    public void create(BoardPostDto boardPostDto,MultipartFile[] files){
+    	BoardPost boardPost = new BoardPost(boardPostDto.getTitle(),boardPostDto.getContent(),1,1,"test");
+    	BoardPost b = boardPostRepository.save(boardPost);
+    	fileService.upload(b.getId(),files);
+    }
+
+    public BoardPostListDto findAll(){
+    	return BoardPostListDto.of(boardPostRepository.findAll());
+    }
+
+    public BoardPostDto findById(int id){
+    	return BoardPostDto.of(boardPostRepository.findById(id));
+    }
+
+    @Transactional(readOnly = false)
+    public void update(BoardPostDto boardPostDto){
+    	BoardPost boardPost = boardPostRepository.findOne(boardPostDto.getId());
+    	boardPost.setTitle(boardPostDto.getTitle());
+    	boardPost.setContent(boardPostDto.getContent());
+    	boardPostRepository.save(boardPost);
+    }
+
+    @Transactional(readOnly = false)
+    public void webDelete(int id){
+    	boardPostRepository.delete(id);
+    }
     /***** read *****/
 
     public List<BoardPostResponse> read(int categoryId, BoardType boardType){

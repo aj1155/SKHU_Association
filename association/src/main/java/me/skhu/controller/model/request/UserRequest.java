@@ -1,8 +1,8 @@
 package me.skhu.controller.model.request;
 
-import lombok.Data;
-
 import javax.validation.constraints.NotNull;
+
+import lombok.Data;
 
 /**
  * Created by Manki Kim on 2017-01-18.

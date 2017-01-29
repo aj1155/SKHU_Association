@@ -1,11 +1,25 @@
 package me.skhu.domain;
 
-import lombok.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -67,5 +81,10 @@ public class BoardPost extends BaseEntity implements Serializable{
 				.writer_id(writer_id)
 				.writer_name(writer_name)
 				.build();
+	}
+
+	public BoardPost(String title, String content){
+		this.title=title;
+		this.content=content;
 	}
 }

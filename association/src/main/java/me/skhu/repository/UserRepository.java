@@ -1,10 +1,11 @@
 package me.skhu.repository;
 
-import me.skhu.domain.User;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import me.skhu.domain.User;
 
 /**
  * Created by Manki Kim on 2017-01-18.

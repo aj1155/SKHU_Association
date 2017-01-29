@@ -1,12 +1,12 @@
 package me.skhu.controller.model.response;
 
+import java.util.Collection;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import me.skhu.domain.BoardPost;
 import me.skhu.domain.Comment;
-
-import java.util.Collection;
 
 /**
  * Created by Manki Kim on 2017-01-23.

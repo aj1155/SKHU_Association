@@ -1,16 +1,21 @@
 package me.skhu.domain.dto;
 
+import org.joda.time.DateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.skhu.domain.BoardPost;
-import org.joda.time.DateTime;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BoardPostDto {
-
+	private int id;
 	private String title;
 	private String content;
 	private DateTime createTime;
@@ -20,6 +25,7 @@ public class BoardPostDto {
 
 	public static BoardPostDto of(BoardPost boardPost){
 		return BoardPostDto.builder()
+				.id(boardPost.getId())
 				.title(boardPost.getTitle())
 				.content(boardPost.getContent())
 				.createTime(boardPost.getCreatedDate())
