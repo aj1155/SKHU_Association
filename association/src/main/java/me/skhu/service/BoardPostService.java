@@ -11,16 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import me.skhu.controller.model.request.BoardPostRequest;
 import me.skhu.controller.model.response.BoardPostResponse;
-import me.skhu.domain.Board;
 import me.skhu.domain.BoardPost;
-import me.skhu.domain.BoardType;
 import me.skhu.domain.dto.BoardPostDto;
 import me.skhu.domain.dto.BoardPostListDto;
 import me.skhu.repository.BoardPostRepository;
 import me.skhu.repository.BoardRepository;
+import me.skhu.util.Pagination;
 
 /**
  * Created by Manki Kim on 2017-01-23.
@@ -38,7 +37,7 @@ public class BoardPostService {
     private BoardRepository boardRepository;
 
     /***** create *****/
-
+/*
     public BoardPostResponse create(BoardPostRequest boardPostRequest){
         //Todo arguments 줄이기
         BoardPost boardPost = BoardPost.ofCreate(boardPostRequest.getTitle(),boardPostRequest.getContent(),boardPostRequest.getOwnBoardId(),boardPostRequest.getWriter_id(),boardPostRequest.getWriter_name());
@@ -46,16 +45,27 @@ public class BoardPostService {
         System.out.println(boardPost.getCreatedDate());
         return BoardPostResponse.ofBoard(boardPost);
     }
-
+*/
     @Transactional(readOnly = false)
-    public void create(BoardPostDto boardPostDto,MultipartFile[] files){
-    	BoardPost boardPost = new BoardPost(boardPostDto.getTitle(),boardPostDto.getContent(),1,1,"test");
+    public void create(BoardPostDto boardPostDto,MultipartFile[] files,MultipartHttpServletRequest request){
+    	BoardPost boardPost = BoardPost.of(boardPostDto,boardRepository.findOne(boardPostDto.getUserId()));
     	BoardPost b = boardPostRepository.save(boardPost);
-    	fileService.upload(b.getId(),files);
+    	if(files!=null)
+    		fileService.upload(b.getId(),files,request);
     }
 
-    public BoardPostListDto findAll(){
-    	return BoardPostListDto.of(boardPostRepository.findAll());
+    public BoardPostListDto findAll(Pagination pagination,int boardId){
+    	switch(pagination.getSrchType()){
+    		case 0 :
+    			pagination.setRecordCount(boardPostRepository.countByBoardId(boardId));
+    			return BoardPostListDto.of(boardPostRepository.pagination(pagination,boardId));
+    		case 1 :
+    			pagination.setRecordCount(boardPostRepository.countByBoardIdAndTitle(boardId,pagination.getSrchText()));
+    			return BoardPostListDto.of(boardPostRepository.paginationByTitle(pagination,boardId));
+    		default :
+    			pagination.setRecordCount(boardPostRepository.countByBoardIdAndWriterName(boardId,pagination.getSrchText()));
+    			return BoardPostListDto.of(boardPostRepository.paginationByUserName(pagination,boardId));
+    	}
     }
 
     public BoardPostDto findById(int id){
@@ -73,17 +83,20 @@ public class BoardPostService {
     @Transactional(readOnly = false)
     public void webDelete(int id){
     	boardPostRepository.delete(id);
+    	fileService.deleteByBoardId(id);
     }
     /***** read *****/
-
+/*
     public List<BoardPostResponse> read(int categoryId, BoardType boardType){
         Board board = this.boardRepository.findByCategoryIdAndBoardType(categoryId,boardType);
         List<BoardPost> boardPostList = boardPostRepository.findByOwnBoardId(board.getId());
         return convertBoardPostEntityToResponse(boardPostList);
     }
+*/
 
     /***** update *****/
     //Todo Json Utill 로 return 할 것!
+    /*
     public Map<String,Object> update(BoardPostRequest boardPostRequest){
         BoardPost boardPost = BoardPost.ofUpdate(boardPostRequest.getId(),boardPostRequest.getTitle(),boardPostRequest.getContent()
                                                     ,boardPostRequest.getOwnBoardId(),boardPostRequest.getWriter_id(),boardPostRequest.getWriter_name());
@@ -94,6 +107,7 @@ public class BoardPostService {
 
         return resultStatus;
     }
+*/
     /***** delete *****/
     //TODO JSON Utill로 return
     public Map<String,Object> delete(int boardPostId){
@@ -112,4 +126,5 @@ public class BoardPostService {
                 .map(boardPost -> BoardPostResponse.ofBoard(boardPost)).distinct().collect(Collectors.toList());
         return boardPostResponses;
     }
+
 }

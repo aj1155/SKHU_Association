@@ -5,8 +5,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,14 +33,13 @@ public class Board implements Serializable {
 
 	@Column(name = "board_type")
 	@NotNull
-	@Enumerated(EnumType.STRING)
-	private BoardType boardType;
+	private String boardType;
 
 	@Column(name = "category_id")
 	@NotNull
 	private int categoryId;
 
-	public static Board ofCreate(BoardType boardType,int categoryId){
+	public static Board ofCreate(String boardType,int categoryId){
 		return Board.builder()
 				.boardType(boardType)
 				.categoryId(categoryId)

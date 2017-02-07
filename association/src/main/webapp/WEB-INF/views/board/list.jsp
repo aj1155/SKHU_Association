@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,12 +41,27 @@ ul.pagination li>.page.active:active {
 				</header>
 				<br />
 				<h4>공지사항</h4>
-				<button><a href="create">글쓰기</a></button>
+				
+				<button>
+					<a href="create">글쓰기</a>
+				</button>
+				<form:form modelAttribute="pagination">
+				<div class="form-inline" style="float: right;">
+					<form:select path="st">
+						<form:option value="0" label="검색조건" />
+						<form:option value="1" label="제목" />
+						<form:option value="2" label="작성자" />
+					</form:select> 
+					<form:input path="ss" />
+					<button type="submit" class="btn btn-small btn-primary">검색</button>
+				</div>
 				<div class="table-wrapper">
 					<table>
 						<thead>
 							<tr>
-								<th>No.</th>
+								<th><input type="checkbox">
+									<label></label>
+								</th>
 								<th>제목</th>
 								<th>작성자</th>
 								<th>작성일</th>
@@ -54,128 +69,35 @@ ul.pagination li>.page.active:active {
 						</thead>
 						<tbody>
 							<c:forEach var="list" items="${ list.boardPostList }" varStatus="status">
-				               <tr data-url="read?id=${list.id}">
-				                    <td>${ list.title }</td>
-				                    <td>${ list.content }</td>
-				                    <td>${ list.writer_name }</td>
-				                </tr>
-							</c:forEach>            
-				        </tbody>
-					</table>
-					<div class="pagination pagination-small pagination-centered">
-						<ul>
-							<li><a href="#" class="button" style="font-size: 5px;">Prev</a></li>
-							<li><a href="#" class="page active">1</a></li>
-							<li><a href="#" class="page">2</a></li>
-							<li><a href="#" class="page">3</a></li>
-							<li><a href="#" class="page">4</a></li>
-							<li><a href="#" class="page">5</a></li>
-							<li><a href="#" class="page">6</a></li>
-							<li><a href="#" class="page">7</a></li>
-							<li><a href="#" class="page">8</a></li>
-							<li><a href="#" class="page">9</a></li>
-							<li><a href="#" class="page">10</a></li>
-							<li><a href="#" class="button" style="font-size: 5px;">Next</a></li>
-						</ul>
-
-					</div>
-				</div>
-				<h4>자유게시판</h4>
-				<div class="table-wrapper">
-					<div class="form-inline" style="float:right;">
-						<select>
-							<option value="0" label="검색조건" />
-							<option value="1" label="아이디" />
-							<option value="2" label="이름" />
-							<option value="3" label="학과" />
-						</select>
-						<input name="st"/>
-						<button type="submit" class="btn btn-small btn-primary">검색</button>
-					</div>
-					<br/>
-					<table class="alt">
-						<thead>
-							<tr>
-								<th>No.</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Item1</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item2</td>
-								<td>Vis ac commodo adipiscing arcu aliquet.</td>
-								<td>19.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item3</td>
-								<td>Morbi faucibus arcu accumsan lorem.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item4</td>
-								<td>Vitae integer tempus condimentum.</td>
-								<td>19.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
-							<tr>
-								<td>Item5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-								<td>2017-01-13</td>
-							</tr>
+								<tr data-url="read?id=${list.id}">
+									<td><input type="checkbox">
+										<label></label>
+									</td>
+									<td>${ list.title }</td>
+									<td>${ list.content }</td>
+									<td>${ list.writer_name }</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
+					<input type="hidden" name="cp" value="1" />
+					<div class="pagination pagination-small pagination-centered">
+						<ul>
+							<c:forEach var="p" items="${ pagination.pageIndexList }">
+								<li class='${ p.cssClass }'>
+									<a data-page="${ p.number }" href="#">${ p.label }</a>
+								</li>
+							</c:forEach>
+						</ul>
+					</div>
+				</form:form>
 				</div>
-			</div>
-			
 		</div>
-		<c:import url="../commons/sidebar.jsp" />
+		
 	</div>
-		<!-- Scripts -->
-		<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/common.js"></script>
+	
+			<c:import url="../commons/sidebar.jsp" />
+	<!-- Scripts -->
+	<c:import url="../commons/script.jsp"/>
 </body>
 </html>

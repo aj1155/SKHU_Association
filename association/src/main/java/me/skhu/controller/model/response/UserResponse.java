@@ -46,7 +46,7 @@ public class UserResponse {
                 .birth(user.getBirth())
                 .email(user.getEmail())
                 .image(user.getImage())
-                .categoryId(user.getCategoryId())
+                //.categoryId(user.getCategoryId())
                 .position(user.getPosition())
                 .build();
     }

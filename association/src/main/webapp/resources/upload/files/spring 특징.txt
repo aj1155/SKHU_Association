@@ -1,0 +1,7 @@
+spring의 특징
+	Dependency
+	Injection   --> DI:스프링이 객체를 주입해주는것(라이브러리는 maven이 넣어주는것)-->스프링이 객체를 자동생성하는것을 의미
+												@Autowired
+	Aspected
+	Oriented   --> AOP:
+	Programing

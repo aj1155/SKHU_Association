@@ -55,8 +55,11 @@ ul.pagination li>.page.active:active {
 						<td>${boardPost.modifiedTime }</td>
 					</tr>
 					<tr>
-						<td>파일</td>
-						<td colspan="3">asb.jsp</td>
+						<td>파일:</td>
+						<td colspan="3">
+						<c:forEach var = "f" items="${fileList.files}">
+							<a href="download?id=${f.id }">${f.name }</a><br/>
+						</c:forEach>
 					</tr>
 					<tr>
 						<td colspan="4"style="height:300px;">${boardPost.content }</td>
@@ -66,7 +69,7 @@ ul.pagination li>.page.active:active {
 					<button class="btn btn-primary">
 						<i class="icon-ok icon-white"><a href="edit?id=${boardPost.id }"> 수정하기</a></i>
 					</button>
-					<button class="btn"><a href="list">목록으로</a></button>
+					<button class="btn"><a href="list?${ pagination.queryString }">목록으로</a></button>
 					<button type="submit"><a href="delete?id=${boardPost.id }">삭제</a></button>
 				</div>
 			</div>
@@ -74,9 +77,6 @@ ul.pagination li>.page.active:active {
 		<c:import url="../commons/sidebar.jsp" />
 	</div>
 		<!-- Scripts -->
-		<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+		<c:import url="../commons/script.jsp"/>
 </body>
 </html>
