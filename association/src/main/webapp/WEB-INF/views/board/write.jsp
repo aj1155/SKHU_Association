@@ -30,6 +30,15 @@ ul.pagination li>.page.active:active {
 	background-color: C0FFFF;
 }
 </style>
+<script>
+$(function() {
+    $("button#addFile").click(function() {
+        var tag = "<span>파일:</span> <input type='file' name='file' multiple /><br/>";
+        $(tag).appendTo("div#files");
+    });
+});
+</script>
+
 </head>
 <body>
 	<div id="wrapper">
@@ -45,16 +54,19 @@ ul.pagination li>.page.active:active {
 				<br />
 				<h4>글쓰기</h4>
 				<br/>
-				<form name="uploadFIle" method="POST"enctype="multipart/form-data">
+				<form name="uploadFIle" method="POST" enctype="multipart/form-data">
+					<input type="hidden" name="userId" value="1"/>
+					<input type="hidden" name="userName" value="test"/>
 					<div style="display:inline-block;">
-						<span>제목:</span> <input type="text" name="title" value="${boardPost.title }"/>
+						<span>제목:</span> <input type="text" name="title" />
 					</div>
-					<div>
-						<span>파일:</span> <input type="file" name="file"/>
-						<input type="file" name="file"/>
+					<div id="files">
+						<span>첨부 파일:</span> <input type="file" name="file"/>
+						<button type="button" class="btn" id="addFile">
+            				<i class="icon-plus"></i> 파일추가
+        				</button>
 					</div>
-					<textarea id="body" name="content" class="smarteditor2" style="width:900px;min-height:300px;">${boardPost.content }</textarea>
-
+					<textarea id="body" name="content" class="smarteditor2" style="width:900px;min-height:300px;"></textarea>
 					<button type="submit">저장</button>
 				</form>
 			</div>
@@ -62,9 +74,6 @@ ul.pagination li>.page.active:active {
 		<c:import url="../commons/sidebar.jsp" />
 	</div>
 	<!-- Scripts -->
-	<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script> 
-	<script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+		<c:import url="../commons/script.jsp"/>
 </body>
 </html>

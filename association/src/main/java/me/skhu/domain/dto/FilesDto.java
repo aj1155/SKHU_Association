@@ -1,5 +1,7 @@
 package me.skhu.domain.dto;
 
+import java.util.List;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,17 +12,14 @@ import me.skhu.domain.Files;
 @Builder
 public class FilesDto {
 
-	private int boardPostId;
-	private String name;
-	private Long size;
-	private String path;
+	private int boardId;
+	private List<Files> files;
 
-	public static FilesDto of(Files file){
+	public static FilesDto of(int boardId,List<Files> list){
 		return FilesDto.builder()
-				.boardPostId(file.getBoardId())
-				.name(file.getName())
-				.size(file.getSize())
-				.path(file.getPath()).build();
+				.boardId(boardId)
+				.files(list)
+				.build();
 	}
 
 }

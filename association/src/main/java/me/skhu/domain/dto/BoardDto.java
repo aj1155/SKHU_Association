@@ -1,19 +1,21 @@
 package me.skhu.domain.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.skhu.domain.Board;
-import me.skhu.domain.BoardType;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class BoardDto {
 
-	private BoardType boardType;
+	private String boardType;
 	private int categoryId;
-	private String categoryName;
 
 	public static BoardDto of(Board board){
 		return BoardDto.builder()

@@ -22,6 +22,7 @@ public class BoardPostDto {
 	private DateTime modifiedTime;
 	private String boardName;
 	private String userName;
+	private int userId;
 
 	public static BoardPostDto of(BoardPost boardPost){
 		return BoardPostDto.builder()

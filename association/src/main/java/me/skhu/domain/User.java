@@ -64,8 +64,9 @@ public class User implements Serializable {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "category_id")
-    private int categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @ManyToOne
     @JoinColumn(name="user_type")

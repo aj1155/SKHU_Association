@@ -10,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -20,6 +22,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.skhu.domain.dto.BoardPostDto;
 
 @Getter
 @Setter
@@ -47,8 +50,9 @@ public class BoardPost extends BaseEntity implements Serializable{
 	private String content;
 
 	@NotNull
-	@Column(name = "own_board_id")
-	private int ownBoardId;
+	@JoinColumn(name = "own_board_id")
+	@ManyToOne
+	private Board board;
 
 	@NotNull
 	@Column(name = "writer_id")
@@ -62,11 +66,21 @@ public class BoardPost extends BaseEntity implements Serializable{
 	@Basic(fetch=FetchType.LAZY)
 	private Collection<Comment> commentList;
 
+
+	public static BoardPost of(BoardPostDto boardPostDto,Board board){
+		return BoardPost.builder()
+				.title(boardPostDto.getTitle())
+				.content(boardPostDto.getContent())
+				.board(board)
+				.writer_name(boardPostDto.getUserName())
+				.writer_id(boardPostDto.getUserId())
+				.build();
+	}
 	public static BoardPost ofCreate(String title, String content, int boardId, int writer_id ,String writer_name){
 		return BoardPost.builder()
 				.title(title)
 				.content(content)
-				.ownBoardId(boardId)
+				//.ownBoardId(boardId)
 				.writer_id(writer_id)
 				.writer_name(writer_name)
 				.build();
@@ -77,7 +91,7 @@ public class BoardPost extends BaseEntity implements Serializable{
 				.id(id)
 				.title(title)
 				.content(content)
-				.ownBoardId(boardId)
+				//.ownBoardId(boardId)
 				.writer_id(writer_id)
 				.writer_name(writer_name)
 				.build();
