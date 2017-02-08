@@ -118,4 +118,22 @@ public class FileService {
 		System.out.println("path " + path);
 		return "../resources/upload/advertiseImage/"+fileName;
 	}
+
+	public String excelUpload(MultipartFile file, MultipartHttpServletRequest request){
+		String fileName = null;
+		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/excel/");
+		String path=null;
+		try{
+			fileName=file.getOriginalFilename();
+			byte[] bytes = file.getBytes();
+			path = rootPath+fileName;
+			BufferedOutputStream buffStream =
+                    new BufferedOutputStream(new FileOutputStream(new File(path)));
+			buffStream.write(bytes);
+            buffStream.close();
+		}catch (Exception e){
+			System.out.println("Image upload Error : " + e.getMessage());
+		}
+		return path;
+	}
 }
