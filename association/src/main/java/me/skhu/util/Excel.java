@@ -1,8 +1,12 @@
 package me.skhu.util;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,8 +15,11 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Component;
 
 import me.skhu.domain.dto.UserDto;
+
+@Component
 public class Excel {
 
 	public void xlsxWriter(List<UserDto> list,HttpServletResponse response) throws IOException{
@@ -88,5 +95,58 @@ public class Excel {
 		workbook.write(out);
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
+	}
+
+	public List<UserDto> readExcel(String path){
+		File file = new File(path);
+		FileInputStream inputDocument = null;
+		XSSFWorkbook workBook = new XSSFWorkbook();
+		XSSFSheet sheet;
+		XSSFRow row ;
+		XSSFCell cell;
+		List<UserDto> userList = new ArrayList<UserDto>();
+
+		try{
+			inputDocument = new FileInputStream(file);
+			workBook = new XSSFWorkbook(inputDocument);
+		}catch(FileNotFoundException e){
+			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+
+		sheet = workBook.getSheetAt(0);
+		int rowSize = sheet.getLastRowNum() + 1;
+		XSSFCell value;
+		UserDto userDto;
+		for(int i=0; i<rowSize; i++){
+			row= sheet.getRow(i);
+			if(row!=null){
+				userDto = new UserDto();
+				userDto.setCategoryName(row.getCell(0).toString());
+				value=row.getCell(1);
+				double x = Double.parseDouble(value.toString());
+				int y = (int)x;
+				userDto.setGrade(y);
+				userDto.setName(row.getCell(2).toString());
+				userDto.setPositionName(row.getCell(3).toString());
+				value=row.getCell(4);
+				x = Double.parseDouble(value.toString());
+				y = (int)x;
+				userDto.setPhoneNumber(String.valueOf(y));
+				value=row.getCell(5);
+				x = Double.parseDouble(value.toString());
+				y = (int)x;
+				userDto.setCompanyNumber(String.valueOf(y));
+				value=row.getCell(6);
+				x = Double.parseDouble(value.toString());
+				y = (int)x;
+				userDto.setBirth(String.valueOf(y));
+				userDto.setEmail(row.getCell(7).toString());
+				userDto.setStatus(row.getCell(8).toString());
+				userList.add(userDto);
+			}
+		}
+		return userList;
 	}
 }

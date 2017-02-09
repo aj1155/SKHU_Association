@@ -16,6 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.skhu.domain.dto.UserDto;
 
 /**
  * Created by Manki Ki on 2017-01-18.
@@ -88,4 +89,19 @@ public class User implements Serializable {
                 .build();
     }
 
+    public static User of(UserDto userDto, Category category, Position position){
+    	return User.builder()
+    			.loginId(userDto.getPhoneNumber())
+    			.password(userDto.getBirth())
+    			.name(userDto.getName())
+    			.grade(userDto.getGrade())
+    			.phoneNumber(userDto.getPhoneNumber())
+    			.companyNumber(userDto.getCompanyNumber())
+    			.status(userDto.getStatus())
+    			.birth(userDto.getBirth())
+    			.email(userDto.getEmail())
+    			.category(category)
+    			.position(position)
+    			.build();
+    }
 }
