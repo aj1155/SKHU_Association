@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import me.skhu.domain.dto.BoardPostEditDto;
+import me.skhu.domain.dto.FilesDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,8 +70,8 @@ public class BoardPostService {
     	}
     }
 
-    public BoardPostDto findById(int id){
-    	return BoardPostDto.of(boardPostRepository.findById(id));
+    public BoardPostEditDto findById(int id){
+        return BoardPostEditDto.of(BoardPostDto.of(boardPostRepository.findById(id)),fileService.findByBoardId(id).getFiles());
     }
 
     @Transactional(readOnly = false)

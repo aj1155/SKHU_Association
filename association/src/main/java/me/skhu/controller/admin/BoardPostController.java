@@ -57,7 +57,7 @@ public class BoardPostController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(@RequestParam("id") int id , Model model, Pagination pagination){
     	model.addAttribute("boardPost",boardPostService.findById(id));
-    	return "board/write";
+    	return "board/edit";
     }
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
