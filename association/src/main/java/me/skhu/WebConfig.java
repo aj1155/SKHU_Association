@@ -22,6 +22,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import me.skhu.controller.filter.CORSFilter;
 import me.skhu.controller.interceptor.JwtInterceptor;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
 
 /**
  * Created by Manki Kim on 2016. 12. 30..

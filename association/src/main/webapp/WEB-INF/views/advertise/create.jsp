@@ -46,13 +46,13 @@
 							<span>광고문구:</span> <input type="text" name="slogan" style="width: 800px;" /> 
 							<span>광고자:</span> 
 							<input type="text" name="userName" style="width: 800px;" /> 
-							<span>휴대폰 번호:</span> 
+							<span>휴대폰 번호:</span>
 							<input type="text" name="phoneNumber" style="width: 800px;" />
 							<div align="right">
-										<ul class="actions">
-											<li><a href="#addMember" class="button special icon fa-plus" data-toggle="modal">임원추가</a></li>
-										</ul>
-									</div>
+								<ul class="actions">
+									<li><a href="#addMember" class="button special icon fa-plus" data-toggle="modal">임원추가</a></li>
+								</ul>
+							</div>
 							<input type="file" name="image"/>
 						</div>
 						<br />
