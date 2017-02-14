@@ -1,22 +1,14 @@
 package me.skhu.util;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.util.IOUtils;
+import org.apache.poi.xssf.usermodel.*;
 import org.springframework.stereotype.Component;
-
 import me.skhu.domain.dto.UserDto;
 
 @Component
@@ -27,6 +19,9 @@ public class Excel {
 		XSSFSheet sheet = workbook.createSheet();
 		XSSFRow row = sheet.createRow(0);
 		XSSFCell cell;
+		for(int i=0; i<11; i++) {
+			sheet.setColumnWidth(i,11*256);
+		}
 
 		cell = row.createCell(0);
 		cell.setCellValue("분류");
@@ -35,24 +30,27 @@ public class Excel {
 		cell.setCellValue("기수");
 
 		cell = row.createCell(2);
-		cell.setCellValue("이름");
+		cell.setCellValue("사진");
 
 		cell = row.createCell(3);
-		cell.setCellValue("직책");
+		cell.setCellValue("이름");
 
 		cell = row.createCell(4);
-		cell.setCellValue("전화번호");
-
-		cell = row.createCell(5);
-		cell.setCellValue("직장 전화번호");
-
-		cell = row.createCell(6);
 		cell.setCellValue("직책");
 
+		cell = row.createCell(5);
+		cell.setCellValue("전화번호");
+
+		cell = row.createCell(6);
+		cell.setCellValue("직장 전화번호");
+
 		cell = row.createCell(7);
-		cell.setCellValue("생년월일");
+		cell.setCellValue("직책");
 
 		cell = row.createCell(8);
+		cell.setCellValue("생년월일");
+
+		cell = row.createCell(9);
 		cell.setCellValue("이메일");
 
 		UserDto userDto;
@@ -68,24 +66,28 @@ public class Excel {
 			cell.setCellValue(userDto.getGrade());
 
 			cell = row.createCell(2);
-			cell.setCellValue(userDto.getName());
+			row.setHeight((short)(10*215));
+			drawImage(workbook,sheet,index,index,userDto);
 
 			cell = row.createCell(3);
-			cell.setCellValue(userDto.getPositionName());
+			cell.setCellValue(userDto.getName());
 
 			cell = row.createCell(4);
-			cell.setCellValue(userDto.getPhoneNumber());
+			cell.setCellValue(userDto.getPositionName());
 
 			cell = row.createCell(5);
-			cell.setCellValue(userDto.getCompanyNumber());
+			cell.setCellValue(userDto.getPhoneNumber());
 
 			cell = row.createCell(6);
-			cell.setCellValue(userDto.getStatus());
+			cell.setCellValue(userDto.getCompanyNumber());
 
 			cell = row.createCell(7);
-			cell.setCellValue(userDto.getBirth());
+			cell.setCellValue(userDto.getStatus());
 
 			cell = row.createCell(8);
+			cell.setCellValue(userDto.getBirth());
+
+			cell = row.createCell(9);
 			cell.setCellValue(userDto.getEmail());
 		}
 
@@ -148,5 +150,29 @@ public class Excel {
 			}
 		}
 		return userList;
+	}
+
+	public void drawImage(XSSFWorkbook workbook, XSSFSheet sheet, int row, int cell, UserDto userDto) throws IOException{
+		try{
+			InputStream inputStream = new FileInputStream("C:\\Users\\iljun\\IdeaProjects\\Association\\association\\src\\main\\webapp\\resources\\upload\\files\\1453204456664.jpeg");
+			byte[] bytes = IOUtils.toByteArray(inputStream);
+			int pictureIndex = workbook.addPicture(bytes,XSSFWorkbook.PICTURE_TYPE_JPEG);
+			inputStream.close();
+
+			XSSFCreationHelper helper = workbook.getCreationHelper();
+			XSSFDrawing drawing = sheet.createDrawingPatriarch();
+			XSSFClientAnchor anchor = helper.createClientAnchor();
+
+			anchor.setCol1(2);
+			anchor.setRow1(row+1);
+
+			XSSFPicture picture = drawing.createPicture(anchor,pictureIndex);
+			double x = 0.15;
+
+			picture.resize(x);
+
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
 }
