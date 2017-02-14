@@ -14,27 +14,31 @@ import me.skhu.domain.User;
 @AllArgsConstructor
 public class UserDto {
 
+	private int id;
+	private String loginId;
 	private String name;
-	private int grade;
-	private String phoneNumber;
-	private String companyNumber;
-	private String status;
+	private Integer grade;
 	private String birth;
+	private String phoneNumber;
 	private String email;
+	private String status;
+	private String companyNumber;
+	private Integer user_type;
 	private String positionName;
 	private String categoryName;
 
 	public static UserDto of(User user){
 		return UserDto.builder()
+				.loginId(user.getLoginId())
 				.name(user.getName())
 				.grade(user.getGrade())
-				.phoneNumber(user.getPhoneNumber())
-				.companyNumber(user.getCompanyNumber())
-				.status(user.getStatus())
 				.birth(user.getBirth())
+				.phoneNumber(user.getPhoneNumber())
 				.email(user.getEmail())
-				.positionName(user.getPosition().getName())
-				.categoryName(user.getCategory().getName())
+				.status(user.getStatus())
+				.companyNumber(user.getCompanyNumber())
+				.user_type(user.getPosition()==null ? 0 : user.getPosition().getId())
 				.build();
 	}
+
 }

@@ -7,6 +7,7 @@ import javax.servlet.MultipartConfigElement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +16,14 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
 
 import me.skhu.controller.filter.CORSFilter;
 import me.skhu.controller.interceptor.JwtInterceptor;
@@ -26,6 +31,8 @@ import me.skhu.controller.interceptor.JwtInterceptor;
 /**
  * Created by Manki Kim on 2016. 12. 30..
  */
+@SpringBootApplication
+@EnableWebMvc
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
@@ -57,17 +64,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/auth/**");
     }
 
-    @Bean
-	public InternalResourceViewResolver setupViewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".jsp");
-		return resolver;
-	}
-
     @Override
-    public void configureDefaultServletHandling(
-            DefaultServletHandlerConfigurer configurer) {
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 
@@ -82,6 +80,22 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
+    }
+
+    @Bean
+    public ViewResolver viewResolver(){
+    	UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
+    	viewResolver.setViewClass(TilesView.class);
+    	return viewResolver;
+    }
+
+    @Bean
+    public TilesConfigurer tilesConfigurer(){
+    	TilesConfigurer tilesConfigurer = new TilesConfigurer();
+    	tilesConfigurer.setDefinitionsFactoryClass(TilesDefinitionsConfig.class);
+    	tilesConfigurer.setCheckRefresh(true);
+    	TilesDefinitionsConfig.addDefinitions();
+    	return tilesConfigurer;
     }
 
 }
