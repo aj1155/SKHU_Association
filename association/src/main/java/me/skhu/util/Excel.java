@@ -127,32 +127,33 @@ public class Excel {
 				userDto = new UserDto();
 				userDto.setCategoryName(row.getCell(0).toString());
 				value=row.getCell(1);
+
 				double x = Double.parseDouble(value.toString());
 				int y = (int)x;
 				userDto.setGrade(y);
-				userDto.setName(row.getCell(2).toString());
-				userDto.setPositionName(row.getCell(3).toString());
-				value=row.getCell(4);
-				x = Double.parseDouble(value.toString());
-				y = (int)x;
-				userDto.setPhoneNumber(String.valueOf(y));
+				userDto.setName(row.getCell(3).toString());
+				userDto.setPositionName(row.getCell(4).toString());
 				value=row.getCell(5);
 				x = Double.parseDouble(value.toString());
 				y = (int)x;
-				userDto.setCompanyNumber(String.valueOf(y));
+				userDto.setPhoneNumber(String.valueOf(y));
 				value=row.getCell(6);
 				x = Double.parseDouble(value.toString());
 				y = (int)x;
+				userDto.setCompanyNumber(String.valueOf(y));
+				value=row.getCell(7);
+				x = Double.parseDouble(value.toString());
+				y = (int)x;
 				userDto.setBirth(String.valueOf(y));
-				userDto.setEmail(row.getCell(7).toString());
-				userDto.setStatus(row.getCell(8).toString());
+				userDto.setEmail(row.getCell(8).toString());
+				userDto.setStatus(row.getCell(9).toString());
 				userList.add(userDto);
 			}
 		}
 		return userList;
 	}
 
-	public void drawImage(XSSFWorkbook workbook, XSSFSheet sheet, int row, int cell, UserDto userDto) throws IOException{
+	public void drawImage(XSSFWorkbook workbook, XSSFSheet sheet, int row, UserDto userDto) throws IOException{
 		try{
 			InputStream inputStream = new FileInputStream("C:\\Users\\iljun\\IdeaProjects\\Association\\association\\src\\main\\webapp\\resources\\upload\\files\\1453204456664.jpeg");
 			byte[] bytes = IOUtils.toByteArray(inputStream);
@@ -174,5 +175,10 @@ public class Excel {
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public void readImage(XSSFWorkbook workbook, XSSFSheet sheet, String path, int row) throws IOException{
+		XSSFDrawing drawing = sheet.createDrawingPatriarch();
+		XSSFPicture picture = drawing.getShapes();
 	}
 }
