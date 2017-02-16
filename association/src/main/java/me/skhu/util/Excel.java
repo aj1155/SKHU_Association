@@ -3,22 +3,28 @@ package me.skhu.util;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.util.IOUtils;
+import org.apache.poi.util.SystemOutLogger;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.stereotype.Component;
 import me.skhu.domain.dto.UserDto;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component
 public class Excel {
+
 
 	public void xlsxWriter(List<UserDto> list,HttpServletResponse response) throws IOException{
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet();
 		XSSFRow row = sheet.createRow(0);
 		XSSFCell cell;
+
 		for(int i=0; i<11; i++) {
 			sheet.setColumnWidth(i,11*256);
 		}
@@ -67,7 +73,7 @@ public class Excel {
 
 			cell = row.createCell(2);
 			row.setHeight((short)(10*215));
-			drawImage(workbook,sheet,index,index,userDto);
+			drawImage(workbook,sheet,index,userDto);
 
 			cell = row.createCell(3);
 			cell.setCellValue(userDto.getName());
@@ -99,7 +105,7 @@ public class Excel {
 		response.getOutputStream().close();
 	}
 
-	public List<UserDto> readExcel(String path){
+	public List<UserDto> readExcel(String path, MultipartHttpServletRequest request) throws IOException{
 		File file = new File(path);
 		FileInputStream inputDocument = null;
 		XSSFWorkbook workBook = new XSSFWorkbook();
@@ -107,6 +113,7 @@ public class Excel {
 		XSSFRow row ;
 		XSSFCell cell;
 		List<UserDto> userList = new ArrayList<UserDto>();
+		List<XSSFPictureData> list = workBook.getAllPictures();
 
 		try{
 			inputDocument = new FileInputStream(file);
@@ -121,16 +128,21 @@ public class Excel {
 		int rowSize = sheet.getLastRowNum() + 1;
 		XSSFCell value;
 		UserDto userDto;
+		String imagePath=null;
+
 		for(int i=0; i<rowSize; i++){
 			row= sheet.getRow(i);
 			if(row!=null){
 				userDto = new UserDto();
 				userDto.setCategoryName(row.getCell(0).toString());
-				value=row.getCell(1);
-
+				value =row.getCell(1);
 				double x = Double.parseDouble(value.toString());
 				int y = (int)x;
 				userDto.setGrade(y);
+				value = row.getCell(2);
+				if(value!=null)
+					imagePath = readImage(list.get(i),request);
+				userDto.setImage(imagePath);
 				userDto.setName(row.getCell(3).toString());
 				userDto.setPositionName(row.getCell(4).toString());
 				value=row.getCell(5);
@@ -141,12 +153,12 @@ public class Excel {
 				x = Double.parseDouble(value.toString());
 				y = (int)x;
 				userDto.setCompanyNumber(String.valueOf(y));
-				value=row.getCell(7);
+				value=row.getCell(8);
 				x = Double.parseDouble(value.toString());
 				y = (int)x;
 				userDto.setBirth(String.valueOf(y));
-				userDto.setEmail(row.getCell(8).toString());
-				userDto.setStatus(row.getCell(9).toString());
+				userDto.setEmail(row.getCell(9).toString());
+				userDto.setStatus(row.getCell(7).toString());
 				userList.add(userDto);
 			}
 		}
@@ -177,8 +189,17 @@ public class Excel {
 		}
 	}
 
-	public void readImage(XSSFWorkbook workbook, XSSFSheet sheet, String path, int row) throws IOException{
-		XSSFDrawing drawing = sheet.createDrawingPatriarch();
-		XSSFPicture picture = drawing.getShapes();
+	public String readImage(XSSFPictureData pictureData , MultipartHttpServletRequest request) throws IOException{
+		byte[] bytes = pictureData.getData();
+		String path = request.getSession().getServletContext().getRealPath("/resource/upload/userImage/");
+		try{
+			BufferedOutputStream buffStream =
+					new BufferedOutputStream(new FileOutputStream(new File(path)));
+			buffStream.write(bytes);
+			buffStream.close();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return "path";
 	}
 }

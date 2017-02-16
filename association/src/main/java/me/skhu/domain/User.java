@@ -102,6 +102,39 @@ public class User implements Serializable {
     			.email(userDto.getEmail())
     			.category(category)
     			.position(position)
+                .image(userDto.getImage())
     			.build();
     }
+
+    public static User ofCreate2(UserDto userDto,Position position){
+        return User.builder()
+                .loginId(userDto.getPhoneNumber())
+                .password(userDto.getBirth())
+                .name(userDto.getName())
+                .grade(userDto.getGrade())
+                .birth(userDto.getBirth())
+                .status(userDto.getStatus())
+                .phoneNumber(userDto.getPhoneNumber())
+                .companyNumber(userDto.getCompanyNumber())
+                .email(userDto.getEmail())
+                .position(position)
+                .build();
+    }
+
+   public static User ofUpdate2(int id, String loginId, String name, int grade, String birth, String status, String phoneNumber,
+		   String companyNumber, String email, Position position){
+	   return User.builder()
+			   .loginId(loginId)
+    		   .id(id)
+               .name(name)
+               .grade(grade)
+               .birth(birth)
+               .status(status)
+               .phoneNumber(phoneNumber)
+               .companyNumber(companyNumber)
+               .email(email)
+               .position(position)
+               .build();
+   }
+
 }

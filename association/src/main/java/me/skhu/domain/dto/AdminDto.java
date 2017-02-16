@@ -1,13 +1,13 @@
 package me.skhu.domain.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import me.skhu.domain.Admin;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdminDto {
 
 	private String loginId;

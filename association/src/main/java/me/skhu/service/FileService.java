@@ -128,7 +128,7 @@ public class FileService {
 			byte[] bytes = file.getBytes();
 			path = rootPath+fileName;
 			BufferedOutputStream buffStream =
-                    new BufferedOutputStream(new FileOutputStream(new File(path)));
+					new BufferedOutputStream(new FileOutputStream(new File(path)));
 			buffStream.write(bytes);
             buffStream.close();
 		}catch (Exception e){

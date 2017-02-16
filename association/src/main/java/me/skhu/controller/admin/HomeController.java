@@ -2,7 +2,9 @@ package me.skhu.controller.admin;
 
 import java.util.List;
 
+import me.skhu.config.security.SecurityAdminDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,16 +14,13 @@ import me.skhu.service.BoardService;
 
 @Controller
 public class HomeController {
-	@Autowired
-	private BoardService boardService;
+    @RequestMapping("/")
+    public String index(){
+        return "index page<br/><a href=/mypage>mypage</a>";
+    }
 
-	@RequestMapping("/home/login")
-	public String home(){
-		return "home/login";
-	}
-
-	@RequestMapping("/home/sideBar")
-	public @ResponseBody List<BoardDto> sideBar(int categoryId){
-		return boardService.findByCategoryId(categoryId);
-	}
+    @RequestMapping("mypage")
+    public String mypage(@AuthenticationPrincipal SecurityAdminDetails adminDetails){
+        return "us myPage</br>"+adminDetails.getLoginId()+"<br/><a href=/logout>logout</a>";
+    }
 }

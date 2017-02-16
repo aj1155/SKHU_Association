@@ -2,34 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시판1</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
-<link href="http://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<style>
-ul.pagination li>.page {
-	color: blue;
-}
 
-ul.pagination li>.page.active {
-	background-color: #BEEFFF;
-	color: blue !important;
-}
-
-ul.pagination li>.page.active:hover {
-	background-color: #00FFFF;
-}
-
-ul.pagination li>.page.active:active {
-	background-color: C0FFFF;
-}
-</style>
-</head>
-<body>
-	<div id="wrapper">
 
 		<!-- Main -->
 		<div id="main">
@@ -74,9 +47,3 @@ ul.pagination li>.page.active:active {
 				</div>
 			</div>
 		</div>
-		<c:import url="../commons/sidebar.jsp" />
-	</div>
-		<!-- Scripts -->
-		<c:import url="../commons/script.jsp"/>
-</body>
-</html>

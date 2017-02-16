@@ -2,16 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시판1</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
-<link href="http://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
-	<div id="wrapper">
+
 
 		<!-- Main -->
 		<div id="main">
@@ -99,9 +90,3 @@
 
 			</div>
 			</div>
-			<c:import url="../commons/sidebar.jsp" />
-		</div>
-		<!-- Scripts -->
-		<c:import url="../commons/script.jsp"/>
-</body>
-</html>
