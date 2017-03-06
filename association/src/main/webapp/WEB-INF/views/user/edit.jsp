@@ -1,78 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<script>
+function getThumbnailPrivew(html, $target) {
+  if (html.files && html.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $target.css('display', '');
+      //$target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시
+      $target.html('<img src="' + e.target.result + '" border="0" alt="" />');
+    }
+    reader.readAsDataURL(html.files[0]);
+    $("img[id=profileImg]").hide();
+  }
+}
+</script>
+<style>
+input{ width:250px; }
+img{
+  width:100%;
+  height:100%;
+  border-radius: 100%;
+}
+</style>
 <div id="main">
 	<div class="inner">
-<h2>개인정보 변경</h2>
+<h2>${ param.id == null ? "동문 추가" : "정보 변경" }</h2>
 <hr />
+<c:if test="${ param.id != null }">
+
+<form name="form" class="form-group" id="form" action="profile" method="post" enctype="multipart/form-data" >
+        <div class="filebox" style="margin-left : 0%;">
+          <label for="cma_file" >프로필 사진 편집</label>
+          <input type="hidden" name="id" value="${ param.id }" />
+          <input type="file" name="cma_file" id="cma_file" accept="image/*" onchange="getThumbnailPrivew(this,$('#cma_image'))"/>
+          <br /><br />
+          <c:if test="${ imgPath == null }">
+          	<img src="/resources/upload/profileImg/user.png" class="img-circle profile_img" id="profileImg" style="width:70%; max-width:70%;">
+          </c:if>
+          <c:if test="${ imgPath != null }">
+          	<img src="${ imgPath }" class="img-circle profile_img" id="profileImg" style="width:70%; max-width:70%;">
+          </c:if>
+          <div id="cma_image" style="width:70%; max-width:70%;"></div>
+          
+        </div>
+        <br />
+        <br />
+        <button type="submit" class="button special">프로필 사진 저장</button>
+</form> 
+</c:if>
+
 <form:form class="form-horizontal form-label-left" method="post" modelAttribute="userDto">
 
-	<div class="form-group">
-		<label class="control-label col-md-3 col-sm-3 col-xs-12">이름 </label>
-		<div class="col-md-4 col-sm-9 col-xs-12">
-			<form:input path="name" class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="control-label col-md-3 col-sm-3 col-xs-12">기수 </label>
-		<div class="col-md-4 col-sm-9 col-xs-12">
-			<form:input path="grade" class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="control-label col-md-3 col-sm-3 col-xs-12">생년월일</label>
-		<div class="col-md-4 col-sm-9 col-xs-12">
-			<form:input path="birth" name="social_status" class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="control-label col-md-3 col-sm-3 col-xs-12">소속지위</label>
-		<div class="col-md-4 col-sm-9 col-xs-12">
-			<form:input path="status" class="form-control" />
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="control-label col-md-3 col-sm-3 col-xs-12">휴대전화</label>
-		<div class="col-md-4 col-sm-9 col-xs-12">
-			<form:input path="phoneNumber" class="form-control" />		
-	</div>
-</div>
-
-<div class="form-group">
-	<label class="control-label col-md-3 col-sm-3 col-xs-12">직장전화</label>
-	<div class="col-md-4 col-sm-9 col-xs-12">
-		<form:input path="companyNumber" class="form-control" />
-	</div>
-</div>
-
-<div class="form-group">
-	<label class="control-label col-md-3 col-sm-3 col-xs-12">e-mail</label>
-	<div class="col-md-4 col-sm-9 col-xs-12">
-		<form:input path="email" class="form-control" />
-		</div>
-	</div>
+<div class="table-wrapper">
+<table>
+	<tr>
+		<td>이름</td>
+		<td><form:input path="name"  /></td>
+	</tr>
+	<tr>
+		<td>기수</td>
+		<td><form:input path="grade"  /></td>
+	</tr>
+	<tr>
+		<td>생년월일</td>
+		<td><form:input path="birth"  /></td>
+	</tr>
+	<tr>
+		<td>소속지위</td>
+		<td><form:input path="status"  /></td>
+	</tr>	
+	<tr>
+		<td>핸드폰번호</td>
+		<td><form:input path="phoneNumber"  /></td>
+	</tr>
+	<tr>
+		<td>직장전화</td>
+		<td><form:input path="companyNumber"  /></td>
+	</tr>
+	<tr>
+		<td>이메일</td>
+		<td><form:input path="email"  /></td>
+	</tr>
 	
-	
-	<div class="form-group">
-	<label class="control-label col-md-3 col-sm-3 col-xs-12">일반회원 / 임원</label>
-	<div class="col-md-4 col-sm-9 col-xs-12">
-		<form:select path="user_type" itemValue="id" itemLabel="name" items="${ position }" />		
-		</div>
-	</div>
-
+	<tr>
+		<td>카테고리</td>
+		<td><form:select path="user_type" itemValue="id" itemLabel="name" items="${ position }" /></td>
+	</tr>
+</table>
+</div>
 <hr />
 	<div class="form-group">
-		<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
 			<ul class="actions">
-				<li><button type="submit" class="button special">추가</button></li>
+				<li><button type="submit" class="button special" name="cmd" value="save">저장</button></li>
 				<li><a href="list" class="button">취소</a></li>
+				<c:if test="${ param.id != null }">
+					<li><button type="submit" class="button" name="cmd" value="delete">삭제</button></li>
+				</c:if>
 			</ul>
-		</div>
 	</div>
 </form:form>
 </div>
+
 </div>
