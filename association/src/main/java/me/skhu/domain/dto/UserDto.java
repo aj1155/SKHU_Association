@@ -17,7 +17,7 @@ public class UserDto {
 	private int id;
 	private String loginId;
 	private String name;
-	private Integer grade;
+	private int grade;
 	private String birth;
 	private String phoneNumber;
 	private String email;
@@ -26,6 +26,7 @@ public class UserDto {
 	private Integer user_type;
 	private String positionName;
 	private String categoryName;
+	private String image;
 
 	public static UserDto of(User user){
 		return UserDto.builder()
@@ -38,6 +39,7 @@ public class UserDto {
 				.status(user.getStatus())
 				.companyNumber(user.getCompanyNumber())
 				.user_type(user.getPosition()==null ? 0 : user.getPosition().getId())
+				.image(user.getImage())
 				.build();
 	}
 

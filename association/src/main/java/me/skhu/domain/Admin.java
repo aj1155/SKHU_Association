@@ -15,6 +15,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.skhu.domain.dto.AdminDto;
 
 @Getter
 @Setter
@@ -67,6 +68,19 @@ public class Admin {
 				.email(email)
 				.birth(birth)
 				.phoneNumber(phoneNumber)
-				.name(name).build();
+				.name(name)
+				.build();
+	}
+
+	public static Admin create(AdminDto adminDto,Category category){
+		return Admin.builder()
+				.loginId(adminDto.getLoginId())
+				.password(adminDto.getBirth())
+				.category(category)
+				.email(adminDto.getEmail())
+				.birth(adminDto.getBirth())
+				.phoneNumber(adminDto.getPhoneNumber())
+				.name(adminDto.getName())
+				.build();
 	}
 }

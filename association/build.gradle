@@ -62,7 +62,9 @@ dependencies {
 
 	//tiles
 	 compile("org.apache.tiles:tiles-jsp:3.0.3")
-
+	 
+	 //mail sender
+	 compile("org.springframework.boot:spring-boot-starter-mail")
 
 	def querydslVersion = "4.1.4"
 	/**

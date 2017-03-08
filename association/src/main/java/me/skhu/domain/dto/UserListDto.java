@@ -12,12 +12,20 @@ import me.skhu.domain.User;
 @Builder
 public class UserListDto {
 	List<User> user;
+	List<UserDto> userDto;
 
 	public static UserListDto of(List<User> userList){
 		return UserListDto.builder()
 				.user(userList)
 				.build();
 	}
+
+	public static UserListDto userDtoOf(List<UserDto> userDtoList){
+		return UserListDto.builder()
+				.userDto(userDtoList)
+				.build();
+	}
+
 
 
 }

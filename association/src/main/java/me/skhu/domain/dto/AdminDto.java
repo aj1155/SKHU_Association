@@ -1,13 +1,17 @@
 package me.skhu.domain.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.skhu.domain.Admin;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdminDto {
 
 	private String loginId;
@@ -23,8 +27,8 @@ public class AdminDto {
 		return AdminDto.builder()
 				.loginId(admin.getLoginId())
 				.password(admin.getPassword())
-				.categoryId(admin.getCategory().getId())
-				.categoryName(admin.getCategory().getName())
+				.categoryId(admin.getCategory() == null? 0 : admin.getCategory().getId())
+				.categoryName(admin.getCategory() == null? null : admin.getCategory().getName())
 				.email(admin.getEmail())
 				.birth(admin.getBirth())
 				.phoneNumber(admin.getPhoneNumber())
