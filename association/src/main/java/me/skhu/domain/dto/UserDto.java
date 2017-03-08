@@ -17,7 +17,7 @@ public class UserDto {
 	private int id;
 	private String loginId;
 	private String name;
-	private Integer grade;
+	private int grade;
 	private String birth;
 	private String phoneNumber;
 	private String email;

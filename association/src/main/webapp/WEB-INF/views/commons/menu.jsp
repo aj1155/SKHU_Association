@@ -12,8 +12,9 @@
             <a href="/logout">로그아웃</a>
         </header>
         <ul>
-          <li><a href="#">마이페이지</a></li>
-          <li><a href="user/list">동문관리</a></li>
+          <li><a href="/admin/myInfo">마이페이지</a></li>
+          <li><a href="/user/list">동문관리</a></li>
+          <li><a href="/user/typeList">회원유형</a></li>
           <li>
             <span class="opener">인문학습원 소개</span>
             <ul>

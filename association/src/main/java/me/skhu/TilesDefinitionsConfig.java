@@ -14,6 +14,7 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 
 	private static final Map<String, Definition> tilesDefinitions = new HashMap<String, Definition>();
 	private static final Attribute BASE_TEMPLATE = new Attribute("/WEB-INF/views/template.jsp");
+	private static final Attribute AJAX_TEMPLATE = new Attribute("/WEB-INF/views/templateAjax.jsp");
 
 	@Override
 	public Definition getDefinition(String name,Request tilesContext){
@@ -27,6 +28,13 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 		attributes.put("menu",new Attribute("/WEB-INF/views/commons/menu.jsp"));
 		attributes.put("content",new Attribute("/WEB-INF/views/"+content+".jsp"));
 		tilesDefinitions.put(name, new Definition(name, BASE_TEMPLATE, attributes));
+	}
+
+	public static void addDefaultAjaxDef(String name, String content){
+		Map<String, Attribute> attributes = new HashMap<String, Attribute>();
+
+		attributes.put("content", new Attribute("/WEB-INF/views/"+content+".jsp"));
+		tilesDefinitions.put(name, new Definition(name, AJAX_TEMPLATE, attributes));
 	}
 
 	public static void addDefinitions(){
@@ -49,5 +57,17 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 		addDefaultLayoutDef("user/phoneNumberEditList", "user/phoneNumberEditList");
 		addDefaultLayoutDef("admin/introduceEdit","admin/introduceEdit");
 		addDefaultLayoutDef("admin/introduce","admin/introduce");
+		addDefaultLayoutDef("user/createByExcel","user/createByExcel");
+		addDefaultLayoutDef("admin/list","admin/list");
+		addDefaultLayoutDef("admin/edit","admin/edit");
+		addDefaultLayoutDef("admin/myInfo","admin/myInfo");
+		addDefaultLayoutDef("admin/mailSend","admin/mailSend");
+		addDefaultLayoutDef("user/createType","user/createType");
+		addDefaultLayoutDef("user/typeList","user/typeList");
+
+		// Ajax
+		addDefaultAjaxDef("admin/mailList","admin/mailList");
+
 	}
+
 }
