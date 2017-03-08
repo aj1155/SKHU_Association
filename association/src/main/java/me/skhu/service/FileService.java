@@ -33,14 +33,6 @@ public class FileService {
     	String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/files/");
 		String fileName;
 		Files f;
-		System.out.println(request.getSession());
-		System.out.println(request.getSession().getServletContext());
-		System.out.println(request.getSession().getServletContext().getRealPath("/"));
-		System.out.println("request URL : " +request.getRequestURI());
-		System.out.println("request URL : " +request.getRequestURL());
-		System.out.println("request context path " + request.getContextPath());
-		System.out.println("request servlet Path " + request.getServletPath());
-		System.out.println("gerServletContext Path : " +request.getServletContext());
     	if (files != null && files.length >0) {
     		for(int i =0 ;i< files.length; i++){
 	            try {
@@ -48,7 +40,6 @@ public class FileService {
 	                size=files[i].getSize();
 	                byte[] bytes = files[i].getBytes();
 	                path=rootPath+fileName;
-	                System.out.println("path: " + path);
 	                BufferedOutputStream buffStream =
 	                        new BufferedOutputStream(new FileOutputStream(new File(path)));
 	                buffStream.write(bytes);

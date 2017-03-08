@@ -18,6 +18,7 @@ public class OriginUserDto {
 	private int grade;
 	private String status;
 	private String categoryName;
+	private int userId;
 
 	public static OriginUserDto of(OriginUser originUser){
 		return OriginUserDto.builder()
@@ -28,6 +29,8 @@ public class OriginUserDto {
 				.companyNumber(originUser.getCompanyNumber())
 				.grade(originUser.getGrade())
 				.status(originUser.getStatus())
-				.categoryName(originUser.getCategory().getName()).build();
+				.categoryName(originUser.getCategory().getName())
+				.userId(originUser.getUserId())
+				.build();
 	}
 }

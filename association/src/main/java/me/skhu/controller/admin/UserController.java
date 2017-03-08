@@ -1,5 +1,9 @@
 package me.skhu.controller.admin;
 
+import me.skhu.domain.OriginUser;
+import me.skhu.domain.dto.OriginUserDto;
+import me.skhu.service.OriginUserPhoneService;
+import me.skhu.service.OriginUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import me.skhu.domain.dto.UserDto;
 import me.skhu.service.UserService;
 import me.skhu.util.Pagination;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -17,6 +24,12 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private OriginUserService originUserService;
+
+	@Autowired
+	private OriginUserPhoneService originUserPhoneSerice;
 
 	@RequestMapping("/list")
 	public String list(Model model, Pagination pagination){
@@ -52,5 +65,52 @@ public class UserController {
 		return "redirect:/user/list?"+pagination.getQueryString();
 	}
 
+	@RequestMapping(value="userEditList", method=RequestMethod.GET)
+	public String userEditList (Model model, Pagination pagination){
+		model.addAttribute("userEditList",userService.getEditUser(pagination));
+		return "user/userEditList";
+	}
 
+	@RequestMapping(value = "/userEditAgree" , method=RequestMethod.GET)
+	@ResponseBody
+	public void userEditAgree(@RequestParam(value="checkList[]") List<String> checked){
+		System.out.println("checkList[] : " + checked);
+		System.out.println("checked[0]: " + checked.get(0));
+		System.out.println("checked[1]: " + checked.get(1).toString());
+	}
+
+	@RequestMapping(value="userEditDetail", method = RequestMethod.GET)
+	public String userEditDetails(Model model, @RequestParam("id") int id){
+		OriginUserDto originUser = originUserService.findById(id);
+		model.addAttribute("originUser",originUser);
+		model.addAttribute("user",userService.findById(originUser.getUserId()));
+		return "user/userEditDetail";
+	}
+
+	@RequestMapping(value = "phoneNumberEditList", method = RequestMethod.GET)
+	public String phoneNumberEditList(Model model, Pagination pagination){
+		model.addAttribute("list",originUserPhoneSerice.pagination(pagination));
+		return "user/phoneNumberEditList";
+	}
+
+	@RequestMapping(value = "agree", method = RequestMethod.GET)
+	public @ResponseBody String agree(@RequestParam("id") int id){
+		try{
+			originUserPhoneSerice.agree(id);
+			return "success";
+		}catch (Exception e){
+			return "false";
+		}
+
+	}
+
+	@RequestMapping(value="agrees", method = RequestMethod.GET)
+	public @ResponseBody String agrees(@RequestParam(value = "id" , required = true) List<Integer> id){
+		try{
+			originUserPhoneSerice.agrees(id);
+			return "success";
+		}catch (Exception e){
+			return "fail";
+		}
+	}
 }

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/sideBarAjax.js"></script>
 <div id="sidebar">
   <div class="inner">
 
@@ -6,17 +9,16 @@
       <nav id="menu">
         <header class="major">
           <h2>Menu</h2>
+            <a href="/logout">로그아웃</a>
         </header>
         <ul>
           <li><a href="#">마이페이지</a></li>
           <li><a href="user/list">동문관리</a></li>
           <li>
-            <span class="opener">안내페이지</span>
+            <span class="opener">인문학습원 소개</span>
             <ul>
-              <li><a href="#">원장님 인사말</a></li>
-              <li><a href="#">사업안내</a></li>
-              <li><a href="#">조직안내</a></li>
-              <li><a href="#">오시는길</a></li>
+              <li><a href="/admin/introduceEdit">안내페이지 수정</a></li>
+              <li><a href="/admin/introduce">보기</a></li>
             </ul>
           </li>
           <li><span class="opener">커뮤니티</span>
@@ -24,23 +26,17 @@
 					</ul>
 				</li>
 				<li><span class="opener">광고</span>
-					<ul>
-						<li><a href="/advertise/list?categoryId=1">금융보험</a></li>
-						<li><a href="/advertise/list?categoryId=2">요식업</a></li>
-						<li><a href="/advertise/list?categoryId=3">컨설팅</a></li>
-						<li><a href="/advertise/list?categoryId=4">서비스</a></li>
-						<li><a href="/advertise/list?categoryId=5">출판인쇄</a></li>
-						<li><a href="/advertise/list?categoryId=6">임대업</a></li>
-						<li><a href="/advertise/list?categoryId=7">IT</a></li>
-						<li><a href="/advertise/list?categoryId=8">전문직</a></li>
-						<li><a href="/advertise/list?categoryId=9">자동차</a></li>
-						<li><a href="/advertise/list?categoryId=10">일반제조</a></li>
-						<li><a href="/advertise/list?categoryId=11">기타</a></li>
+					<ul id="advertise">
 					</ul>
 				</li>
           <li><a href="#">관리자 권한 부여</a></li>
           <li><a href="#">문자/메일 발송</a></li>
-          <li><a href="#">회원변경사항</a></li>
+            <li><span class="opener">회원변경사항</span>
+                <ul>
+                    <li><a href="/user/phoneNumberEditList">아이디변경</a></li>
+                    <li><a href="/user/userEditList">회원 정보 변경</a></li>
+                </ul>
+            </li>
         </ul>
       </nav>
 

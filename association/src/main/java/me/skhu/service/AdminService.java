@@ -1,10 +1,14 @@
 package me.skhu.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import me.skhu.domain.Admin;
 import me.skhu.domain.Category;
+import me.skhu.domain.dto.UserExcelDto;
+import me.skhu.util.Excel.ExcelReadOption;
 import me.skhu.util.PasswordEncoding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,7 +27,7 @@ import me.skhu.repository.AdminRepository;
 import me.skhu.repository.CategoryRepository;
 import me.skhu.repository.PositionRepository;
 import me.skhu.repository.UserRepository;
-import me.skhu.util.Excel;
+import me.skhu.util.Excel.ExcelRead;
 
 @Service
 public class AdminService {
@@ -37,7 +41,7 @@ public class AdminService {
 	private FileService fileService;
 
 	@Autowired
-	private Excel excel;
+	private ExcelRead excel;
 
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -55,9 +59,30 @@ public class AdminService {
 		return userRepository.findByCategoryIdAndGrade(1, grade);
 	}
 
-	public List<UserDto> excelRead(MultipartFile file, MultipartHttpServletRequest request) throws IOException {
+	public List<UserExcelDto> excelRead(MultipartFile file, MultipartHttpServletRequest request) throws IOException {
 		String path = fileService.excelUpload(file, request);
-		return excel.readExcel(path ,request);
+		ExcelReadOption excelReadOption = new ExcelReadOption();
+		excelReadOption.setFilePath(path);
+		excelReadOption.setColumns("B","C","D","E","F","G","H","I","J","K");
+		excelReadOption.setStartRow(2);
+		List<Map<String,String>> excelResult = ExcelRead.readExcel(excelReadOption,path);
+		List<UserExcelDto> list = new ArrayList<UserExcelDto>();
+		for(Map<String,String> content : excelResult){
+			UserExcelDto userExcelDto = new UserExcelDto();
+			System.out.println(content.get("B"));
+			userExcelDto.setCategoryName(content.get("B"));
+			userExcelDto.setGrade((int)(Double.parseDouble(content.get("C").substring(0,1))));
+			userExcelDto.setImage(content.get("D"));
+			userExcelDto.setName(content.get("E"));
+			userExcelDto.setPositionName(content.get("F"));
+			userExcelDto.setPhoneNumber(content.get("G"));
+			userExcelDto.setCompanyNumber(content.get("H"));
+			userExcelDto.setStatus(content.get("I"));
+			userExcelDto.setBirth(content.get("J"));
+			userExcelDto.setEmail(content.get("K"));
+			list.add(userExcelDto);
+		}
+		return list;
 	}
 
 	@Transactional(readOnly = false)

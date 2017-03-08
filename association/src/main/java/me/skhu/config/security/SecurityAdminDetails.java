@@ -14,9 +14,6 @@ public class SecurityAdminDetails extends User {
     private static final long serialVersionUID = 1L;
 
     @Getter
-    private int id ;
-
-    @Getter
     private String loginId;
 
     public SecurityAdminDetails(Admin admin){
@@ -25,7 +22,6 @@ public class SecurityAdminDetails extends User {
                 admin.getPassword(),
                 AuthorityUtils.createAuthorityList("ROLE_ADMIN")
         );
-        id = admin.getId();
         loginId = admin.getLoginId();
     }
 }

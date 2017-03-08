@@ -1,6 +1,5 @@
 package me.skhu.config;
 
-import me.skhu.config.security.SecurityAdminDetails;
 import me.skhu.config.security.SecurityAdminDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +20,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception{
        web
             .ignoring()
-            .antMatchers("/");
+            .antMatchers("/resource/**","/");
        //css js파일등 풀어주기
    }
 
@@ -36,15 +35,19 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        http
                .formLogin()
                .loginProcessingUrl("/login")
-               .successForwardUrl("/boardpost/list")
-                .failureUrl("/login?error");
+               .successForwardUrl("/admin/introduce")
+               .failureUrl("/login?error");
        http
                .logout()
                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-               .logoutSuccessUrl("/");
+               .logoutSuccessUrl("/login");
        http
                .csrf()
-                    .disable();
+               .disable();
+       http
+               .headers()
+               .frameOptions().sameOrigin()
+               .httpStrictTransportSecurity().disable();//security가 iframe을 방어하는걸 제거
    }
 
    @Configuration

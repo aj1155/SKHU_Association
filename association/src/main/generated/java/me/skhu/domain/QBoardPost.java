@@ -26,8 +26,6 @@ public class QBoardPost extends EntityPathBase<BoardPost> {
 
     public final QBoard board;
 
-    public final CollectionPath<Comment, QComment> commentList = this.<Comment, QComment>createCollection("commentList", Comment.class, QComment.class, PathInits.DIRECT2);
-
     public final StringPath content = createString("content");
 
     //inherited

@@ -26,7 +26,6 @@ public class BoardPostResponse {
                 .title(boardPost.getTitle())
                 .content(boardPost.getContent())
                 .writer_name(boardPost.getWriter_name())
-                .commentList(boardPost.getCommentList())
                 .build();
     }
 }

@@ -16,7 +16,7 @@
 				<h4>공지사항</h4>
 				
 				<button>
-					<a href="create">글쓰기</a>
+					<a href="/board/create?boardId=${boardId}">글쓰기</a>
 				</button>
 				<form:form modelAttribute="pagination">
 				<div class="form-inline" style="float: right;">
@@ -42,7 +42,7 @@
 						</thead>
 						<tbody>
 							<c:forEach var="list" items="${ list.boardPostList }" varStatus="status">
-								<tr data-url="read?id=${list.id}">
+								<tr data-url="/board/read?id=${list.id}">
 									<td><input type="checkbox">
 										<label></label>
 									</td>

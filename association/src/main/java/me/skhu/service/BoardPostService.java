@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import me.skhu.domain.dto.BoardPostEditDto;
-import me.skhu.domain.dto.FilesDto;
+import me.skhu.domain.Admin;
+import me.skhu.domain.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +17,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import me.skhu.controller.model.response.BoardPostResponse;
 import me.skhu.domain.BoardPost;
-import me.skhu.domain.dto.BoardPostDto;
-import me.skhu.domain.dto.BoardPostListDto;
 import me.skhu.repository.BoardPostRepository;
 import me.skhu.repository.BoardRepository;
 import me.skhu.util.Pagination;
@@ -36,7 +34,13 @@ public class BoardPostService {
     private FileService fileService;
 
     @Autowired
-    private BoardRepository boardRepository;
+    private BoardService boardService;
+
+    @Autowired
+    private BoardImageService boardImageService;
+
+    @Autowired
+    private AdminService adminService;
 
     /***** create *****/
 /*
@@ -49,11 +53,14 @@ public class BoardPostService {
     }
 */
     @Transactional(readOnly = false)
-    public void create(BoardPostDto boardPostDto,MultipartFile[] files,MultipartHttpServletRequest request){
-    	BoardPost boardPost = BoardPost.of(boardPostDto,boardRepository.findOne(boardPostDto.getUserId()));
+    public void create(BoardPostInsertDto boardPostInsertDto, MultipartFile[] files, MultipartHttpServletRequest request, int categoryId){
+    	BoardPost boardPost = BoardPost.of(boardPostInsertDto,boardService.find(1),adminService.getCurrentAdmin());
     	BoardPost b = boardPostRepository.save(boardPost);
+    	System.out.println("files.length: " + files.length);
     	if(files!=null)
-    		fileService.upload(b.getId(),files,request);
+            fileService.upload(b.getId(),files,request);
+    	if(request.getHeader("file-name")!=null)
+             boardImageService.update(b,request);
     }
 
     public BoardPostListDto findAll(Pagination pagination,int boardId){
@@ -86,6 +93,7 @@ public class BoardPostService {
     public void webDelete(int id){
     	boardPostRepository.delete(id);
     	fileService.deleteByBoardId(id);
+    	boardImageService.delete(id);
     }
     /***** read *****/
 /*
@@ -120,13 +128,21 @@ public class BoardPostService {
         return resultStatus;
     }
 
-
-
-
     private List<BoardPostResponse> convertBoardPostEntityToResponse(List<BoardPost> boardPostList){
         List<BoardPostResponse> boardPostResponses = Optional.ofNullable(boardPostList).orElse(Collections.emptyList()).stream()
                 .map(boardPost -> BoardPostResponse.ofBoard(boardPost)).distinct().collect(Collectors.toList());
         return boardPostResponses;
     }
 
+    public BoardPost save(){
+        BoardPost boardPost = new BoardPost(null,null);
+        return boardPostRepository.save(boardPost);
+    }
+
+    public BoardPostInsertDto preInsert(BoardPostInsertDto boardPostInsertDto){
+        Admin admin = adminService.getCurrentAdmin();
+        boardPostInsertDto.setUesrId(admin.getId());
+        boardPostInsertDto.setUserName(admin.getName());
+        return boardPostInsertDto;
+    }
 }

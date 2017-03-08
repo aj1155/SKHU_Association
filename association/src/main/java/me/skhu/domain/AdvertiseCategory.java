@@ -37,4 +37,10 @@ public class AdvertiseCategory {
 				.name(name)
 				.build();
 	}
+
+	public static AdvertiseCategory of(String name){
+		return AdvertiseCategory.builder()
+				.name(name)
+				.build();
+	}
 }

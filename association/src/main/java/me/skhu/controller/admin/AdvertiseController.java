@@ -1,13 +1,16 @@
 package me.skhu.controller.admin;
 
 import java.text.ParseException;
+import java.util.List;
 
+import me.skhu.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -51,7 +54,7 @@ public class AdvertiseController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(Model model,AdvertiseDto advertiseDto, Pagination pagination,MultipartHttpServletRequest request, @RequestParam("image") MultipartFile file) throws ParseException{
 		int category=advertiseService.create(advertiseDto,request,file);
-		System.out.println("advertiseDto.content : "+advertiseDto.getContent());
+		advertiseService.create(advertiseDto,request,file);
 		return "redirect:/advertise/list?categoryId="+category;
 	}
 
@@ -74,9 +77,12 @@ public class AdvertiseController {
 	}
 
 	@RequestMapping(value ="searchUser")
-	public String searchUser(Model model, @RequestParam("name") String userName){
-		model.addAttribute("list",userService.findByName(userName));
-		return "commons/userList";
+	public @ResponseBody List<User> searchUser(Model model, @RequestParam("name") String userName){
+		return userService.findByName(userName);
 	}
 
+	@RequestMapping(value="categoryAdd")
+	public @ResponseBody String categoryAdd(@RequestParam("name") String name){
+		return advertiseCategoryService.add(name);
+	}
 }

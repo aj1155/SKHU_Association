@@ -11,8 +11,6 @@ $(function() {
     });
 });
 </script>
-
-
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
@@ -25,10 +23,10 @@ $(function() {
 				<h4>글쓰기</h4>
 				<br/>
 				<form name="uploadFIle" method="POST" enctype="multipart/form-data">
-					<input type="hidden" name="userId" value="1"/>
-					<input type="hidden" name="userName" value="test"/>
+					<input type="hidden" name="boardId" value="${boardId}"/>
+					<input type="hidden" name="ac" value="board"/>
 					<div style="display:inline-block;">
-						<span>제목:</span> <input type="text" name="title" />
+						<span>제목:</span> <input type="text" name="title"/>
 					</div>
 					<div id="files">
 						<span>첨부 파일:</span> <input type="file" name="file"/>

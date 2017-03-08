@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
@@ -38,6 +37,24 @@
 						<td colspan="4"style="height:300px;">${boardPost.content }</td>
 					</tr>
 				</table>
+				<div>
+					댓글:
+					<textarea id="comment"></textarea><button id = "commentSubmit">댓글달기</button>
+					<input type="hidden" name="boardId" value="${boardPost.id}"/>
+				</div>
+				<div id="commentList">
+					<table>
+					<c:forEach var="comment" items="${comment.list}">
+						<tr>
+							<td colspan="2">${comment.writer_name}</td>
+						</tr>
+						<tr>
+							<td>${comment.content}</td>
+							<td><p id="commentDelete" class="btn btn-primary" value="${comment.id}">삭제</p></td>
+						</tr>
+					</c:forEach>
+					</table>
+				</div>
 				<div style="float:right;">
 					<button class="btn btn-primary">
 						<i class="icon-ok icon-white"><a href="edit?id=${boardPost.id }"> 수정하기</a></i>
@@ -46,4 +63,5 @@
 					<button type="submit"><a href="delete?id=${boardPost.id }">삭제</a></button>
 				</div>
 			</div>
-		</div>
+    </div>
+<script src="/resources/js/comment.js"></script>

@@ -44,5 +44,10 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 		addDefaultLayoutDef("home/login","home/login");
 		addDefaultLayoutDef("admin/save","admin/save");
 		addDefaultLayoutDef("admin/value","admin/value");
+		addDefaultLayoutDef("user/userEditList","user/userEditList");
+		addDefaultLayoutDef("user/userEditDetail","user/userEditDetail");
+		addDefaultLayoutDef("user/phoneNumberEditList", "user/phoneNumberEditList");
+		addDefaultLayoutDef("admin/introduceEdit","admin/introduceEdit");
+		addDefaultLayoutDef("admin/introduce","admin/introduce");
 	}
 }

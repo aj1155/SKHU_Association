@@ -2,6 +2,9 @@ package me.skhu.service;
 
 import java.util.List;
 
+import me.skhu.domain.Admin;
+import me.skhu.domain.OriginUser;
+import me.skhu.repository.OriginUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,12 @@ public class UserService {
 
     @Autowired
     private PositionRepository positionRepository;
+
+    @Autowired
+    private AdminService adminService;
+
+    @Autowired
+    private OriginUserRepository originUserRepository;
 
     public List<User> findByName(String name){
     	return userRepository.findByName(name);
@@ -48,6 +57,9 @@ public class UserService {
     	return UserDto.of(userRepository.findOne(id));
     }
 
+    public User findByUserId(int id){
+        return userRepository.findOne(id);
+    }
     public void update(UserDto userDto, int id){
     	User user = userRepository.findOne(userDto.getId());
     	user.setName(userDto.getName());
@@ -64,6 +76,14 @@ public class UserService {
 
     public List<Position> getUserType(){
     	return positionRepository.findAll();
+    }
+
+    public List<OriginUser> getEditUser(Pagination pagination){
+        return originUserRepository.pagination(pagination,adminService.getCurrentAdmin().getCategory().getId());
+    }
+
+    public void save(User user){
+        userRepository.save(user);
     }
 
 }
