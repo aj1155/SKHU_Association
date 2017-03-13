@@ -30,13 +30,9 @@ public class CORSFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 
         HttpServletResponse response = (HttpServletResponse) res;
-        response.addHeader("Access-Control-Max-Age", Integer.toString(1800));
-        //response.addHeader("Access-Control-Allow-Origin", this.dashboardUrl);
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "*");
-        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-requested-with");
-        response.addHeader("Access-Control-Allow-Credentials", "true");
+        response.addHeader("X-Frame-Options", "SAMEORIGIN");
         chain.doFilter(request, res);
+
     }
 
     @Override

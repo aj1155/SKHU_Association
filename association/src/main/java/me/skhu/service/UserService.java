@@ -3,6 +3,10 @@ package me.skhu.service;
 import java.io.File;
 import java.util.List;
 
+import me.skhu.domain.Admin;
+import me.skhu.domain.OriginUser;
+import me.skhu.repository.OriginUserRepository;
+import me.skhu.util.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +33,12 @@ public class UserService {
 
     @Autowired
     private PositionRepository positionRepository;
+
+    @Autowired
+    private AdminService adminService;
+
+    @Autowired
+    private OriginUserRepository originUserRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -76,6 +86,9 @@ public class UserService {
     	return UserDto.of(userRepository.findOne(id));
     }
 
+    public User findByUserId(int id){
+        return userRepository.findOne(id);
+    }
     public void update(UserDto userDto, int id){
     	User user = userRepository.findOne(userDto.getId());
     	user.setName(userDto.getName());
@@ -102,6 +115,15 @@ public class UserService {
     	return UserListDto.of(userRepository.findAll());
     }
 
+
+    public List<OriginUser> getEditUser(Pagination pagination){
+        return originUserRepository.pagination(pagination,adminService.getCurrentAdmin().getCategory().getId());
+    }
+
+    public void save(User user){
+        userRepository.save(user);
+    }
+
     public UserListDto getUserMail(String srchType, String srchText){
     	switch(Integer.parseInt(srchType)){
     	case 1 : return UserListDto.of(userRepository.findByGrade(Integer.parseInt(srchText)));
@@ -109,6 +131,5 @@ public class UserService {
     	default : return UserListDto.of(userRepository.findAll());
     	}
     }
-
 
 }

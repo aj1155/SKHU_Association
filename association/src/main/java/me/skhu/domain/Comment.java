@@ -31,10 +31,9 @@ public class Comment {
 	@NotNull
 	private int id;
 
-	@JoinColumn(name= "board_post_id")
+	@Column(name = "board_post_id")
 	@NotNull
-	@ManyToOne
-	private BoardPost boardPost;//TODO
+	private int boardId;
 
 	@Column(name = "content")
 	@NotNull
@@ -48,12 +47,21 @@ public class Comment {
 	@Column(name = "writer_name")
 	private String writer_name;
 
-	public static Comment of(int id, BoardPost boardPost, int writer_id,String writer_name, String content){
+	public static Comment of(String content, Admin admin, int boardId){
 		return Comment.builder()
-				.id(id)
-				.boardPost(boardPost)
-				.writer_id(writer_id)
-				.writer_name(writer_name)
-				.content(content).build();
+				.boardId(boardId)
+				.content(content)
+				.writer_id(admin.getId())
+				.writer_name(admin.getName())
+				.build();
+	}
+
+	public static Comment ofEmpty(){
+		return Comment.builder()
+				.boardId(0)
+				.content(null)
+				.writer_id(0)
+				.writer_name(null)
+				.build();
 	}
 }

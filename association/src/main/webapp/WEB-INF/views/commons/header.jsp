@@ -6,8 +6,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
 <!--  jQuery 1.11.3 -->
-<!--<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>-->
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<script src="${pageContext.request.contextPath}/resources/editor/js/HuskyEZCreator.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resources/editor/init.js" type="text/javascript"></script>
+

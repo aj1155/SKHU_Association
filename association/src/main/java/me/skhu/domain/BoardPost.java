@@ -2,6 +2,7 @@ package me.skhu.domain;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -23,6 +24,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.skhu.domain.dto.BoardPostDto;
+import me.skhu.domain.dto.BoardPostInsertDto;
 
 @Getter
 @Setter
@@ -62,18 +64,13 @@ public class BoardPost extends BaseEntity implements Serializable{
 	@Column(name = "writer_name")
 	private String writer_name;
 
-	@OneToMany(mappedBy="boardPost")
-	@Basic(fetch=FetchType.LAZY)
-	private Collection<Comment> commentList;
-
-
-	public static BoardPost of(BoardPostDto boardPostDto,Board board){
+	public static BoardPost of(BoardPostInsertDto boardPostInsertDto, Board board, Admin admin){
 		return BoardPost.builder()
-				.title(boardPostDto.getTitle())
-				.content(boardPostDto.getContent())
+				.title(boardPostInsertDto.getTitle())
+				.content(boardPostInsertDto.getContent())
 				.board(board)
-				.writer_name(boardPostDto.getUserName())
-				.writer_id(boardPostDto.getUserId())
+				.writer_name(admin.getName())
+				.writer_id(admin.getId())
 				.build();
 	}
 	public static BoardPost ofCreate(String title, String content, int boardId, int writer_id ,String writer_name){
@@ -101,4 +98,5 @@ public class BoardPost extends BaseEntity implements Serializable{
 		this.title=title;
 		this.content=content;
 	}
+
 }

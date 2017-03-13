@@ -83,4 +83,16 @@ public class Admin {
 				.name(adminDto.getName())
 				.build();
 	}
+
+	public static Admin of(AdminDto adminDto, Category category){
+		return Admin.builder()
+				.loginId(adminDto.getLoginId())
+				.password(adminDto.getPassword())
+				.category(category)
+				.email(adminDto.getEmail())
+				.birth(adminDto.getBirth())
+				.phoneNumber(adminDto.getPhoneNumber())
+				.name(adminDto.getName())
+				.build();
+	}
 }

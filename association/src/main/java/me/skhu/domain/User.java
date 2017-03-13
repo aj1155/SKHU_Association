@@ -102,6 +102,7 @@ public class User implements Serializable {
     			.email(userDto.getEmail())
     			.category(category)
     			.position(position)
+                .image(userDto.getImage())
     			.build();
     }
 

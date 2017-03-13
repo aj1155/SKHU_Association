@@ -17,4 +17,11 @@ public class AdvertiseCategoryService {
 	public List<AdvertiseCategory> findAll(){
 		return advertiseCategoryRepository.findAll();
 	}
+
+	public String add(String name){
+		AdvertiseCategory advertiseCategory = advertiseCategoryRepository.save(AdvertiseCategory.of(name));
+		if(advertiseCategory==null)
+			return "false";
+		return "success";
+	}
 }

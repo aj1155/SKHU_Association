@@ -73,19 +73,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public MultipartConfigElement multipartConfigElement() {
-        MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize("2048KB");
-        factory.setMaxRequestSize("2048KB");
-        return factory.createMultipartConfig();
-    }
-
-    @Bean
-    public MultipartResolver multipartResolver() {
-        return new StandardServletMultipartResolver();
-    }
-
-    @Bean
     public ViewResolver viewResolver(){
     	UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
     	viewResolver.setViewClass(TilesView.class);

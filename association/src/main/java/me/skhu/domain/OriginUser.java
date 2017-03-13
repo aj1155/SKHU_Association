@@ -63,7 +63,11 @@ public class OriginUser {
 	@ManyToOne
 	private Category category;
 
-	public static OriginUser of(int id, String loginId, String name, String birth, String phoneNumber, String companyNumber, int grade, String status, Category category){
+	@NotNull
+	@Column(name= "user_id")
+	private int userId;
+
+	public static OriginUser of(int id, String loginId, String name, String birth, String phoneNumber, String companyNumber, int grade, String status, Category category, int userId){
 		return OriginUser.builder()
 				.id(id)
 				.loginId(loginId)
@@ -72,6 +76,8 @@ public class OriginUser {
 				.companyNumber(companyNumber)
 				.grade(grade)
 				.status(status)
-				.category(category).build();
+				.category(category)
+				.userId(userId)
+				.build();
 	}
 }

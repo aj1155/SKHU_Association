@@ -2,16 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시판1</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
-<link href="http://maxcdn.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
-	<div id="wrapper">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 		<!-- Main -->
 		<div id="main">
@@ -46,7 +37,11 @@
 						<ul class="actions">
 							<li><a href="#" class="button">삭제</a></li>
 							<li><a href="create"
-								class="button special icon fa-plus">광고추가</a></li>
+								class="button special icon fa-plus">광고추가</a>
+							</li>
+							<li>
+								<a href="#addCategory" class="button special icon fa-plus" data-toggle="modal">광고 분류 추가</a>
+							</li>
 						</ul>
 					</div>
 					<!-- Table -->
@@ -93,15 +88,38 @@
 							</c:forEach>
 						</ul>
 					</div>
+						<div id="addCategory" class="modal hide fade" tabindex="-1">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+								<h3>광고 카테고리 추가</h3>
+							</div>
+							<div class="modal-body">
+								<span>카테고리 명:</span>
+								<input type="text" name="name"/>
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal">닫기</button>
+								<button class="btn btn-primary" onclick="addCategory()" data-dismiss="modal">추가</button>
+							</div>
+						</div>
 				</form>
-				
 				</section>
 
 			</div>
 			</div>
-			<c:import url="../commons/sidebar.jsp" />
-		</div>
-		<!-- Scripts -->
-		<c:import url="../commons/script.jsp"/>
-</body>
-</html>
+<script>
+	function addCategory(){
+	    var categoryName = $("input[name=name]").val();
+	    $.ajax({
+	        url : 'categoryAdd',
+			dataType : 'json',
+			data : {
+	            name : categoryName
+			},
+			success : function(result){
+
+			}
+		});
+        location.href=location.href;
+	}
+</script>

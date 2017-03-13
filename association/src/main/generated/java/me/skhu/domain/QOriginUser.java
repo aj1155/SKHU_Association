@@ -40,6 +40,8 @@ public class QOriginUser extends EntityPathBase<OriginUser> {
 
     public final StringPath status = createString("status");
 
+    public final NumberPath<Integer> userId = createNumber("userId", Integer.class);
+
     public QOriginUser(String variable) {
         this(OriginUser.class, forVariable(variable), INITS);
     }

@@ -1,20 +1,25 @@
 package me.skhu.domain.dto;
 
+import java.util.Date;
 import java.util.List;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserExcelDto {
-	private List<UserDto> list;
+	private String categoryName;
+	private int grade;
+	private String image;
+	private String name;
+	private String positionName;
+	private String phoneNumber;
+	private String companyNumber;
+	private String status;
+	private String birth;
+	private String email;
 
-	public static UserExcelDto of(List<UserDto> list){
-		return UserExcelDto.builder()
-				.list(list)
-				.build();
-	}
 }

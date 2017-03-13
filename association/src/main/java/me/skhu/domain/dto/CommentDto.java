@@ -5,16 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 import me.skhu.domain.Comment;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
 public class CommentDto {
-	private String userName;
-	private String content;
+	private List<Comment> list;
 
-	public static CommentDto of(Comment comment){
+	public static CommentDto of(List<Comment> list){
 		return CommentDto.builder()
-				.userName(comment.getWriter_name())
-				.content(comment.getContent()).build();
+				.list(list)
+				.build();
 	}
 }
