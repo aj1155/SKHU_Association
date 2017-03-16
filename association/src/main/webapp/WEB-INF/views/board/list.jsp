@@ -15,10 +15,11 @@
 				<br />
 				<h4>공지사항</h4>
 				
+
+				<form:form modelAttribute="pagination">
 				<button>
 					<a href="/board/create?boardId=${boardId}">글쓰기</a>
 				</button>
-				<form:form modelAttribute="pagination">
 				<div class="form-inline" style="float: right;">
 					<form:select path="st">
 						<form:option value="0" label="검색조건" />
@@ -47,8 +48,8 @@
 										<label></label>
 									</td>
 									<td>${ list.title }</td>
-									<td>${ list.content }</td>
 									<td>${ list.writer_name }</td>
+									<td>${ list.createDate }</td>
 								</tr>
 							</c:forEach>
 						</tbody>

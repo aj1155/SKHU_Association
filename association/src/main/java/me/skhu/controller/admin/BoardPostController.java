@@ -1,21 +1,15 @@
 package me.skhu.controller.admin;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
-import me.skhu.domain.BoardImage;
-import me.skhu.domain.BoardPost;
 import me.skhu.domain.Comment;
-import me.skhu.domain.Photo;
 import me.skhu.domain.dto.BoardPostInsertDto;
 import me.skhu.service.BoardImageService;
 import me.skhu.service.CommentService;
+import me.skhu.util.Validator.BoardPostEditValidator;
+import me.skhu.util.Validator.BoardPostValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +39,12 @@ public class BoardPostController {
 	@Autowired
 	private BoardImageService boardImageService;
 
+	@Autowired
+	private BoardPostValidator boardPostValidator;
+
+	@Autowired
+	private BoardPostEditValidator boardPostEditValidator;
+
 	@RequestMapping("list")
 	public String list(Model model , Pagination pagination, @RequestParam("boardId") int boardId) {
 		model.addAttribute("list", boardPostService.findAll(pagination,boardId));
@@ -59,16 +59,16 @@ public class BoardPostController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute BoardPostInsertDto boardPostInsertDto, MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] files, Pagination pagination, BindingResult result, int boardId) {
-		try{
-			if(!result.hasErrors())
-				boardPostService.create(boardPostService.preInsert(boardPostInsertDto),files,request,1);
-			else
-				return "redirect:/board/create?boardId="+boardId;
-		}catch (Exception e){
-			System.out.println("controller Error : " + e.getMessage());
+    public String create(Model model, int boardId, @ModelAttribute BoardPostInsertDto boardPostInsertDto, MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] files, BindingResult result) {
+		boardPostValidator.validate(boardPostInsertDto,result);
+		if(result.hasErrors()) {
+			model.addAttribute("error",boardPostValidator.errorMesage(boardPostInsertDto));
+			model.addAttribute("boardPost",boardPostInsertDto);
+			return "board/write";
+		}else {
+			boardPostService.create(boardPostService.preInsert(boardPostInsertDto), files, request, boardId);
+			return "redirect:/board/list?boardId=" + boardId;
 		}
-		return "redirect:/board/list?boardId=" + boardId;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -78,7 +78,13 @@ public class BoardPostController {
     }
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String edit(BoardPostDto boardPostDto, Pagination pagination) throws UnsupportedEncodingException{
+    public String edit(Model model, Pagination pagination, @ModelAttribute BoardPostDto boardPostDto, BindingResult result) throws UnsupportedEncodingException{
+		boardPostEditValidator.validate(boardPostDto,result);
+		if(result.hasErrors()){
+			model.addAttribute("error",boardPostEditValidator.errorMessage(boardPostDto));
+			model.addAttribute("boardPost",boardPostDto);
+			return "board/edit";
+		}
     	boardPostService.update(boardPostDto);
     	return "redirect:/board/list";
     }

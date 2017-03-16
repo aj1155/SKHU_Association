@@ -53,8 +53,8 @@ public class BoardPostService {
     }
 */
     @Transactional(readOnly = false)
-    public void create(BoardPostInsertDto boardPostInsertDto, MultipartFile[] files, MultipartHttpServletRequest request, int categoryId){
-    	BoardPost boardPost = BoardPost.of(boardPostInsertDto,boardService.find(1),adminService.getCurrentAdmin());
+    public void create(BoardPostInsertDto boardPostInsertDto, MultipartFile[] files, MultipartHttpServletRequest request, int boardId){
+    	BoardPost boardPost = BoardPost.of(boardPostInsertDto,boardService.find(boardId),adminService.getCurrentAdmin());
     	BoardPost b = boardPostRepository.save(boardPost);
     	System.out.println("files.length: " + files.length);
     	if(files!=null)
