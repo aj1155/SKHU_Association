@@ -58,7 +58,7 @@ img{
 				</thead>
 				<tbody>
 					<c:forEach var="user" items="${ list.user }" >
-						<tr data-url="edit?id=${user.id}">
+						<tr data-url="/user/edit?id=${user.id}">
 							<td><input type="checkbox" name="del" value="${ user.id }" /></td>
 							<td>${ user.grade }기</td>
 							<td>
@@ -82,6 +82,7 @@ img{
 			</table>
 		</div>
 		<input type="hidden" name="cp" value="1" />
+	
 		<div class="pagination pagination-small pagination-centered">
 			<ul>
 				<c:forEach var="p" items="${ pagination.pageIndexList }">
@@ -91,6 +92,7 @@ img{
 				</c:forEach>
 			</ul>
 		</div>
+		
 		</form:form>
 			
 		</section>
