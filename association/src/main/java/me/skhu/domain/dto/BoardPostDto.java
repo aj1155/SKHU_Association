@@ -22,8 +22,8 @@ public class BoardPostDto {
 	private int id;
 	private String title;
 	private String content;
-	private String createTime;
-	private String modifiedTime;
+	private DateTime createTime;
+	private DateTime modifiedTime;
 	private String boardName;
 	private String userName;
 	private int userId;
@@ -33,8 +33,9 @@ public class BoardPostDto {
 				.id(boardPost.getId())
 				.title(boardPost.getTitle())
 				.content(boardPost.getContent())
-				.createTime(boardPost.getCreatedDate().toString())
-				.modifiedTime(boardPost.getLastModifiedDate().toString())
+				.createTime(boardPost.getCreatedDate())
+				.modifiedTime(boardPost.getLastModifiedDate())
+				.userName(boardPost.getWriter_name())
 				.build();
 				/* Todo 객체를 담을지 필요할 때 가져올지 생각
 				.boardName(boardPost.getBoard().getName())

@@ -30,7 +30,7 @@ public class BoardPostEditDto {
                 .title(boardPostDto.getTitle())
                 .content(boardPostDto.getContent())
                 .files(file)
-                //.modifiedTime(boardPostDto.getModifiedTime())
+                .modifiedTime(boardPostDto.getModifiedTime())
                 .boardName(boardPostDto.getBoardName())
                 .userName(boardPostDto.getUserName())
                 .userId(boardPostDto.getUserId())

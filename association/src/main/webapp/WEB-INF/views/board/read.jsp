@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
@@ -18,13 +18,13 @@
 				<table>
 					<tr>
 						<td style="width:80px;">제목:</td>
-						<td colspan="3" style="text-align:left;">읽기view</td>
+						<td colspan="3" style="text-align:left;">${boardPost.title}</td>
 					</tr>
 					<tr>
 						<td>작성자:</td>
-						<td style="width:500px;">${boardPost.title }</td>
+						<td style="width:500px;">${boardPost.userName }</td>
 						<td style="width:80px;">작성일</td>
-						<td>${boardPost.modifiedTime }</td>
+						<td><joda:format value="${boardPost.modifiedTime}" style="SM"/></td>
 					</tr>
 					<tr>
 						<td>파일:</td>
