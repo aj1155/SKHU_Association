@@ -1,6 +1,5 @@
 package me.skhu.config;
 
-import me.skhu.config.security.SecurityAdminDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import me.skhu.config.security.SecurityAdminDetailsService;
+
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -20,7 +21,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception{
        web
             .ignoring()
-            .antMatchers("/resource/**","/");
+            .antMatchers("/resources/**","/");
        //css js파일등 풀어주기
    }
 
@@ -28,19 +29,24 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
        http
                .authorizeRequests()
-                    .antMatchers("/login")
-                    .permitAll()
+               		.antMatchers("/resources/**","/")
+               		.permitAll()
                     .antMatchers("/**")
                     .authenticated();
        http
                .formLogin()
-               .loginProcessingUrl("/login")
-               .successForwardUrl("/admin/introduce")
-               .failureUrl("/login?error");
+               .loginPage("/home/login")
+               .permitAll()
+               .usernameParameter("loginId")
+               .passwordParameter("passwd")
+               .loginProcessingUrl("/loginProcessing")
+               .successForwardUrl("/user/list")
+               .failureUrl("/home/login?error");
+
        http
                .logout()
                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-               .logoutSuccessUrl("/login");
+               .logoutSuccessUrl("/home/login");
        http
                .csrf()
                .disable();

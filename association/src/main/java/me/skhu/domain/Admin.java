@@ -72,10 +72,10 @@ public class Admin {
 				.build();
 	}
 
-	public static Admin create(AdminDto adminDto,Category category){
+	public static Admin create(AdminDto adminDto,Category category, String passwd){
 		return Admin.builder()
 				.loginId(adminDto.getLoginId())
-				.password(adminDto.getBirth())
+				.password(passwd)
 				.category(category)
 				.email(adminDto.getEmail())
 				.birth(adminDto.getBirth())

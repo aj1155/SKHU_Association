@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<script src="${pageContext.request.contextPath }/resources/editor/js/HuskyEZCreator.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/resources/editor/init.js" type="text/javascript"></script>
 <script>
 $(function(){
 	$("button#addFile").click(function(){
@@ -12,8 +10,17 @@ $(function(){
 })
 </script>
 <style>
-	div.modal-content { height: 800px; }
-	div#scroll{ height :500px; width:100%; overflow-y:scroll; border:1px solid #8F8; }
+div.modal-content { height: 800px; }
+div#scroll{ 
+	height :500px; 
+	width:100%; 
+	overflow-y:scroll; 
+	border:1px solid #808080; 
+}
+button.close{
+	width:30px;
+	height:30px;
+}
 </style>
 <div id="main">
 	<div class="inner">

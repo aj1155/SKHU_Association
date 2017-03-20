@@ -2323,7 +2323,7 @@
 		border: none;
 		border: solid 1px rgba(210, 215, 217, 0.75);
 		color: inherit;
-		display: block;
+		/*display: block;*/
 		outline: 0;
 		padding: 0 1em;
 		text-decoration: none;
