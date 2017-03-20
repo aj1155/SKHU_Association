@@ -3,11 +3,12 @@ package me.skhu.repository.custom;
 import java.util.List;
 
 import me.skhu.domain.BoardPost;
+import me.skhu.domain.dto.BoardPostDto;
 import me.skhu.util.Pagination;
 
 public interface BoardPostRepositoryCustom {
 
-	List<BoardPost> pagination(Pagination pagination,int boardId);
+	List<BoardPost> pagination(Pagination pagination, int boardId);
 
 	List<BoardPost> paginationByTitle(Pagination pagination, int boardId);
 

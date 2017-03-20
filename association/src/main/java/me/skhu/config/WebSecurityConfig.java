@@ -43,6 +43,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                .successForwardUrl("/user/list")
                .failureUrl("/home/login?error");
 
+
        http
                .logout()
                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
