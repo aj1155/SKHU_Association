@@ -34,7 +34,7 @@
                 <input type="hidden" name="userId" value="1"/>
                 <input type="hidden" name="userName" value="test"/>
                 <div style="display:inline-block;">
-                    <span>제목:</span> <input type="text" name="title" value="${boardPost.title}"/>
+                    <span>제목:</span> <input type="text" name="title" value="${boardPost.title}"/><p>${error}</p>
                 </div>
                 <div id="files">
                     <c:forEach var="files" items="${boardPost.files}">
