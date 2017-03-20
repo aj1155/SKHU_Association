@@ -1,7 +1,6 @@
 $(document).on("click","#commentSubmit",function(){
     var text = $("#comment").val();
     var id = $("input[name=boardId]").val();
-    alert("id: "+id);
     $.ajax({
         url : 'commentSave',
         type : 'POST',
@@ -25,7 +24,7 @@ $(document).on("click","#commentSubmit",function(){
                 '<td>'+content+'</td>'+
                 '<td>'+'<p id="commentDelete" class="btn btn-primary">'+'삭제'+'</p>'+'</td>'+
                 '</tr>';
-            var lastTr=$('tr').last();
+            var lastTr=$('#CommentList').last();
             lastTr.after(commentTr);
             $("#comment").val("");
         },
@@ -38,6 +37,7 @@ $(document).on("click","#commentSubmit",function(){
 $(document).on("click","#commentDelete",function(){
     if(confirm("댓글을 삭제하시겠습니까?")==true) {
         var id = $(this).attr('value');
+        alert("id : " +id );
         $.ajax({
             url: 'commentDelete',
             type: 'GET',

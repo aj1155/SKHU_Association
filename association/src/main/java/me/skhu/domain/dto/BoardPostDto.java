@@ -1,5 +1,6 @@
 package me.skhu.domain.dto;
 
+import com.fasterxml.jackson.databind.util.StdDateFormat;
 import org.joda.time.DateTime;
 
 import lombok.AllArgsConstructor;
@@ -8,6 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.skhu.domain.BoardPost;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -31,10 +35,12 @@ public class BoardPostDto {
 				.content(boardPost.getContent())
 				.createTime(boardPost.getCreatedDate())
 				.modifiedTime(boardPost.getLastModifiedDate())
+				.userName(boardPost.getWriter_name())
 				.build();
 				/* Todo 객체를 담을지 필요할 때 가져올지 생각
 				.boardName(boardPost.getBoard().getName())
 				.userName(boardPost.getUser().getName())
 				*/
 	}
+
 }

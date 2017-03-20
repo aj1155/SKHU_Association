@@ -35,6 +35,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticated();
        http
                .formLogin()
+<<<<<<< HEAD
                .loginPage("/home/login")
                .permitAll()
                .usernameParameter("loginId")
@@ -43,6 +44,11 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                .successForwardUrl("/user/list")
                .failureUrl("/home/login?error");
 
+=======
+               .loginProcessingUrl("/login")
+               .successForwardUrl("/user/list")
+               .failureUrl("/login?error");
+>>>>>>> branch 'master' of https://github.com/aj1155/SKHU_Association.git
        http
                .logout()
                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

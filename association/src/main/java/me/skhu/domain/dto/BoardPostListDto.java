@@ -1,5 +1,6 @@
 package me.skhu.domain.dto;
 
+import java.text.DateFormat;
 import java.util.List;
 
 import lombok.Builder;
@@ -13,9 +14,10 @@ import me.skhu.domain.BoardPost;
 public class BoardPostListDto {
 	List<BoardPost> boardPostList;
 
-	public static BoardPostListDto of(List<BoardPost> boardPostList){
+	public static BoardPostListDto of(List<BoardPost> list){
 		return BoardPostListDto.builder()
-				.boardPostList(boardPostList)
+				.boardPostList(list)
 				.build();
 	}
+
 }
