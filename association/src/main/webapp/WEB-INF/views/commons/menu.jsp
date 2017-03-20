@@ -30,8 +30,8 @@
 					<ul id="advertise">
 					</ul>
 				</li>
-          <li><a href="#">관리자 권한 부여</a></li>
-          <li><a href="#">문자/메일 발송</a></li>
+          <li><a href="/admin/list">관리자 권한 부여</a></li>
+          <li><a href="/admin/mailSend">문자/메일 발송</a></li>
             <li><span class="opener">회원변경사항</span>
                 <ul>
                     <li><a href="/user/phoneNumberEditList">아이디변경</a></li>

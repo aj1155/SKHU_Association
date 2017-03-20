@@ -3,6 +3,7 @@ package me.skhu.repository.Impl;
 import java.util.List;
 
 import com.querydsl.jpa.sql.JPASQLQuery;
+import me.skhu.domain.dto.BoardPostDto;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
 import me.skhu.domain.BoardPost;
