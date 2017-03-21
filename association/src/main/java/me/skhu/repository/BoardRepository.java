@@ -14,6 +14,6 @@ import me.skhu.domain.dto.BoardDto;
  */
 @Repository
 public interface BoardRepository extends JpaRepository<Board,Integer> {
-    Board findByCategoryIdAndBoardType(int categoryId, BoardType boardType);
+    Board findByCategoryIdAndBoardType(int categoryId, String boardType);
     List<BoardDto> findByCategoryId(int categoryId);
 }

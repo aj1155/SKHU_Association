@@ -1,13 +1,16 @@
 package me.skhu.domain;
 
-import static com.querydsl.core.types.PathMetadataFactory.*;
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
-import com.querydsl.core.types.dsl.*;
-
-import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
+
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.PathMetadata;
+import com.querydsl.core.types.dsl.DateTimePath;
+import com.querydsl.core.types.dsl.EntityPathBase;
+import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.PathInits;
+import com.querydsl.core.types.dsl.StringPath;
 
 
 /**
@@ -22,15 +25,24 @@ public class QOriginUser extends EntityPathBase<OriginUser> {
 
     public static final QOriginUser originUser = new QOriginUser("originUser");
 
+
+    public final QBaseEntity _super = new QBaseEntity(this);
+
     public final StringPath birth = createString("birth");
 
     public final QCategory category;
 
     public final StringPath companyNumber = createString("companyNumber");
 
+    //inherited
+    public final DateTimePath<org.joda.time.DateTime> createdDate = _super.createdDate;
+
     public final NumberPath<Integer> grade = createNumber("grade", Integer.class);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
+
+    //inherited
+    public final DateTimePath<org.joda.time.DateTime> lastModifiedDate = _super.lastModifiedDate;
 
     public final StringPath loginId = createString("loginId");
 

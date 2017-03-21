@@ -40,4 +40,12 @@ public class OriginUserPhone  extends BaseEntity implements Serializable {
     @ManyToOne
     private Category category;
 
+    public static OriginUserPhone of(User user){
+        return OriginUserPhone.builder()
+                .loginId(user.getPhoneNumber())
+                .user(user)
+                .agree(false)
+                .category(user.getCategory())
+                .build();
+    }
 }

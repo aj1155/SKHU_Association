@@ -6,12 +6,15 @@
 <!-- Main -->
 <div id="main">
 	<div class="inner">
+
 		<!-- Header -->
 		<header id="header">
 			<a href="index.html" class="logo"><strong>커뮤니티</strong></a>
 		</header>
 		<br />
-		
+		<h4>읽기</h4>
+		<br/>
+		<input type="hidden" name="boardId" value="${boardId}"/>
 		<table>
 			<tr>
 				<td style="width:80px;">제목:</td>
@@ -54,7 +57,7 @@
 		</div>
 		<div style="float:right;">
 			<button class="btn btn-primary">
-				<i class="icon-ok icon-white"><a href="edit?id=${boardPost.id }">수정</a></i>
+				<i class="icon-ok icon-white"><a href="edit?id=${boardPost.id }&boardId=${boardId}"> 수정하기</a></i>
 			</button>
 			<button class="btn"><a href="list?${ pagination.queryString }">목록으로</a></button>
 			<button type="submit"><a href="delete?id=${boardPost.id }">삭제</a></button>

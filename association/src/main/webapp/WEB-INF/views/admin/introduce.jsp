@@ -19,7 +19,7 @@
         </header>
         <br />
         <div>${introduce.content}</div>
-
+        <div style="float:right;"><a href="/admin/introduceEdit">수정</a></div>
     </div>
 </div>
 

@@ -11,4 +11,5 @@ import java.util.List;
 public interface OriginUserPhoneRepositoryCustom {
     List<OriginUserPhone> pagination(Pagination pagination, int categoryId);
     int resultCount(Pagination pagination, int categoryId);
+    int countBoolean(int categoryId);
 }

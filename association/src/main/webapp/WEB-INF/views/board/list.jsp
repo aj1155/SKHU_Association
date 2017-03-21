@@ -29,7 +29,6 @@
 				<button type="submit" class="button" >검색</button>
 			</div>
 		
-		
 		<div class="row">
 			<div class="table-wrapper" style="width:100%;">
 				<table>
@@ -68,7 +67,21 @@
 		</div>
 		</form:form>
 		</section>
-	</div>
 </div>
-		
+</div>
+<script>
+    function allCkeck(checkbox){
+        event.stopPropagation();
+        $("tbody input").trigger("click");
+    };
 
+    $(document).on("click","#groupDelete",function(){
+            var param="";
+            var boardId=$("input[name=boardId]").val();
+            $("tbody tr :checked").each(function(){
+                param += "id="+$(this).attr("id");
+                param += "&";
+            });
+            location.href="/board/groupDelete?"+param+"boardId="+boardId;
+    });
+</script>

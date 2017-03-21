@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import me.skhu.domain.Admin;
 import me.skhu.domain.dto.*;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,8 +56,8 @@ public class BoardPostService {
     @Transactional(readOnly = false)
     public void create(BoardPostInsertDto boardPostInsertDto, MultipartFile[] files, MultipartHttpServletRequest request, int boardId){
     	BoardPost boardPost = BoardPost.of(boardPostInsertDto,boardService.find(boardId),adminService.getCurrentAdmin());
+    	System.out.println("boardPost.getBoard().getId()" + boardPost.getBoard().getId());
     	BoardPost b = boardPostRepository.save(boardPost);
-    	System.out.println("files.length: " + files.length);
     	if(files!=null)
             fileService.upload(b.getId(),files,request);
     	if(request.getHeader("file-name")!=null)
@@ -144,5 +145,25 @@ public class BoardPostService {
         boardPostInsertDto.setUesrId(admin.getId());
         boardPostInsertDto.setUserName(admin.getName());
         return boardPostInsertDto;
+    }
+
+    @Transactional(readOnly = false)
+    public void groupDelete(List<Integer> id){
+        for(int i : id) {
+            boardPostRepository.delete(i);
+        }
+
+    }
+
+    public int[] findByCategoryCount(int categoryId){
+        DateTime dateTime = new DateTime();
+        DateTime midNight = dateTime.toDateMidnight().toDateTime();
+        DateTime now = DateTime.now();
+        List<BoardDto> boardList = boardService.findByCategoryId(categoryId);
+        int[] list = new int[boardList.size()];
+        for(int i=0; i<list.length; i++) {
+            list[i]=boardPostRepository.todayBoard(boardList.get(i).getBoardId(), midNight, now);
+        }
+        return list;
     }
 }

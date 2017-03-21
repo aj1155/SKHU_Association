@@ -19,7 +19,7 @@
         </header>
         <br />
         <form:form modelAttribute="introduce" method="POST" action="introduceEdit">
-            <textarea id="body" name="content" class="smarteditor2" style="width:inherit;"></textarea>
+            <textarea id="body" name="content" class="smarteditor2" style="width:inherit;">${introduce.content}</textarea>
             <button class="btn btn-primary" type="submit">저장하기</button>
         </form:form>
     </div>

@@ -5,6 +5,7 @@ import java.util.List;
 import me.skhu.domain.BoardPost;
 import me.skhu.domain.dto.BoardPostDto;
 import me.skhu.util.Pagination;
+import org.joda.time.DateTime;
 
 public interface BoardPostRepositoryCustom {
 
@@ -19,4 +20,6 @@ public interface BoardPostRepositoryCustom {
 	int countByBoardId(int boardId);
 
 	int countByBoardIdAndTitle(int boardId, String title);
+
+	int todayBoard(int categoryId,DateTime dateTime, DateTime now);
 }
