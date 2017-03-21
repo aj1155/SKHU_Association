@@ -18,6 +18,10 @@ public class AdvertiseCategoryService {
 		return advertiseCategoryRepository.findAll();
 	}
 
+	public AdvertiseCategory findById(int id){
+		return advertiseCategoryRepository.findById(id);
+	}
+
 	public String add(String name){
 		AdvertiseCategory advertiseCategory = advertiseCategoryRepository.save(AdvertiseCategory.of(name));
 		if(advertiseCategory==null)

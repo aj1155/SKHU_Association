@@ -6,7 +6,6 @@
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/skel.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/util.js"></script>
 <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>

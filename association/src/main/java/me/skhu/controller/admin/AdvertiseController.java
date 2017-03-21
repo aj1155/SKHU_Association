@@ -3,7 +3,6 @@ package me.skhu.controller.admin;
 import java.text.ParseException;
 import java.util.List;
 
-import me.skhu.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import me.skhu.domain.User;
 import me.skhu.domain.dto.AdvertiseDto;
 import me.skhu.service.AdvertiseCategoryService;
 import me.skhu.service.AdvertiseService;
@@ -41,6 +41,7 @@ public class AdvertiseController {
 	@RequestMapping("list")
 	public String list(Model model,Pagination pagination,int categoryId){
 		pagination.setPageSize(5);
+		model.addAttribute("categoryName",advertiseCategoryService.findById(categoryId).getName());
 		model.addAttribute("list",advertiseService.findAll(pagination,categoryId));
 		return "advertise/list";
 	}

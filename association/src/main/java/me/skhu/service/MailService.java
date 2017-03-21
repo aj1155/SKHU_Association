@@ -24,8 +24,11 @@ public class MailService {
 			messageHelper.setText(msg,true);
 			messageHelper.setFrom("norlights23@gmail.com");
 			messageHelper.setTo(email);
+
 			for(MultipartFile file : files){
-				messageHelper.addAttachment(file.getOriginalFilename(), file);
+				if(file.getSize() > 0){
+					messageHelper.addAttachment(file.getOriginalFilename(), file);
+				}
 			}
 			javaMailSender.send(message);
 		} catch(MailException e){

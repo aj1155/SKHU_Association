@@ -7,6 +7,15 @@
 
 <c:if test = "${ list.size() > 0 }">
 	<table class="table">
+		<thead>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>기수</td>
+				<td>이름</td>
+				<td>E-mail</td>
+			</tr>
+		</thead>
+		<tbody>
 		<c:forEach var="user" items="${ list }">
 			<tr>
 				<td><input type="checkbox" name="email" value="${ user.email }" /></td>
@@ -15,9 +24,9 @@
 				<td>${ user.email }</td>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 </c:if>
-	
-	
+
 
 

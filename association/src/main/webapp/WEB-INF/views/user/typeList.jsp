@@ -8,7 +8,7 @@
 		<header id="header">
 			<a href="index.html" class="logo"><strong>회원유형</strong></a>
 		</header>
-		<section>
+		<section style="paddin-top:50px;">
 		<div align="right">
 			<ul class="actions">
 				<li><a href="createType" class="button special icon fa-plus">임원추가</a></li>

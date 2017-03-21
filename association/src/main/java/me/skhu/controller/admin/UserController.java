@@ -164,4 +164,9 @@ public class UserController {
 			return "fail";
 		}
 	}
+
+	@RequestMapping("/createByExcel")
+	public String createByExcel(Model model){
+		return "user/createByExcel";
+	}
 }

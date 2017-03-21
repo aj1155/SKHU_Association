@@ -8,7 +8,7 @@
       <nav id="menu">
         <header class="major">
           <h2>Menu</h2>
-            <a href="/logout">로그아웃</a>
+          <a href="/logout">로그아웃</a>
         </header>
         <ul>
           <li><a href="/admin/myInfo">마이페이지</a></li>
@@ -33,7 +33,7 @@
           <li><a href="/admin/mailSend">문자/메일 발송</a></li>
             <li><span class="opener">회원변경사항</span>
                 <ul>
-                    <li><a href="/user/phoneNumberEditList">아이디변경</a></li>
+                    <li><a href="/user/phoneNumberEditList">아이디변경<span class="badge" style="display:inline;">5</span></a></li>
                     <li><a href="/user/userEditList">회원 정보 변경</a></li>
                 </ul>
             </li>

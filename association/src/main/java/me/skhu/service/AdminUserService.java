@@ -41,15 +41,17 @@ public class AdminUserService {
 	}
 
 	public void update(AdminDto adminDto, int id){
-		Admin admin = adminRepository.findOne(id);
-		admin.setLoginId(adminDto.getLoginId());
-		admin.setName(adminDto.getName());
-		admin.setEmail(adminDto.getEmail());
-		admin.setPhoneNumber(adminDto.getPhoneNumber());
-		admin.setBirth(adminDto.getBirth());
-		admin.setCategory(categoryRepository.findOne(adminDto.getCategoryId()));
-
-		adminRepository.save(admin);
+		if(adminDto.getPasswdEdit().equals(adminDto.getPasswdCheck())){
+			Admin admin = adminRepository.findOne(id);
+			admin.setLoginId(adminDto.getLoginId());
+			admin.setName(adminDto.getName());
+			admin.setEmail(adminDto.getEmail());
+			admin.setPhoneNumber(adminDto.getPhoneNumber());
+			admin.setBirth(adminDto.getBirth());
+			admin.setCategory(categoryRepository.findOne(adminDto.getCategoryId()));
+			admin.setPassword(passwordEncoder.encode(adminDto.getPasswdEdit()));
+			adminRepository.save(admin);
+		}
 	}
 
 	public void delete(int id){
