@@ -46,4 +46,8 @@ public class OriginUserPhoneService {
         for(int i : id)
             agree(i);
     }
+
+    public int findCount(int categoryId){
+        return originUserPhoneRepository.countBoolean(categoryId);
+    }
 }

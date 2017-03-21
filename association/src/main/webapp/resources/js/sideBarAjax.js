@@ -4,11 +4,12 @@ $(function() {
 		dataType : 'json',
 		type : 'GET',
 		success : function(result) {
+			alert("test");
 			for (var i = 0; i < result.length; i++) {
 				$("#community").append(
 						'<li><a href="/board/list?boardId='
 								+ result[i].boardId + '">'
-								+ result[i].boardType + '</a></li>');
+								+ result[i].boardType + '<p class="badge badge-danger">3</p></a></li>');
 			}
 		},
 		error : function(request, status, error) {
@@ -34,5 +35,35 @@ $(function(){
 		error : function(request, status, error){
 			alert("code:" + request.status + "\n"+ "message:"+ request.responseText + "\n" + "error: " + error);
 		}
+	});
+});
+
+$(function(){
+	$.ajax({
+		url : '/home/menu/phoneNumberEdit',
+		dataType : 'json',
+		type : 'GET',
+		success: function(result){
+			alert('phoneNumberEdit' + result.toString());
+			$("#phoneNumberEdit").text(result);
+		},
+        error : function(request, status, error){
+            alert("code:" + request.status + "\n"+ "message:"+ request.responseText + "\n" + "error: " + error);
+        }
+	});
+});
+
+$(function(){
+	$.ajax({
+		url : '/home/menu/userEdit',
+		dataType : 'json',
+		type : 'GET',
+		success : function(result){
+			alert('userEdit' + result.toString());
+			$("#userEdit").text(result);
+		},
+        error : function(request, status, error){
+            alert("code:" + request.status + "\n"+ "message:"+ request.responseText + "\n" + "error: " + error);
+        }
 	});
 });

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.querydsl.jpa.sql.JPASQLQuery;
 import me.skhu.domain.dto.BoardPostDto;
+import org.joda.time.DateTime;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
 import me.skhu.domain.BoardPost;
@@ -71,6 +72,15 @@ public class BoardPostRepositoryImpl extends QueryDslRepositorySupport implement
 	public int countByBoardIdAndTitle(int boardId, String title){
 		return (int)from(qBoardPost)
 				.where(qBoardPost.board.id.eq(boardId),qBoardPost.title.eq(title))
+				.fetchCount();
+	}
+
+	@Override
+	public int todayBoard(int categoryId, DateTime today, DateTime now){
+		return (int)from(qBoardPost)
+				.leftJoin(qBoardPost.board,qBoard)
+				.where(qBoard.categoryId.eq(categoryId))
+				.where(qBoardPost.lastModifiedDate.between(today,now))
 				.fetchCount();
 	}
 }

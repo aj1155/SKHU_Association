@@ -46,6 +46,9 @@ public class UserService {
     @Autowired
     private UserDiscloserRepository userDiscloserRepository;
 
+    @Autowired
+    private BoardService boardService;
+
     public List<User> findByName(String name){
     	return userRepository.findByName(name);
     }
@@ -73,6 +76,7 @@ public class UserService {
 
     public void create(UserDto userDto){
     	User user = User.of(userDto, categoryRepository.findOne(1), positionRepository.findOne(userDto.getUser_type()));
+    	boardService.saveBoard(user);
     	userRepository.save(user);
     	userDiscloserRepository.save(UserDiscloser.of(user.getId()));
     }

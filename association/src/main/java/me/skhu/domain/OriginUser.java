@@ -23,7 +23,7 @@ import lombok.Setter;
 @Builder
 @Table(name = "origin_user")
 @Entity
-public class OriginUser {
+public class OriginUser extends BaseEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

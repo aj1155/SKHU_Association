@@ -16,13 +16,9 @@
           <li><a href="/user/list">동문관리</a></li>
           <li><a href="/user/typeList">회원유형</a></li>
           <li>
-            <span class="opener">인문학습원 소개</span>
-            <ul>
-              <li><a href="/admin/introduceEdit">안내페이지 수정</a></li>
-              <li><a href="/admin/introduce">보기</a></li>
-            </ul>
+              <a href="/admin/introduce">인문학습원 소개</a>
           </li>
-          <li><span class="opener">커뮤니티</span>
+          <li><span class="opener">커뮤니티<p class="badge badge-danger">3</p></span>
 					<ul id="community">
 					</ul>
 				</li>
@@ -34,8 +30,8 @@
           <li><a href="/admin/mailSend">문자/메일 발송</a></li>
             <li><span class="opener">회원변경사항</span>
                 <ul>
-                    <li><a href="/user/phoneNumberEditList">아이디변경</a></li>
-                    <li><a href="/user/userEditList">회원 정보 변경</a></li>
+                    <li><a href="/user/phoneNumberEditList">아이디변경<p id="phoneNumberEdit" class="badge badge-danger"></p></a></li>
+                    <li><a href="/user/userEditList">회원 정보 변경<p id="userEdit" class="badge badge-danger"></p></a></li>
                 </ul>
             </li>
         </ul>

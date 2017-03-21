@@ -1,6 +1,7 @@
 package me.skhu.repository;
 
 import me.skhu.domain.OriginUser;
+import me.skhu.repository.custom.OriginUserRepositoryCustom;
 import me.skhu.util.Pagination;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by iljun on 2017-02-20.
  */
 @Repository
-public interface OriginUserRepository extends JpaRepository<OriginUser, Integer>{
+public interface OriginUserRepository extends JpaRepository<OriginUser, Integer>, OriginUserRepositoryCustom{
 
     Page<OriginUser> findByCategoryId(int categoryId, Pageable pageable);
     Page<OriginUser> findByCategoryIdAndGrade(int categoryId, int grade, Pageable pageable);

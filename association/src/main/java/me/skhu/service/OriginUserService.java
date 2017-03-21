@@ -2,6 +2,7 @@ package me.skhu.service;
 
 import me.skhu.domain.dto.OriginUserDto;
 import me.skhu.repository.OriginUserRepository;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +16,12 @@ public class OriginUserService {
 
     public OriginUserDto findById(int id){
         return OriginUserDto.of(originUserRepository.findById(id));
+    }
+
+    public int findCount(int categoryId){
+        DateTime dateTime = new DateTime();
+        DateTime midNight = dateTime.toDateMidnight().toDateTime();
+        DateTime now = DateTime.now();
+        return originUserRepository.countToday(categoryId,midNight,now);
     }
 }
