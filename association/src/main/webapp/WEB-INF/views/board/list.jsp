@@ -34,12 +34,17 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-11">
+					<div class="col-sm-10">
 					</div>
 					<div class="col-sm-1">
 					<button style="float:right;">
 						<a href="/board/create?boardId=${boardId}">글쓰기</a>
 					</button>
+					</div>
+					<div class="col-sm-1">
+						<button style="float:right;">
+							<a href="#" id="groupDelete">삭제</a>
+						</button>
 					</div>
 				</div>
 				<div class="row">
@@ -47,7 +52,7 @@
 					<table>
 						<thead>
 							<tr>
-								<th><input type="checkbox">
+								<th><input type="checkbox" onClick="allCkeck(this)">
 									<label></label>
 								</th>
 								<th>제목</th>
@@ -56,10 +61,11 @@
 							</tr>
 						</thead>
 						<tbody>
+							<input type="hidden" name="boardId" value="${boardId}"/>
 							<c:forEach var="list" items="${ list.boardPostList }" varStatus="status">
 								<tr data-url="/board/read?id=${list.id}">
-									<td><input type="checkbox">
-										<label></label>
+									<td onclick='event.cancelBubble=true;'>
+										<input type="checkbox" id="${list.id}"><label for="${list.id}"></label>
 									</td>
 									<td>${ list.title }</td>
 									<td>${ list.writer_name }</td>
@@ -84,3 +90,20 @@
 		</div>
 		
 	</div>
+
+<script>
+    function allCkeck(checkbox){
+        event.stopPropagation();
+        $("tbody input").trigger("click");
+    };
+
+    $(document).on("click","#groupDelete",function(){
+            var param="";
+            var boardId=$("input[name=boardId]").val();
+            $("tbody tr :checked").each(function(){
+                param += "id="+$(this).attr("id");
+                param += "&";
+            });
+            location.href="/board/groupDelete?"+param+"boardId="+boardId;
+    });
+</script>

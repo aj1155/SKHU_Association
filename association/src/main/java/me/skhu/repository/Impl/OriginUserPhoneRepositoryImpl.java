@@ -103,4 +103,13 @@ public class OriginUserPhoneRepositoryImpl extends QueryDslRepositorySupport imp
 
         }
     }
+
+    @Override
+    public int countBoolean(int categoryId){
+        return (int)from(qOriginUserPhone)
+                .where(qOriginUserPhone.agree.eq(false))
+                .where(qOriginUserPhone.category.id.eq(categoryId))
+                .fetchCount();
+
+    }
 }

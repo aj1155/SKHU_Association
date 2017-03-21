@@ -17,5 +17,5 @@ import java.util.List;
  */
 @Repository
 public interface OriginUserPhoneRepository extends JpaRepository<OriginUserPhone, Integer>, OriginUserPhoneRepositoryCustom{
-
+    OriginUserPhone save(OriginUserPhone originUserPhone);
 }

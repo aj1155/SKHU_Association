@@ -19,18 +19,25 @@
         </header>
         <section>
         <div>
-            <div class="form-inline">
+            <div class="row">
+                <div class="col-sm-3">
                 <form:form modelAttribute="pagination" method="POST">
-                <form:select path="st">
+                    <form:select path="st">
                     <form:option value="0" label="검색조건" />
                     <form:option value="1" label="기수" />
                     <form:option value="2" label="이름" />
                     <form:option value="3" label="생년월일" />
                 </form:select>
+                </div>
+                    <div class="col-sm-8">
                 <form:input path="ss" />
+                    </div>
+                    <div class="col-sm-1">
                 <button type="submit" class="btn btn-small btn-primary">검색</button>
-            </div>
-                <div class="table-wrapper">
+                    </div>
+                    </div>
+            <div class="row">
+                <div class="table-wrapper" style="width:100%;">
                     <table>
                         <thead>
                         <tr>
@@ -56,6 +63,7 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
                 <input type="hidden" name="cp" value="1" />
                 <div class="pagination pagination-small pagination-centered">
                     <c:forEach var="p" items="${ pagination.pageIndexList }">

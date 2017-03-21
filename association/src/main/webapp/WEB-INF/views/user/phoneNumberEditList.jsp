@@ -22,20 +22,29 @@
             <a href="index.html" class="logo"><strong>아이디 변경 관리</strong></a>
         </header>
         <section>
-            <div>
-                <div class="form-inline">
-                    <form:form modelAttribute="pagination" method="POST">
-                    <p id="allAgrees" class="btn btn-small btn-primary">일괄승인</p>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <!--<div modelAttribute="pagination" method="POST">-->
+                        <form:form modelAttribute="pagination" method="POST">
                     <form:select path="st">
                         <form:option value="0" label="검색조건" />
                         <form:option value="1" label="기수" />
                         <form:option value="2" label="이름" />
                         <form:option value="3" label="핸드폰 번호" />
                     </form:select>
+                    </div>
+                        <div class="col-sm-8">
                     <form:input path="ss" />
+                        </div>
+                        <div class="col-sm-1">
                     <button type="submit" class="btn btn-small btn-primary">검색</button>
+                        </div>
                 </div>
-                <div class="table-wrapper">
+                    <div class="row">
+                <span id="allAgrees" class="btn btn-small btn-primary" style="float:left;">일괄승인</span>
+                        </div>
+            <div class="row">
+                <div class="table-wrapper" style="width:100%;">
                     <table>
                         <thead>
                         <tr>
@@ -57,18 +66,17 @@
                                 <td>${user.user.birth}</td>
                                 <td>${user.user.phoneNumber}</td>
                                 <td>${user.loginId}</td>
-                                <!--
                                <c:if test="${user.agree eq true}">
                                    <td><p>승인완료</p></td>
                                </c:if>
                                 <c:if test="${user.agree eq false}">
                                     <td><p id="submit" class="btn btn-small btn-primary" value="${user.id}">승인</p></td>
-                                </c:if>-->
-                                <td><p id="submit" class="btn btn-small btn-primary" value="${user.id}">승인</p></td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
+                </div>
                 </div>
                 <input type="hidden" name="cp" value="1" />
                 <div class="pagination pagination-small pagination-centered">

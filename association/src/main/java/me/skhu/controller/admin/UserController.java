@@ -143,7 +143,6 @@ public class UserController {
 		return "user/typeList";
 	}
 
-
 	@RequestMapping(value="/createType", method=RequestMethod.GET)
 	public String createType(Model model){
 		return "user/createType";

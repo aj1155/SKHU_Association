@@ -3,7 +3,12 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+<style>
+	#img{
+		width:150px;
+		height:150px;
+	}
+</style>
 		<!-- Main -->
 		<div id="main">
 			<div class="inner">
@@ -14,8 +19,6 @@
 				</header>
 				<br />
 
-				<!-- Content -->
-				<section>
 					<!-- Table -->
 					<form>
 					<div class="row uniform">
@@ -42,6 +45,9 @@
 							<li>
 								<a href="#addCategory" class="button special icon fa-plus" data-toggle="modal">광고 분류 추가</a>
 							</li>
+							<li>
+								<a href="#deleteCategory" class="button special icon fa-minus" data-toggle="modal">광고 분류 삭제</a>
+							</li>
 						</ul>
 					</div>
 					<!-- Table -->
@@ -67,7 +73,7 @@
 										<label for="demo-copy"></label>
 									</td>
 									<td>${list.category.name }</td>
-									<td><img src="${list.image }"/></td>
+									<td><img id="img" src="${list.image }"/></td>
 									<td>${list.slogan }</td>
 									<td>${list.company }</td>
 									<td>${list.userName }</td>
@@ -102,9 +108,19 @@
 								<button class="btn btn-primary" onclick="addCategory()" data-dismiss="modal">추가</button>
 							</div>
 						</div>
-				</form>
-				</section>
+						<div id="deleteCategory" class="modal hide fade" tabindex="-1">
+							<div class="modal-header">
+								<h3>광고 카테고리 삭제</h3>
+							</div>
+							<div class="modal-body">
+								<span>카테고리명:</span>
+								<select id="advertiseCategory">
 
+								</select>
+								<button class="btn" data-dismiss="modal" onclick="deleteCategroy()">삭제</button>
+							</div>
+						</div>
+				</form>
 			</div>
 			</div>
 <script>
@@ -121,5 +137,8 @@
 			}
 		});
         location.href=location.href;
+	}
+	function deleteCategory(){
+	    alert("success");
 	}
 </script>
