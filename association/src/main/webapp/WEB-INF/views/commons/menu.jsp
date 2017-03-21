@@ -8,7 +8,7 @@
       <nav id="menu">
         <header class="major">
           <h2>Menu</h2>
-            <a href="/logout">로그아웃</a>
+          <a href="/logout">로그아웃</a>
         </header>
         <ul>
           <li><a href="/admin/myInfo">마이페이지</a></li>

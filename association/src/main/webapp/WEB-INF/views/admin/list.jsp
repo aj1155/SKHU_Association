@@ -7,9 +7,9 @@
 
 		<!-- Header -->
 		<header id="header">
-			<a href="index.html" class="logo"><strong>관리자목록</strong></a>
+			<h2>관리자목록</h2>
 		</header>
-		<section>
+		<section style="padding-top:50px;">
 		<div align="right">
 			<ul class="actions">
 				<li><a href="create" class="button special icon fa-plus">관리자 추가</a></li>

@@ -19,4 +19,7 @@ public interface AdvertiseRepositoryCustom {
 
 	int countByUserName(String userName, int categoryId);
 
+	List<Advertise> paginationByCompany(Pagination pagination, int categoryId);
+
+	int countByCompany(String company, int categoryId);
 }

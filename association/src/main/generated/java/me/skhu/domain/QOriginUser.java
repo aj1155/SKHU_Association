@@ -1,13 +1,16 @@
 package me.skhu.domain;
 
-import static com.querydsl.core.types.PathMetadataFactory.*;
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
-import com.querydsl.core.types.dsl.*;
-
-import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
+
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.PathMetadata;
+import com.querydsl.core.types.dsl.DateTimePath;
+import com.querydsl.core.types.dsl.EntityPathBase;
+import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.PathInits;
+import com.querydsl.core.types.dsl.StringPath;
 
 
 /**
@@ -21,6 +24,7 @@ public class QOriginUser extends EntityPathBase<OriginUser> {
     private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QOriginUser originUser = new QOriginUser("originUser");
+
 
     public final QBaseEntity _super = new QBaseEntity(this);
 

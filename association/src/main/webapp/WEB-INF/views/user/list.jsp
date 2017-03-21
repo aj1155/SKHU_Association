@@ -15,15 +15,15 @@ img{
 
 	<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="logo"><strong>동문관리</strong></a>
+		<h2>동문관리</h2>
 	</header>
-	<section>
+	<section style="padding-top:50px;">
 		<form:form modelAttribute="pagination">
 		<div align="right">
 			<ul class="actions">
 				<li><button type="submit" name="cmd" value="delete" class="button">삭제</button></li>
 				<li><a href="create" class="button special icon fa-plus">동문 추가</a></li>
-				<li><a href="#" class="button special icon fa-plus">동문목록 엑셀</a></li>
+				<li><a href="createByExcel" class="button special icon fa-plus">동문목록 엑셀</a></li>
 			</ul>
 		</div>
 
@@ -45,7 +45,7 @@ img{
 			<table>
 				<thead>
 					<tr>
-						<th>CHECK</th>
+						<th><input type="checkbox" /></th>
 						<th>기수</th>
 						<th>이미지</th>
 						<th>이름</th>
@@ -59,7 +59,7 @@ img{
 				</thead>
 				<tbody>
 					<c:forEach var="user" items="${ list.user }" >
-						<tr data-url="/user/edit?id=${user.id}">
+						<tr data-url="/user/edit?id=${ user.id }">
 							<td><input type="checkbox" name="del" value="${ user.id }" /></td>
 							<td>${ user.grade }기</td>
 							<td>
@@ -81,7 +81,8 @@ img{
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
+		</div>	
+		<a href="#" class="button special" style="float:right;">엑셀다운로드</a>
 		<input type="hidden" name="cp" value="1" />
 
 		<div align="center">
@@ -101,18 +102,3 @@ img{
 		</section>
 	</div>
 </div>
-
-<script>
-function stop_propagation_handler(e) {
-    e.stopPropagation();
-  }
-  $("td input:checkbox").each(function(c) {
-  	$(this).parent().click(stop_propagation_handler);
-  })    
-
-  $("thead input:checkbox").click(function() {
-  	$("tbody input:checkbox").each(function() {
-  		$(this).prop("checked", !$(this).prop("checked"));
-  	});
-  })
-</script>

@@ -30,12 +30,19 @@ public class AdvertiseService {
 	public AdvertiseListDto findAll(Pagination pagination,int categoryId){
 		switch(pagination.getSrchType()){
 			case 0 :
+				System.out.println("pagination");
 				pagination.setRecordCount(advertiseRepository.countByPagination(categoryId));
 				return AdvertiseListDto.of(advertiseRepository.pagination(pagination, categoryId));
 			case 1 :
+				System.out.println("pagination slogan");
 				pagination.setRecordCount(advertiseRepository.countBySlogan(pagination.getSrchText(), categoryId));
 				return AdvertiseListDto.of(advertiseRepository.paginationBySlogan(pagination, categoryId));
+			case 2:
+				System.out.println("company");
+				pagination.setRecordCount(advertiseRepository.countByCompany(pagination.getSrchText(),categoryId));
+				return AdvertiseListDto.of(advertiseRepository.paginationByCompany(pagination,categoryId));
 			default :
+				System.out.println("defualt");
 				pagination.setRecordCount(advertiseRepository.countByUserName(pagination.getSrchText(), categoryId));
                 return AdvertiseListDto.of(advertiseRepository.paginationByUserName(pagination, categoryId));
 		}
