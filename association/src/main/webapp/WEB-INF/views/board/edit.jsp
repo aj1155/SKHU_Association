@@ -31,8 +31,7 @@
             <h4>글쓰기</h4>
             <br/>
             <form name="uploadFIle" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="userId" value="1"/>
-                <input type="hidden" name="userName" value="test"/>
+                <input type="hidden" name="boardId" value="${boardId}"/>
                 <div style="display:inline-block;">
                     <span>제목:</span> <input type="text" name="title" value="${boardPost.title}"/><p>${error}</p>
                 </div>

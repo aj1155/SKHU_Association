@@ -18,6 +18,7 @@
 				
 
 				<form:form modelAttribute="pagination">
+				<input type="hidden" name="boardId" value="${boardId}"/>
 				<div class="row">
 					<div class="col-sm-3">
 					<form:select path="st" cssStyle="width:100%;">
@@ -63,7 +64,7 @@
 						<tbody>
 							<input type="hidden" name="boardId" value="${boardId}"/>
 							<c:forEach var="list" items="${ list.boardPostList }" varStatus="status">
-								<tr data-url="/board/read?id=${list.id}">
+								<tr data-url="/board/read?id=${list.id}&boardId=${boardId}">
 									<td onclick='event.cancelBubble=true;'>
 										<input type="checkbox" id="${list.id}"><label for="${list.id}"></label>
 									</td>

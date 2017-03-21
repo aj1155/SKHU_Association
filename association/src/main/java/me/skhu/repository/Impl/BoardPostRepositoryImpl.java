@@ -74,10 +74,9 @@ public class BoardPostRepositoryImpl extends QueryDslRepositorySupport implement
 	}
 
 	@Override
-	public int todayBoard(int categoryId, DateTime today, DateTime now){
+	public int todayBoard(int boardId, DateTime today, DateTime now){
 		return (int)from(qBoardPost)
-				.leftJoin(qBoardPost.board,qBoard)
-				.where(qBoard.categoryId.eq(categoryId))
+				.where(qBoardPost.board.id.eq(boardId))
 				.where(qBoardPost.lastModifiedDate.between(today,now))
 				.fetchCount();
 	}

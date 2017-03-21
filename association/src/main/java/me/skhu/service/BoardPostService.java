@@ -155,10 +155,15 @@ public class BoardPostService {
 
     }
 
-    public int findByCategoryCount(int categoryId){
+    public int[] findByCategoryCount(int categoryId){
         DateTime dateTime = new DateTime();
         DateTime midNight = dateTime.toDateMidnight().toDateTime();
         DateTime now = DateTime.now();
-        return boardPostRepository.todayBoard(categoryId, midNight, now);
+        List<BoardDto> boardList = boardService.findByCategoryId(categoryId);
+        int[] list = new int[boardList.size()];
+        for(int i=0; i<list.length; i++) {
+            list[i]=boardPostRepository.todayBoard(boardList.get(i).getBoardId(), midNight, now);
+        }
+        return list;
     }
 }

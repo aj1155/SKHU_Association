@@ -58,8 +58,8 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/menu/boarcCount")
-    public @ResponseBody int sideBarBoardCount(){
+    @RequestMapping("/menu/boardCount")
+    public @ResponseBody int[] sideBarBoardCount(){
         return boardPostService.findByCategoryCount(adminService.getCurrentAdmin().getCategory().getId());
     }
 

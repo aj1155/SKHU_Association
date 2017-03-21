@@ -16,7 +16,6 @@ public class BoardDto {
 
 	private String boardType;
 	private int boardId;
-	private int count;
 
 	public static BoardDto of(Board board){
 		return BoardDto.builder()

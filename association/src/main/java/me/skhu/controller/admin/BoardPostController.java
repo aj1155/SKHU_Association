@@ -76,13 +76,14 @@ public class BoardPostController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(@RequestParam("id") int id, Model model, Pagination pagination) {
+	public String edit(@RequestParam("id") int id, Model model, Pagination pagination, int boardId) {
 		model.addAttribute("boardPost", boardPostService.findById(id));
+		model.addAttribute("boardId",boardId);
 		return "board/edit";
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String edit(Model model, Pagination pagination, @ModelAttribute BoardPostDto boardPostDto, BindingResult result) throws UnsupportedEncodingException {
+	public String edit(Model model, Pagination pagination, @ModelAttribute BoardPostDto boardPostDto, BindingResult result, int boardId) throws UnsupportedEncodingException {
 		boardPostEditValidator.validate(boardPostDto, result);
 		if (result.hasErrors()) {
 			model.addAttribute("error", boardPostEditValidator.errorMessage(boardPostDto));
@@ -90,14 +91,16 @@ public class BoardPostController {
 			return "board/edit";
 		}
 		boardPostService.update(boardPostDto);
-		return "redirect:/board/list";
+		return "redirect:/board/list?boardId="+boardId;
 	}
 
 	@RequestMapping(value = "/read")
-	public String read(@RequestParam("id") int id, Model model, Pagination pagination) {
+	public String read(@RequestParam("id") int id, Model model, Pagination pagination, int boardId) {
+		System.out.println("boardId : " + boardId);
 		model.addAttribute("boardPost", boardPostService.findById(id));
 		model.addAttribute("fileList", fileService.findByBoardId(id));
 		model.addAttribute("comment", commentService.findByBoardId(id));
+		model.addAttribute("boardId",boardId);
 		return "board/read";
 	}
 
