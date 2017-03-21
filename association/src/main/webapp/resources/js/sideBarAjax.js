@@ -8,7 +8,7 @@ $(function() {
 				$("#community").append(
 						'<li><a href="/board/list?boardId='
 								+ result[i].boardId + '">'
-								+ result[i].boardType + '</a></li>');
+								+ result[i].boardType + '<p class="badge badge-danger" id='+i+'></p></a></li>');
 			}
 		},
 		error : function(request, status, error) {
@@ -33,6 +33,48 @@ $(function(){
 		},
 		error : function(request, status, error){
 			alert("code:" + request.status + "\n"+ "message:"+ request.responseText + "\n" + "error: " + error);
+		}
+	});
+});
+
+$(function(){
+	$.ajax({
+		url : '/home/menu/phoneNumberEdit',
+		dataType : 'json',
+		type : 'GET',
+		success: function(result){
+			$("#phoneNumberEdit").text(result);
+		},
+        error : function(request, status, error){
+            alert("code:" + request.status + "\n"+ "message:"+ request.responseText + "\n" + "error: " + error);
+        }
+	});
+});
+
+$(function(){
+	$.ajax({
+		url : '/home/menu/userEdit',
+		dataType : 'json',
+		type : 'GET',
+		success : function(result){
+			$("#userEdit").text(result);
+		},
+        error : function(request, status, error){
+            alert("code:" + request.status + "\n"+ "message:"+ request.responseText + "\n" + "error: " + error);
+        }
+	});
+});
+
+$(function(){
+	$.ajax({
+		url : '/home/menu/boardCount',
+		dataType : 'json',
+		type : 'GET',
+		success : function(result){
+			for(var i =0; i<result.length; i++) {
+                $("#"+i).text(result[i]);
+            }
+
 		}
 	});
 });

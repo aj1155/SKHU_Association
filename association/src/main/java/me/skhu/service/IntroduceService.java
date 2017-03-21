@@ -17,12 +17,13 @@ public class IntroduceService {
     private IntroduceRepository introduceRepository;
 
     public IntroduceDto find(){
-        System.out.println(introduceRepository.getMaxId());
-        return IntroduceDto.of(introduceRepository.findById(introduceRepository.getMaxId()));
+        return IntroduceDto.of(introduceRepository.findById(1));
     }
 
     @Transactional(readOnly = false)
-    public void save(Introduce introduce){
+    public void save(Introduce newIntroduce){
+        Introduce introduce = introduceRepository.findOne(1);
+        introduce.setContent(newIntroduce.getContent());
         introduceRepository.save(introduce);
     }
 }

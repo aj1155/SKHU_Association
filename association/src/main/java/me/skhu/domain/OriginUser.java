@@ -16,6 +16,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -23,7 +25,7 @@ import lombok.Setter;
 @Builder
 @Table(name = "origin_user")
 @Entity
-public class OriginUser {
+public class OriginUser extends BaseEntity implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,38 +34,30 @@ public class OriginUser {
 	private int id;
 
 	@Column(name = "login_id")
-	@NotNull
 	private String loginId;
 
 	@Column(name = "name")
-	@NotNull
 	private String name;
 
 	@Column(name = "birth")
-	@NotNull
 	private String birth;
 
 	@Column(name = "phone_number")
-	@NotNull
 	private String phoneNumber;
 
 	@Column(name = "company_number")
 	private String companyNumber;
 
 	@Column(name = "grade")
-	@NotNull
 	private int grade;
 
 	@Column(name = "status")
-	@NotNull
 	private String status;
 
 	@JoinColumn(name = "category_id")
-	@NotNull
 	@ManyToOne
 	private Category category;
 
-	@NotNull
 	@Column(name= "user_id")
 	private int userId;
 
@@ -78,6 +72,20 @@ public class OriginUser {
 				.status(status)
 				.category(category)
 				.userId(userId)
+				.build();
+	}
+
+	public static OriginUser of(User user){
+		return OriginUser.builder()
+				.loginId(user.getLoginId())
+				.name(user.getName())
+				.birth(user.getBirth())
+				.phoneNumber(user.getPhoneNumber())
+				.companyNumber(user.getCompanyNumber())
+				.grade(user.getGrade())
+				.status(user.getStatus())
+				.category(user.getCategory())
+				.userId(user.getId())
 				.build();
 	}
 }
