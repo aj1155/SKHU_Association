@@ -40,33 +40,43 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 	public static void addDefinitions(){
 		addDefaultLayoutDef("user/list","user/list");
 		addDefaultLayoutDef("user/edit","user/edit");
+		addDefaultLayoutDef("user/createType","user/createType");
+		addDefaultLayoutDef("user/typeList","user/typeList");
+
 		addDefaultLayoutDef("admin/excelUpload","admin/excelUpload");
+
 		addDefaultLayoutDef("advertise/create","advertise/create");
 		addDefaultLayoutDef("advertise/edit","advertise/edit");
 		addDefaultLayoutDef("advertise/home","advertise/home");
 		addDefaultLayoutDef("advertise/list","advertise/list");
+
 		addDefaultLayoutDef("board/list","board/list");
 		addDefaultLayoutDef("board/edit","board/edit");
 		addDefaultLayoutDef("board/read","board/read");
 		addDefaultLayoutDef("board/write","board/write");
-		addDefaultLayoutDef("home/login","home/login");
+
+		//addDefaultLayoutDef("home/login","home/login");
+
 		addDefaultLayoutDef("admin/save","admin/save");
 		addDefaultLayoutDef("admin/value","admin/value");
+
 		addDefaultLayoutDef("user/userEditList","user/userEditList");
 		addDefaultLayoutDef("user/userEditDetail","user/userEditDetail");
 		addDefaultLayoutDef("user/phoneNumberEditList", "user/phoneNumberEditList");
+
 		addDefaultLayoutDef("admin/introduceEdit","admin/introduceEdit");
 		addDefaultLayoutDef("admin/introduce","admin/introduce");
+
 		addDefaultLayoutDef("user/createByExcel","user/createByExcel");
+
 		addDefaultLayoutDef("admin/list","admin/list");
 		addDefaultLayoutDef("admin/edit","admin/edit");
 		addDefaultLayoutDef("admin/myInfo","admin/myInfo");
 		addDefaultLayoutDef("admin/mailSend","admin/mailSend");
-		addDefaultLayoutDef("user/createType","user/createType");
-		addDefaultLayoutDef("user/typeList","user/typeList");
 
 		// Ajax
 		addDefaultAjaxDef("admin/mailList","admin/mailList");
+		addDefaultAjaxDef("home/login","home/login");
 
 	}
 

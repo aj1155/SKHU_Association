@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import me.skhu.domain.Category;
 import me.skhu.domain.Position;
 import me.skhu.domain.User;
 import me.skhu.domain.dto.UserDto;
@@ -26,27 +27,30 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByLoginIdAndPassword(String login_id, String password);
 
     List<User> findByName(String name);
-    List<User> findByGrade(int grade);
+    List<User> findByCategory(Category category);
+    List<User> findByNameAndCategory(String name, Category category);
+    List<User> findByGradeAndCategory(int grade, Category category);
 
-    Page<User> findByNameContaining(String name, Pageable pageable);
-    Page<User> findByGrade(int grade, Pageable pageable);
-    Page<User> findByPosition(Position position, Pageable pageable);
-    Page<User> findByNameContainingAndPosition(String name, Position position, Pageable pageable);
-    Page<User> findByGradeAndPosition(int grade, Position position, Pageable pageable);
+    Page<User> findByCategory(Category category, Pageable pageable);
+    Page<User> findByNameContainingAndCategory(String name, Category category, Pageable pageable);
+    Page<User> findByGradeAndCategory(int grade, Category category, Pageable pageable);
+    Page<User> findByPositionAndCategory(Position position, Category category, Pageable pageable);
+    Page<User> findByNameContainingAndPositionAndCategory(String name, Position position, Category category, Pageable pageable);
+    Page<User> findByGradeAndPositionAndCategory(int grade, Position position, Category category, Pageable pageable);
 
-    public default List<User> find(PaginationUser pagination,Position position){
+    public default List<User> find(PaginationUser pagination,Position position,Category category){
     	PageRequest pageRequest = new PageRequest (pagination.getCurrentPage() -1, pagination.getPageSize(), Sort.Direction.DESC, "id");
-    	Page<User> page = this.findAll(pageRequest);
+    	Page<User> page = this.findByCategory(category,pageRequest);
     	if(position == null)
     		switch(pagination.getSrchType()){
-    		case 1: page=this.findByNameContaining(pagination.getSrchText(), pageRequest); break;
-    		case 2: page=this.findByGrade(Integer.parseInt(pagination.getSrchText()), pageRequest); break;
+    		case 1: page=this.findByNameContainingAndCategory(pagination.getSrchText(),category,pageRequest); break;
+    		case 2: page=this.findByGradeAndCategory(Integer.parseInt(pagination.getSrchText()),category,pageRequest); break;
 	    	}
     	else{
     		switch(pagination.getSrchType()){
-			case 0: page=this.findByPosition(position, pageRequest); break;
-			case 1: page=this.findByNameContainingAndPosition(pagination.getSrchText(), position, pageRequest); break;
-			case 2: page=this.findByGradeAndPosition(Integer.parseInt(pagination.getSrchText()), position, pageRequest); break;
+			case 0: page=this.findByPositionAndCategory(position,category,pageRequest); break;
+			case 1: page=this.findByNameContainingAndPositionAndCategory(pagination.getSrchText(), position, category, pageRequest); break;
+			case 2: page=this.findByGradeAndPositionAndCategory(Integer.parseInt(pagination.getSrchText()), position, category, pageRequest); break;
     		}
     	}
     	pagination.setRecordCount((int)page.getTotalElements());

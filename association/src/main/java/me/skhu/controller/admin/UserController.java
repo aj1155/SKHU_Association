@@ -1,10 +1,7 @@
 package me.skhu.controller.admin;
 
-import me.skhu.domain.OriginUser;
-import me.skhu.domain.dto.OriginUserDto;
-import me.skhu.service.OriginUserPhoneService;
-import me.skhu.service.OriginUserService;
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,16 +12,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import me.skhu.domain.dto.OriginUserDto;
 import me.skhu.domain.dto.UserDto;
+import me.skhu.service.OriginUserPhoneService;
+import me.skhu.service.OriginUserService;
 import me.skhu.service.PositionService;
 import me.skhu.service.UserService;
 import me.skhu.util.Pagination;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 import me.skhu.util.PaginationUser;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -40,6 +39,8 @@ public class UserController {
 
 	@Autowired
 	private PositionService positionService;
+
+	//Spring Security session information check
 
 	@RequestMapping("/list")
 	public String list(Model model, @ModelAttribute("pagination") PaginationUser pagination){

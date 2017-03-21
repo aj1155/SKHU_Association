@@ -4,23 +4,16 @@ package me.skhu;
 import java.nio.charset.Charset;
 import java.util.Properties;
 
-import javax.servlet.MultipartConfigElement;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.MultipartConfigFactory;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -93,7 +86,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public JavaMailSender mailSender(){
     	JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-    	//보안 수준이 낮은 앱 허용: 사용 안함
+    	//보안 수준이 낮은 앱 허용: 사용
     	//www.google.com/settings/security/lesssecureapps
     	//계정 설정 변경
     	mailSender.setHost("smtp.gmail.com");
@@ -107,7 +100,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     	return mailSender;
     }
-
 
 
 }

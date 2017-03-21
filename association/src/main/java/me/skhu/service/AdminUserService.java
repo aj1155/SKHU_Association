@@ -1,6 +1,7 @@
 package me.skhu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import me.skhu.domain.Admin;
@@ -18,6 +19,9 @@ public class AdminUserService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	public AdminListDto list(){
 		return AdminListDto.of(adminRepository.findAll());
 	}
@@ -28,7 +32,7 @@ public class AdminUserService {
     }
 
 	public void create(AdminDto adminDto){
-		Admin admin = Admin.create(adminDto,categoryRepository.findOne(adminDto.getCategoryId()));
+		Admin admin = Admin.create(adminDto,categoryRepository.findOne(adminDto.getCategoryId()),passwordEncoder.encode(adminDto.getBirth()));
 		adminRepository.save(admin);
 	}
 

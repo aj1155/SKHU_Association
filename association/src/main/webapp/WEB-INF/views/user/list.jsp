@@ -38,7 +38,8 @@ img{
 				<form:option value="0" label="일반회원/임원" />
 				<form:options itemValue="id" itemLabel="name" items="${ position }" />
 			</form:select>				
-			<button type="submit" class="btn btn-small btn-primary">검색</button>
+			<button type="submit" class="button special">검색</button>
+			<a href="list" class="button">취소</a>
 		</div>
 		<div class="table-wrapper">
 			<table>
@@ -63,11 +64,11 @@ img{
 							<td>${ user.grade }기</td>
 							<td>
 								<c:if test="${ user.image == null }">
-        									<img src="/resources/upload/profileImg/user.png" class="img-circle profile_img" id="profileImg" >
-        								</c:if>
-        								<c:if test="${ user.image != null }">
-        									<img src="${ user.image }" class="img-circle profile_img" id="profileImg" >
-        								</c:if>
+        							<img src="/resources/upload/profileImg/user.png" class="img-circle profile_img" id="profileImg" >
+        						</c:if>
+   								<c:if test="${ user.image != null }">
+   									<img src="${ user.image }" class="img-circle profile_img" id="profileImg" >
+   								</c:if>
         							</td>
 							<td>${ user.name }</td>
 							<td>${ user.birth }</td>
@@ -82,17 +83,19 @@ img{
 			</table>
 		</div>
 		<input type="hidden" name="cp" value="1" />
-	
-		<div class="pagination pagination-small pagination-centered">
-			<ul>
-				<c:forEach var="p" items="${ pagination.pageIndexList }">
-					<li class='${ p.cssClass }'>
-						<a data-page="${ p.number }" href="#">${ p.label }</a>
-					</li>
-				</c:forEach>
-			</ul>
+
+		<div align="center">
+		<div class="pagination">
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<c:forEach var="p" items="${ pagination.pageIndexList }">
+						<li class='${ p.cssClass }'><a data-page="${ p.number }" href="#">${ p.label }</a></li>
+					</c:forEach>
+				</ul>
+			</nav>
 		</div>
-		
+		</div>
+
 		</form:form>
 			
 		</section>
@@ -113,5 +116,3 @@ function stop_propagation_handler(e) {
   	});
   })
 </script>
-
-

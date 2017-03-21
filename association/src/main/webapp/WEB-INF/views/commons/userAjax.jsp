@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <style>
 #searchResult tr:hover { background-color: #ffe; cursor: pointer; }
 #searchResult tr.selected { background-color: #fee; font-weight: bold; }
 </style>
-<div id="addMember" class="modal hide fade" tabindex="-1">
+<div id="addMember" class="modal fade" tabindex="-1">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 		<h3>회원 검색</h3>

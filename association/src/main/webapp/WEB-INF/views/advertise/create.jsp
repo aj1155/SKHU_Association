@@ -47,8 +47,8 @@
 						<span>광고기간:<input type="date" name="startDate" />~<input type="date" name="endDate" /></span> <br /> <br />
 						<button class="button special">저장</button>
 						<a href="#" class="button">취소</a>
-						<jsp:include page="../commons/userAjax.jsp"/>
+						<%@ include file="/WEB-INF/views/commons/userAjax.jsp" %>
+						</form>
 						</div>
-				</form>
 			</div>
 		</div>
