@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import me.skhu.domain.dto.AdminDto;
+import me.skhu.service.AdminService;
 import me.skhu.service.AdminUserService;
 import me.skhu.service.CategoryService;
 import me.skhu.service.MailService;
@@ -17,6 +18,9 @@ import me.skhu.service.UserService;
 @Controller
 @RequestMapping("/admin")
 public class AdminUserController {
+
+	@Autowired
+	AdminService adminService;
 
 	@Autowired
 	AdminUserService adminUserService;
@@ -30,10 +34,17 @@ public class AdminUserController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping("/myInfo")
+	@RequestMapping(value="/myInfo", method=RequestMethod.GET)
 	public String myInfo(Model model){
-		//TODO: 로그인기능 이후 수정
+		model.addAttribute("adminDto", AdminDto.of(adminService.getCurrentAdmin()));
+		model.addAttribute("category", categoryService.getCategory());
 		return "admin/myInfo";
+	}
+
+	@RequestMapping(value="/myInfo", method=RequestMethod.POST)
+	public String myInfoEdit(Model model, AdminDto adminDto){
+		adminUserService.update(adminDto,adminService.getCurrentAdmin().getId());
+		return "redirect:/admin/myInfo";
 	}
 
 	@RequestMapping("/list")
