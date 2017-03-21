@@ -17,7 +17,7 @@
           <li>
               <a href="/admin/introduce">인문학습원 소개</a>
           </li>
-          <li><span class="opener">커뮤니티<p class="badge badge-danger">3</p></span>
+          <li><span class="opener">커뮤니티</span>
 					<ul id="community">
 					</ul>
 				</li>

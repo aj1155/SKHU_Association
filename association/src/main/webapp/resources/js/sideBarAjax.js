@@ -4,7 +4,6 @@ $(function() {
 		dataType : 'json',
 		type : 'GET',
 		success : function(result) {
-			alert("test");
 			for (var i = 0; i < result.length; i++) {
 				$("#community").append(
 						'<li><a href="/board/list?boardId='
@@ -44,7 +43,6 @@ $(function(){
 		dataType : 'json',
 		type : 'GET',
 		success: function(result){
-			alert('phoneNumberEdit' + result.toString());
 			$("#phoneNumberEdit").text(result);
 		},
         error : function(request, status, error){
@@ -59,7 +57,6 @@ $(function(){
 		dataType : 'json',
 		type : 'GET',
 		success : function(result){
-			alert('userEdit' + result.toString());
 			$("#userEdit").text(result);
 		},
         error : function(request, status, error){

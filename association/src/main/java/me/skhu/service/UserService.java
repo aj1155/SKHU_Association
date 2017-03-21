@@ -49,6 +49,12 @@ public class UserService {
     @Autowired
     private BoardService boardService;
 
+    @Autowired
+    private OriginUserPhoneService originUserPhoneService;
+
+    @Autowired
+    private OriginUserService originUserService;
+
     public List<User> findByName(String name){
     	return userRepository.findByName(name);
     }
@@ -105,7 +111,9 @@ public class UserService {
 
     	user.setEmail(userDto.getEmail());
     	user.setPosition(positionRepository.findOne(userDto.getUser_type()));
-
+        if(!userDto.getPhoneNumber().equals(user.getLoginId()))
+            originUserPhoneService.save(user);
+        originUserService.save(user);
     	userRepository.save(user);
     }
 

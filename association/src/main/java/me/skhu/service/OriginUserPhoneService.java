@@ -50,4 +50,8 @@ public class OriginUserPhoneService {
     public int findCount(int categoryId){
         return originUserPhoneRepository.countBoolean(categoryId);
     }
+
+    public void save(User user){
+        originUserPhoneRepository.save(OriginUserPhone.of(user));
+    }
 }

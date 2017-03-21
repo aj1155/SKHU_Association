@@ -2,14 +2,12 @@ package me.skhu.repository.Impl;
 
 import java.util.List;
 
-import com.querydsl.jpa.sql.JPASQLQuery;
-import me.skhu.domain.dto.BoardPostDto;
+import me.skhu.domain.QBoard;
+import me.skhu.domain.QBoardPost;
 import org.joda.time.DateTime;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
 import me.skhu.domain.BoardPost;
-import me.skhu.domain.QBoard;
-import me.skhu.domain.QBoardPost;
 import me.skhu.repository.custom.BoardPostRepositoryCustom;
 import me.skhu.util.Pagination;
 

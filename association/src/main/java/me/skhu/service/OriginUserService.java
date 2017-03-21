@@ -1,5 +1,7 @@
 package me.skhu.service;
 
+import me.skhu.domain.OriginUser;
+import me.skhu.domain.User;
 import me.skhu.domain.dto.OriginUserDto;
 import me.skhu.repository.OriginUserRepository;
 import org.joda.time.DateTime;
@@ -23,5 +25,9 @@ public class OriginUserService {
         DateTime midNight = dateTime.toDateMidnight().toDateTime();
         DateTime now = DateTime.now();
         return originUserRepository.countToday(categoryId,midNight,now);
+    }
+
+    public void save(User user){
+        originUserRepository.save(OriginUser.of(user));
     }
 }
