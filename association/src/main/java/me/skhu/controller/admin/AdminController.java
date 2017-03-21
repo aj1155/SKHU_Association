@@ -35,7 +35,7 @@ public class AdminController {
 	@RequestMapping("excelDownload")
 	public void excelDownload(Model model, HttpServletResponse response) throws Exception{
 		ExcelRead excel = new ExcelRead();
-		excel.xlsxWriter(adminService.findExcelList(0),response);
+		excel.xlsxWriter(adminService.findExcelList(),response);
 	}
 
 	@RequestMapping(value = "excelUpload" , method=RequestMethod.GET)
@@ -46,16 +46,12 @@ public class AdminController {
 	@RequestMapping(value = "excelUpload" , method=RequestMethod.POST)
 	public String excelUpload(Model model, @RequestParam("excelFile") MultipartFile files, MultipartHttpServletRequest request) throws IOException {
 		List<UserExcelDto> list = adminService.excelRead(files, request);
-		list.get(0).getImage();
 		model.addAttribute("excelList",list);
 		return "admin/excelUpload";
 	}
 
 	@RequestMapping(value = "userExcelInsert" , method=RequestMethod.POST)
 	public String userExcelInsert(UserDto userDto){
-		System.out.println(userDto.getImage());
-		System.out.println(userDto.getBirth());
-		System.out.println(userDto.getCategoryName());
 		adminService.saveuUserList(userDto);
 		return "boardpost/list";
 	}

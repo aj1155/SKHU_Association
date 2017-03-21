@@ -53,6 +53,7 @@ public class BoardPostController {
 
 	@RequestMapping("list")
 	public String list(Model model, Pagination pagination, @RequestParam("boardId") int boardId) {
+		pagination.setPageSize(15);
 		model.addAttribute("list", boardPostService.findAll(pagination, boardId));
 		model.addAttribute("boardId", boardId);
 		return "board/list";

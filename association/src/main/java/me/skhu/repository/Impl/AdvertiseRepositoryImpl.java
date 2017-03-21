@@ -79,4 +79,25 @@ public class AdvertiseRepositoryImpl extends QueryDslRepositorySupport implement
 				.fetchCount();
 	}
 
+	@Override
+	public List<Advertise> paginationByCompany(Pagination pagination, int categoryId){
+		return from(qAdvertise)
+				.leftJoin(qAdvertise.category,qAdvertiseCategory)
+				.where(qAdvertise.company.eq(pagination.getSrchText()))
+				.where(qAdvertise.category.id.eq(categoryId))
+				.orderBy(qAdvertise.id.desc())
+				.offset((pagination.getCurrentPage() - 1 ) * pagination.getPageSize())
+				.limit(pagination.getPageSize())
+				.fetch();
+	}
+
+	@Override
+	public int countByCompany(String company, int categoryId){
+		return (int)from(qAdvertise)
+				.leftJoin(qAdvertise.category,qAdvertiseCategory)
+				.where(qAdvertise.category.id.eq(categoryId))
+				.where(qAdvertise.company.eq(company))
+				.fetchCount();
+	}
+
 }

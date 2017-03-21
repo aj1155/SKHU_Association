@@ -20,20 +20,22 @@
 				<br />
 
 					<!-- Table -->
-					<form>
+					<form:form modelAttribute="pagination">
 					<div class="row uniform">
 						<div class="2u">
 							<div class="select-wrapper">
-								<select name="demo-category" id="demo-category">
-									<option value="">- 검색조건 -</option>
-									<option value="1">분류</option>
-									<option value="1">이름</option>
-								</select>
+								<form:select path="st" style="width:200px;">
+									<form:option value="0" label="검색조건"/>
+									<form:option value="1" label="광고문구"/>
+									<form:option value="2" label="회사명"/>
+									<form:option value="3" label="광고자"/>
+								</form:select>
 							</div>
 						</div>
 						<div class="3u">
-							<input type="text" placeholder=검색조건입력 />
+							<form:input path="ss" style="width:300px;"/>
 						</div>
+						<button type="submit">검색</button>
 					</div>
 
 					<div align="right">
@@ -120,7 +122,7 @@
 								<button class="btn" data-dismiss="modal" onclick="deleteCategroy()">삭제</button>
 							</div>
 						</div>
-				</form>
+				</form:form>
 			</div>
 			</div>
 <script>
