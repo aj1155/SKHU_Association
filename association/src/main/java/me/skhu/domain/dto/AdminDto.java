@@ -1,6 +1,5 @@
 package me.skhu.domain.dto;
 
-import lombok.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +22,8 @@ public class AdminDto {
 	private String birth;
 	private String phoneNumber;
 	private String name;
+	private String passwdEdit;
+	private String passwdCheck;
 
 	public static AdminDto of(Admin admin){
 		return AdminDto.builder()

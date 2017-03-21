@@ -24,46 +24,50 @@ button.close{
 </style>
 <div id="main">
 	<div class="inner">
-	<h2>메일 보내기</h2>
-	<hr />
-	<form method="post" enctype="multipart/form-data">
-		<div class="table-wrapper">
-			<table>
-				<tr>
-					<td>받는사람</td>
-					<td><input type="text"  name="sendTo" />
-						<a href="#searchEmail" class="searchButton button" data-toggle="modal">검색</a></td>
-				</tr>
-				<tr>
-					<td>제목</td>
-					<td><input type="text"  name="mailSubject" /></td>
-				</tr>
-				<tr>
-					<td>첨부파일</td>
-					<td id="files">
-					<button type="button" class="button" id="addFile">
-            				<i class="icon-plus"></i> 파일추가
-        			</button>
-        			<br/>
-					<input type="file" name="file" multiple />
-					<br/>
-        			</td>
-				<tr>
-				<tr>
-					<td>내용</td>
-					<td><textarea id="body"  name="mailContent" class="smarteditor2"  style="width:900px; min-height:300px;"></textarea></td>
-				</tr>
-			</table>
-		</div>
-			
+		<header id="header">
+			<h2>메일 보내기</h2>
+		</header>
+		<section style="padding-top:10px;">
 		<hr />
-		<div class="form-group">
-				<ul class="actions">
-					<li><button type="submit" class="button special">전송</button></li>
-					<li><a href="list" class="button">취소</a></li>
-				</ul>
-		</div>
-	</form>	
+			<form method="post" enctype="multipart/form-data">
+				<div class="table-wrapper">
+					<table>
+						<tr>
+							<td>받는사람</td>
+							<td><input type="text"  name="sendTo" />
+								<a href="#searchEmail" class="searchButton button" data-toggle="modal">검색</a></td>
+						</tr>
+						<tr>
+							<td>제목</td>
+							<td><input type="text"  name="mailSubject" /></td>
+						</tr>
+						<tr>
+							<td>첨부파일</td>
+							<td id="files">
+							<button type="button" class="button" id="addFile">
+		            				<i class="icon-plus"></i> 파일추가
+		        			</button>
+		        			<br/>
+							<input type="file" name="file" multiple />
+							<br/>
+		        			</td>
+						<tr>
+						<tr>
+							<td>내용</td>
+							<td><textarea id="body"  name="mailContent" class="smarteditor2" style="width:900px; min-height:300px;"></textarea></td>
+						</tr>
+					</table>
+				</div>
+					
+				<hr />
+				<div class="form-group">
+						<ul class="actions">
+							<li><button type="submit" class="button special">전송</button></li>
+							<li><a href="list" class="button">취소</a></li>
+						</ul>
+				</div>
+			</form>	
+		</section>
 	</div>
 </div>
 

@@ -12,4 +12,5 @@
 		<tiles:insertAttribute name="menu" />
 </div>		 	
 </body>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </html>

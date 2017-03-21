@@ -133,7 +133,6 @@
 	            name : categoryName
 			},
 			success : function(result){
-
 			}
 		});
         location.href=location.href;
