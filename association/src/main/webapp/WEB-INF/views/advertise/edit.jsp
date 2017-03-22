@@ -1,49 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
 <!-- Main -->
 <div id="main">
 	<div class="inner">
 
 		<!-- Header -->
 		<header id="header">
-			<a href="index.html" class="logo"><strong>커뮤니티</strong></a>
+			<h2>광고수정</h2>
 		</header>
-		<br />
-
-		<div>
-			<div class="title_left">
-				<h3>광고 등록</h3>
-			</div>
-			<form method="POST">
-				<div style="display: inline-block;">
-					<div class="select-wrapper">
-						<span>광고분류:</span>
-						<input type="hidden" name="categoryId" value="1"/>
-					</div>
-				
-					<span>회사명:</span> 
-					<input type="text" name="company" style="width: 800px;" value="${advertiseDto.company }"/> 
-					<span>광고문구:</span> 
-					<input type="text" name="slogan" style="width: 800px;" value="${advertiseDto.slogan }"/>
-					<span>광고자:</span>
-					<input type="text" name="userName" style="width: 800px;"value="${advertiseDto.userName }"/>
-					<span>휴대폰 번호:</span>
-					<input type="text" name="phoneNumber" style="width: 800px;" value="${advertiseDto.phoneNumber }"/>
-					<input type="hidden" name="image" value="ss"/>
+		<section style="padding-top:10px;">
+			<form:form method="post" modelAttribute="advertiseDto" enctype="multipart/form-data">
+								<div class="table-wrapper">
+					<table>
+						<tr>
+							<td>광고분류</td>
+							<td>
+								<form:select path="categoryId" style="width: 800px;">
+									<form:options itemValue="id" itemLabel="name" items="${ category }" />
+								</form:select>
+							</td>
+						</tr>
+						<tr>
+							<td>회사명</td>
+							<td><form:input path="company" style="width: 800px;" /></td>
+						</tr>
+						<tr>
+							<td>광고문구</td>
+							<td><form:input path="slogan" style="width: 800px;" /></td>
+						</tr>
+						<tr>
+							<td>광고자</td>
+							<td><form:input path="userName" style="width: 800px;" /></td>
+						</tr>
+						<tr>
+							<td>휴대폰번호</td>
+							<td><form:input path="phoneNumber" style="width: 800px; float:left;" /></td>
+						</tr>
+						<tr>
+							<td>파일변경</td>
+							<td><input type="file" name="image" /></td>
+						</tr>
+						<tr>
+							<td>내용</td>
+							<td>
+								<form:textarea id="body" path="content" name="content" class="smarteditor2" style="width: 800px; min-height: 100px;"></form:textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>광고기간</td>
+							<td><form:input type="date" path="startDate" />~<form:input type="date" path="endDate" /></td>
+						</tr>
+					</table>
 				</div>
-				<br /> 
-				<span>본문</span>
-				<textarea id="body" name="content" class="smarteditor2" style="width: 800px; min-height: 100px;" >${advertiseDto.content }</textarea>
-				<br /> 
-				<span>광고기간:<input type="date" name="startDate" value="${advertiseDto.startDate }"/>~<input type="date" name="endDate" value="${advertiseDto.endDate }"/></span> 
-				<br /> 
-				<br />
-				<button class="button special">저장</button>
-				<a href="#" class="button">취소</a>
-			</form>
-
-		</div>
+					
+				<div class="form-group">
+						<ul class="actions">
+							<li><button type="submit" class="button special">저장</button></li>
+							<li><a href="list" class="button">취소</a></li>
+						</ul>
+				</div>
+				
+			</form:form>	
+		</section>
 	</div>
 </div>
