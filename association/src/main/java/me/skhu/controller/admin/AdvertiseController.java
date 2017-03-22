@@ -38,7 +38,7 @@ public class AdvertiseController {
 		return "advertise/home";
 	}
 
-	@RequestMapping("list")
+	@RequestMapping("/list")
 	public String list(Model model,Pagination pagination,int categoryId){
 		pagination.setPageSize(5);
 		model.addAttribute("categoryName",advertiseCategoryService.findById(categoryId).getName());
