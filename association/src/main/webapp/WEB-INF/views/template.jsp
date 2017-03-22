@@ -6,6 +6,10 @@
 <head>
 	<tiles:insertAttribute name="header" />
 </head>
+<style>
+	ul.pagination li:first-child{ padding-right:0; }
+	ul.pagination li:last-child{ padding-left:0;}
+</style>
 <body>
 <div id="wrapper">
 		<tiles:insertAttribute name="content" />
