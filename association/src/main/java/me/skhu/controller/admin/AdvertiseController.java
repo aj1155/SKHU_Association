@@ -43,6 +43,7 @@ public class AdvertiseController {
 		pagination.setPageSize(5);
 		model.addAttribute("categoryName",advertiseCategoryService.findById(categoryId).getName());
 		model.addAttribute("list",advertiseService.findAll(pagination,categoryId));
+		model.addAttribute("categoryId",categoryId);
 		return "advertise/list";
 	}
 
@@ -85,5 +86,11 @@ public class AdvertiseController {
 	@RequestMapping(value="categoryAdd")
 	public @ResponseBody String categoryAdd(@RequestParam("name") String name){
 		return advertiseCategoryService.add(name);
+	}
+
+	@RequestMapping(value="groupDelete")
+	public String groupDelete(@RequestParam("id") List<Integer> id, Pagination paignation, int categoryId){
+		advertiseService.groupDelete(id);
+		return "redirect:/advertise/list?categoryId="+categoryId;
 	}
 }

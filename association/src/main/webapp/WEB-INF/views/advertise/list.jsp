@@ -40,7 +40,7 @@
 
 					<div align="right">
 						<ul class="actions">
-							<li><a href="#" class="button">삭제</a></li>
+							<li><a id="groupDelete" class="button">삭제</a></li>
 							<li><a href="create"
 								class="button special icon fa-plus">광고추가</a>
 							</li>
@@ -57,7 +57,7 @@
 						<table>
 							<thead>
 								<tr>
-									<th>CHECK</th>
+									<th onclick='event.cancelBubble=true;'><input type="checkbox" id="all" name="all" onClick="allCkeck(this)"/><label for="all"></label></th>
 									<th>분류</th>
 									<th>이미지</th>
 									<th>광고문구</th>
@@ -71,8 +71,7 @@
 							<tbody>
 								<c:forEach var="list" items="${ list.advertise }" varStatus="status">
 								<tr data-url="edit?id=${list.id}">
-									<td><input type="checkbox" id="demo-copy" name="demo-copy">
-										<label for="demo-copy"></label>
+									<td onclick='event.cancelBubble=true;'><input type="checkbox" value="${list.id}" name="checkList"/><label for="${list.id}"></label>
 									</td>
 									<td>${list.category.name }</td>
 									<td><img id="img" src="${list.image }"/></td>
@@ -124,22 +123,29 @@
 						</div>
 				</form:form>
 			</div>
+			<input type="hidden" name="categoryId" value="${categoryId}"/>
 			</div>
 <script>
-	function addCategory(){
-	    var categoryName = $("input[name=name]").val();
-	    $.ajax({
-	        url : 'categoryAdd',
-			dataType : 'json',
-			data : {
-	            name : categoryName
-			},
-			success : function(result){
-			}
-		});
-        location.href=location.href;
-	}
-	function deleteCategory(){
-	    alert("success");
-	}
+    function allCkeck(checkbox){
+        $("tbody input").trigger("click");
+    };
+
+    $(document).on("click","#groupDelete",function(e){
+        if($('tbody :checked').size()==0){
+            alert("삭제할 광고를 선택해주세요");
+            return false;
+        }else {
+            if(confirm("정말 삭제하시겠습니까?")==true) {
+                var param = "";
+                var categoryId = $("input[name=categoryId]").val();
+                $("tbody tr :checked").each(function () {
+                    param += "id=" + $(this).val();
+                    param += "&";
+                });
+                e.preventDefault();
+                document.location.href = "/advertise/groupDelete?" + param + "categoryId=" + categoryId;
+            }
+        }
+    });
+
 </script>

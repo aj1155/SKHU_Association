@@ -1,6 +1,7 @@
 package me.skhu.service;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,5 +72,11 @@ public class AdvertiseService {
 
 	public AdvertiseDto findById(int id){
 		return AdvertiseDto.of(advertiseRepository.findOne(id));
+	}
+
+	@Transactional(readOnly = false)
+	public void groupDelete(List<Integer> list){
+		for(int i : list)
+			advertiseRepository.delete(i);
 	}
 }

@@ -14,7 +14,7 @@
 		<form:form modelAttribute="pagination">
 			<div align="right">
 				<ul class="actions">
-					<li><button type="submit" class="button">삭제</button></li>
+					<li><button id="groupDelete" class="button">삭제</button></li>
 					<li><a href="/board/create?boardId=${boardId}" class="button special">글쓰기</a></li>
 				</ul>
 			</div>
@@ -34,7 +34,7 @@
 				<table>
 					<thead>
 						<tr>
-							<th><input type="checkbox" /></th>
+							<th onclick='event.cancelBubble=true;'><input type="checkbox" id="all" name="all" onClick="allCkeck(this)"/><label for="all"></label></th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
@@ -43,7 +43,7 @@
 					<tbody>
 						<c:forEach var="list" items="${ list.boardPostList }" varStatus="status">
 							<tr data-url="/board/read?id=${list.id}">
-								<td><input type="checkbox" /></td>
+								<td onclick='event.cancelBubble=true;'><input type="checkbox" value="${list.id}" name="checkList"/><label for="${list.id}"></label></td>
 								<td>${ list.title }</td>
 								<td>${ list.writer_name }</td>
 								<td><joda:format value="${ list.lastModifiedDate }" style="SM"/></td>
@@ -65,23 +65,32 @@
 				
 			</div>
 		</div>
+			<input type="hidden" name="boardId" value="${boardId}"/>
 		</form:form>
 		</section>
 </div>
 </div>
 <script>
     function allCkeck(checkbox){
-        event.stopPropagation();
         $("tbody input").trigger("click");
     };
 
-    $(document).on("click","#groupDelete",function(){
-            var param="";
-            var boardId=$("input[name=boardId]").val();
-            $("tbody tr :checked").each(function(){
-                param += "id="+$(this).attr("id");
-                param += "&";
-            });
-            location.href="/board/groupDelete?"+param+"boardId="+boardId;
-    });
+    $(document).on("click","#groupDelete",function(e){
+        if($('tbody :checked').size()==0){
+            alert("삭제할 게시물을 선택해주세요");
+            return false;
+		}else {
+            if(confirm("정말 삭제하시겠습니까?")==true) {
+                var param = "";
+                var boardId= $("input[name=boardId]").val();
+                $("tbody tr :checked").each(function () {
+                    param += "id=" + $(this).val();
+                    param += "&";
+                });
+                e.preventDefault();
+                document.location.href = "/board/groupDelete?" + param + "boardId=" + boardId;
+            }
+        }
+	});
+
 </script>
