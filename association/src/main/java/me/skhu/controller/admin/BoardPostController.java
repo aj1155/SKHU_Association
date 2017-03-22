@@ -53,6 +53,7 @@ public class BoardPostController {
 
 	@RequestMapping("list")
 	public String list(Model model, Pagination pagination, @RequestParam("boardId") int boardId) {
+		pagination.setPageSize(15);
 		model.addAttribute("list", boardPostService.findAll(pagination, boardId));
 		model.addAttribute("boardId", boardId);
 		return "board/list";
@@ -143,6 +144,7 @@ public class BoardPostController {
 
 	@RequestMapping(value = "/groupDelete")
 	public String groupDelete(@RequestParam("id") List<Integer> id, Pagination paignation, int boardId) {
+		System.out.println("groupDeleteStart");
 		boardPostService.groupDelete(id);
 		return "redirect:/board/list?boardId="+boardId;
 	}

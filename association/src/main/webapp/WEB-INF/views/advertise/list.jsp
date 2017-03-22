@@ -76,6 +76,7 @@ button.close{
 			</table>
 		</div>
 
+
 		<div align="center">
 			<div class="pagination">
 				<ul class="pagination">
@@ -104,6 +105,7 @@ button.close{
 					<button class="btn btn-primary" onclick="addCategory()" data-dismiss="modal">추가</button>
 				</div>
 				</div>
+			<input type="hidden" name="categoryId" value="${categoryId}"/>
 			</div>
 		</div>
 		
@@ -130,20 +132,26 @@ button.close{
   </div>
 </div>
 <script>
-	function addCategory(){
-	    var categoryName = $("input[name=name]").val();
-	    $.ajax({
-	        url : 'categoryAdd',
-			dataType : 'json',
-			data : {
-	            name : categoryName
-			},
-			success : function(result){
-			}
-		});
-        location.href=location.href;
-	}
-	function deleteCategory(){
-	    alert("success");
-	}
+    function allCkeck(checkbox){
+        $("tbody input").trigger("click");
+    };
+
+    $(document).on("click","#groupDelete",function(e){
+        if($('tbody :checked').size()==0){
+            alert("삭제할 광고를 선택해주세요");
+            return false;
+        }else {
+            if(confirm("정말 삭제하시겠습니까?")==true) {
+                var param = "";
+                var categoryId = $("input[name=categoryId]").val();
+                $("tbody tr :checked").each(function () {
+                    param += "id=" + $(this).val();
+                    param += "&";
+                });
+                e.preventDefault();
+                document.location.href = "/advertise/groupDelete?" + param + "categoryId=" + categoryId;
+            }
+        }
+    });
+
 </script>

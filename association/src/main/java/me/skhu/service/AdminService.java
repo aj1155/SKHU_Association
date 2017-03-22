@@ -49,14 +49,15 @@ public class AdminService {
 	@Autowired
 	private PositionRepository positionRepository;
 
+	@Autowired
+	private AdminService adminService;
+
 	public Admin findByLoginId(String loginId){
 		return adminRepository.findByLoginId(loginId);
 	}
 
-	public List<UserDto> findExcelList(int grade){
-		if(grade == 0)
-			return userRepository.findByCategoryId(1);
-		return userRepository.findByCategoryIdAndGrade(1, grade);
+	public List<UserDto> findExcelList(){
+		return userRepository.findByCategoryId(adminService.getCurrentAdmin().getCategory().getId());
 	}
 
 	public List<UserExcelDto> excelRead(MultipartFile file, MultipartHttpServletRequest request) throws IOException {
