@@ -11,7 +11,7 @@
 		</header>
 		<section style="padding-top:10px;">
 			<form:form method="post" modelAttribute="advertiseDto" enctype="multipart/form-data">
-								<div class="table-wrapper">
+				<div class="table-wrapper">
 					<table>
 						<tr>
 							<td>광고분류</td>
@@ -35,7 +35,13 @@
 						</tr>
 						<tr>
 							<td>휴대폰번호</td>
-							<td><form:input path="phoneNumber" style="width: 800px; float:left;" /></td>
+							<td><form:input path="phoneNumber" style="width: 800px; float:left;" />
+							<div align="right">
+								<ul class="actions">
+									<li><a href="#addMember" class="button special icon fa-plus" data-toggle="modal">회원 검색</a></li>
+								</ul>
+							</div>
+							</td>
 						</tr>
 						<tr>
 							<td>파일변경</td>
@@ -60,7 +66,7 @@
 							<li><a href="list" class="button">취소</a></li>
 						</ul>
 				</div>
-				
+				<%@ include file="/WEB-INF/views/commons/userAjax.jsp" %>
 			</form:form>	
 		</section>
 	</div>
