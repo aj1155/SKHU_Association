@@ -8,6 +8,7 @@ import java.util.Map;
 import me.skhu.domain.Admin;
 import me.skhu.domain.Category;
 import me.skhu.domain.dto.UserExcelDto;
+import me.skhu.domain.dto.UserForm;
 import me.skhu.util.Excel.ExcelReadOption;
 import me.skhu.util.PasswordEncoding;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,28 +71,25 @@ public class AdminService {
 		List<UserExcelDto> list = new ArrayList<UserExcelDto>();
 		for(Map<String,String> content : excelResult){
 			UserExcelDto userExcelDto = new UserExcelDto();
-			System.out.println(content.get("B"));
-			userExcelDto.setCategoryName(content.get("B"));
-			userExcelDto.setGrade((int)(Double.parseDouble(content.get("C").substring(0,1))));
+			userExcelDto.setGrade((int)(Double.parseDouble(content.get("B").substring(0,1))));
 			userExcelDto.setImage(content.get("D"));
-			userExcelDto.setName(content.get("E"));
-			userExcelDto.setPositionName(content.get("F"));
-			userExcelDto.setPhoneNumber(content.get("G"));
-			userExcelDto.setCompanyNumber(content.get("H"));
-			userExcelDto.setStatus(content.get("I"));
-			userExcelDto.setBirth(content.get("J"));
-			userExcelDto.setEmail(content.get("K"));
+			userExcelDto.setName(content.get("C"));
+			userExcelDto.setPositionName("일반회원");
+			userExcelDto.setPhoneNumber(content.get("E"));
+			userExcelDto.setCompanyNumber(content.get("F"));
+			userExcelDto.setStatus(content.get("G"));
+			userExcelDto.setBirth(content.get("H"));
+			userExcelDto.setEmail(content.get("I"));
 			list.add(userExcelDto);
 		}
 		return list;
 	}
 
 	@Transactional(readOnly = false)
-	public void saveuUserList(UserDto userDto){
-		//for(int i=0; i<userDto.length; i++)
-		System.out.println(categoryRepository.findByName(userDto.getCategoryName()));
-		System.out.println(positionRepository.findByName(userDto.getPositionName()));
-			userRepository.save(User.of(userDto,categoryRepository.findByName(userDto.getCategoryName()),positionRepository.findByName(userDto.getPositionName())));
+	public void saveuUserList(List<UserExcelDto> list, List<String> values){
+		for(int i=0; i<values.size(); i++) {
+			userRepository.save(User.of(list.get(Integer.parseInt(values.get(i)) - 1), adminService.getCurrentAdmin().getCategory(), positionRepository.findByName("일반회원")));
+		}
 	}
 
 	@Transactional(readOnly = false)

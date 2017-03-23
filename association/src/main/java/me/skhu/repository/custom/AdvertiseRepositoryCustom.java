@@ -4,6 +4,7 @@ import java.util.List;
 
 import me.skhu.domain.Advertise;
 import me.skhu.util.Pagination;
+import org.joda.time.DateTime;
 
 public interface AdvertiseRepositoryCustom {
 
@@ -22,4 +23,5 @@ public interface AdvertiseRepositoryCustom {
 	List<Advertise> paginationByCompany(Pagination pagination, int categoryId);
 
 	int countByCompany(String company, int categoryId);
+
 }

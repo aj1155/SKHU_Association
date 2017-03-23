@@ -1,10 +1,13 @@
 package me.skhu.util.Excel;
 
 import java.io.*;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.SystemOutLogger;
@@ -12,6 +15,8 @@ import org.apache.poi.xssf.usermodel.*;
 import org.springframework.stereotype.Component;
 import me.skhu.domain.dto.UserDto;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 @Component
 public class ExcelRead {
@@ -26,9 +31,6 @@ public class ExcelRead {
 			sheet.setColumnWidth(i,11*256);
 		}
 
-		cell = row.createCell(0);
-		cell.setCellValue("분류");
-
 		cell = row.createCell(1);
 		cell.setCellValue("기수");
 
@@ -39,7 +41,7 @@ public class ExcelRead {
 		cell.setCellValue("이름");
 
 		cell = row.createCell(4);
-		cell.setCellValue("직책");
+		cell.setCellValue("동문회 직책");
 
 		cell = row.createCell(5);
 		cell.setCellValue("전화번호");
@@ -62,15 +64,13 @@ public class ExcelRead {
 
 			row = sheet.createRow(index+1);
 
-			cell = row.createCell(0);
-			cell.setCellValue(userDto.getCategoryName());
-
 			cell = row.createCell(1);
 			cell.setCellValue(userDto.getGrade());
 
 			cell = row.createCell(2);
 			row.setHeight((short)(10*215));
-			drawImage(workbook,sheet,index,userDto);
+			if(userDto.getImage()!=null)
+				drawImage(workbook,sheet,index,userDto);
 
 			cell = row.createCell(3);
 			cell.setCellValue(userDto.getName());
@@ -104,7 +104,7 @@ public class ExcelRead {
 
 	public void drawImage(XSSFWorkbook workbook, XSSFSheet sheet, int row, UserDto userDto) throws IOException{
 		try{
-			InputStream inputStream = new FileInputStream("C:\\Users\\iljun\\IdeaProjects\\Association\\association\\src\\main\\webapp\\resources\\upload\\files\\1453204456664.jpeg");
+			InputStream inputStream = new FileInputStream(userDto.getImage());
 			byte[] bytes = IOUtils.toByteArray(inputStream);
 			int pictureIndex = workbook.addPicture(bytes,XSSFWorkbook.PICTURE_TYPE_JPEG);
 			inputStream.close();
@@ -162,58 +162,47 @@ public class ExcelRead {
 				userList.add(map);
 			}
 	}
-	readImage(userList,sheet,workbook,filePath);
+		readImage(userList,workbook,filePath,sheet);
 		return userList;
 	}
 
-	public static void readImage(List<Map<String,String>> userList , Sheet sheet, Workbook workbook,String path) throws IOException{
-		int index=0;
-		List pictureDatas = workbook.getAllPictures();
-		PictureData data;
-		for(int i=0; i<pictureDatas.size(); i++){
-			System.out.println(pictureDatas.get(i).toString());
-			FileOutputStream fileOutputStream = null;
-			data=(XSSFPictureData)pictureDatas.get(i);
-
-			byte[] bytes = data.getData();
-			try{
-				fileOutputStream = new FileOutputStream(path + i);
-				fileOutputStream.write(bytes);
-				fileOutputStream.close();
-			}finally{
-				if(fileOutputStream!=null)
-					fileOutputStream.close();
-			}
-		}
-		/*
-		for(XSSFShape shape : drawing.getShapes()){
-			if(shape instanceof XSSFPicture){
-				XSSFPicture picture = (XSSFPicture) shape;
-				XSSFPictureData pictureData = picture.getPictureData();
-				ClientAnchor anchor = picture.getPreferredSize();
-				int row2 = anchor.getRow2();
-				System.out.println("row2 : " + row2);
-				System.out.println("index : " + index);
-				String ext = pictureData.suggestFileExtension();
-				byte[] bytes = pictureData.getData();
-				FileOutputStream fileOutputStream = null;
-				String fileName = userList.get(index).get("E")+"."+ext;
-				System.out.println("fileName : " + fileName);
-				try{
-					fileOutputStream = new FileOutputStream(path + fileName);
-					 fileOutputStream.write(bytes);
-					 fileOutputStream.close();
-				}finally{
-					if(fileOutputStream!=null)
-						fileOutputStream.close();
-				}
-				userList.get(index).replace("D",fileName);
-				System.out.println(userList.get(index).values());
-			}
-			index++;
-			if(index==userList.size())
+	public static void readImage(List<Map<String, String>> result,Workbook workbook,String path,Sheet sheet) throws FileNotFoundException, IOException{
+		//result.get(row2-1).replace("D",result.get(row2-1).get("H")+"."+ext);
+		char[] ss = path.toCharArray();
+		StringBuilder str = new StringBuilder();
+		str.append(ss[0]);
+		str.append(ss[1]);
+		str.append(ss[2]);
+		str.append(ss[3]);
+		str.append(ss[4]);
+		str.append(ss[5]);
+		for(int i=5; i<ss.length; i++){
+			if(ss[i-5]=='u' && ss[i-4]=='p' && ss[i-3]=='l' && ss[i-2]=='o' && ss[i-1]=='a' && ss[i]=='d') {
+				str.append(ss[i]);
 				break;
+			}
+			str.append(ss[i]);
 		}
-	*/
+		String newPath = str.toString()+"\\profileImg\\";
+		System.out.println(newPath);
+		XSSFDrawing drawing = (XSSFDrawing)sheet.createDrawingPatriarch();
+		for(XSSFShape shape : drawing.getShapes()){
+			if (shape instanceof XSSFPicture) {
+				XSSFPicture picture = (XSSFPicture) shape;
+				XSSFPictureData xssfPictureData = picture.getPictureData();
+				ClientAnchor anchor = (ClientAnchor) picture.getAnchor();
+				int row2 = anchor.getRow2();
+				byte[] data = xssfPictureData.getData();
+				String ext = xssfPictureData.suggestFileExtension();
+				String fileName=result.get(row2-2).get("E");
+
+				try (FileOutputStream os = new FileOutputStream(path+fileName+"."+ext)) {
+					os.write(data);
+					os.flush();
+				}
+				System.out.println(path+fileName+"."+ext);
+				System.out.println(result.get(row2-2).replace("D",path+fileName+"."+ext));
+			}
+		}
 	}
 }

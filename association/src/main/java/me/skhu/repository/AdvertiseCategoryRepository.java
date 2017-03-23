@@ -9,4 +9,6 @@ import me.skhu.domain.AdvertiseCategory;
 public interface AdvertiseCategoryRepository extends JpaRepository<AdvertiseCategory,Integer>{
 	AdvertiseCategory findById(int id);
 	AdvertiseCategory save(AdvertiseCategory advertiseCategory);
+	AdvertiseCategory findByName(String name);
+	void delete(AdvertiseCategory advertiseCategory);
 }

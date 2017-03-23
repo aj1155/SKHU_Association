@@ -28,7 +28,7 @@ $(function(){
 				$("#advertise").append(
 					'<li><a href="/advertise/list?categoryId='
 						+result[i].id +'">'
-						+result[i].name + '</a></li>');
+						+result[i].name + '<p class="badge badge-danger" id='+i+'></p></a></li>');
 			}
 		},
 		error : function(request, status, error){

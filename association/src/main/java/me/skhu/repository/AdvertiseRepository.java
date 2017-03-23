@@ -23,4 +23,6 @@ public interface AdvertiseRepository extends JpaRepository<Advertise,Integer>, A
 		pagination.setRecordCount((int)page.getTotalElements());
 		return page.getContent();
 	}
+
+	void deleteByCategoryId(int categoryId);
 }

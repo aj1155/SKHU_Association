@@ -118,10 +118,8 @@ button.close{
 				</div>
 				<div class="modal-body">
 					<span>카테고리명:</span>
-					<select id="advertiseCategory">
-	
-					</select>
-					<button class="btn" data-dismiss="modal" onclick="deleteCategroy()">삭제</button>
+					<input type="text" name="categoryName"/>
+					<button class="btn" data-dismiss="modal" onclick="deleteCategory()">삭제</button>
 				</div>
 				</div>
 			</div>
@@ -154,4 +152,36 @@ button.close{
         }
     });
 
+    function addCategory(){
+        var categoryName = $("input[name=name]").val();
+        $.ajax({
+            url : 'categoryAdd',
+            dataType : 'json',
+            data : {
+                name : categoryName
+            },
+            success : function(result){
+
+            }
+        });
+        location.href=location.href;
+    }
+
+	function deleteCategory(){
+		var categoryName = $("input[name=categoryName]").val();
+		if(confirm("카테고리를 삭제하시면 해당 카테고리에 관련된 게시물은 모두 삭제됩니다,")==true) {
+            $.ajax({
+                url: 'categoryDelete',
+                dataType: 'json',
+                data: {
+                    categoryName: categoryName
+                },
+                success: function (result) {
+                    if (result == false)
+                        alert("카테고리명을 정확히 입력해주세요");
+                }
+            });
+            location.href = location.href;
+        }
+	}
 </script>

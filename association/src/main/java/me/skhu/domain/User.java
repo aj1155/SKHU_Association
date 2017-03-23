@@ -17,6 +17,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.skhu.domain.dto.UserDto;
+import me.skhu.domain.dto.UserExcelDto;
+import me.skhu.util.PasswordEncoding;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Created by Manki Ki on 2017-01-18.
@@ -134,6 +138,24 @@ public class User implements Serializable {
                .companyNumber(companyNumber)
                .email(email)
                .position(position)
+               .build();
+   }
+    static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    static PasswordEncoding passwordEncoding = new PasswordEncoding(passwordEncoder);
+   public static User of(UserExcelDto userExcelDto, Category category, Position position){
+       return User.builder()
+               .loginId(userExcelDto.getPhoneNumber())
+               .name(userExcelDto.getName())
+               .grade(userExcelDto.getGrade())
+               .birth(userExcelDto.getBirth())
+               .status(userExcelDto.getStatus())
+               .phoneNumber(userExcelDto.getPhoneNumber())
+               .companyNumber(userExcelDto.getCompanyNumber())
+               .email(userExcelDto.getEmail())
+               .image(userExcelDto.getImage())
+               .position(position)
+               .category(category)
+               .password(passwordEncoding.encode(userExcelDto.getBirth()))
                .build();
    }
 

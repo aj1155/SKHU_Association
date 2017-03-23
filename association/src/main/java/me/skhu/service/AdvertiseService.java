@@ -3,6 +3,8 @@ package me.skhu.service;
 import java.text.ParseException;
 import java.util.List;
 
+import me.skhu.domain.AdvertiseCategory;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,5 +80,16 @@ public class AdvertiseService {
 	public void groupDelete(List<Integer> list){
 		for(int i : list)
 			advertiseRepository.delete(i);
+	}
+
+	public boolean deleteCategoryName(String name){
+		AdvertiseCategory advertise =advertiseCategoryRepository.findByName(name);
+		if(advertise==null)
+			return false;
+		else{
+			advertiseRepository.deleteByCategoryId(advertise.getId());
+			advertiseCategoryRepository.delete(advertise);
+		}
+		return true;
 	}
 }

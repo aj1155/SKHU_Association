@@ -23,7 +23,7 @@ img{
 			<ul class="actions">
 				<li><button type="submit" name="cmd" value="delete" class="button">삭제</button></li>
 				<li><a href="create" class="button special icon fa-plus">동문 추가</a></li>
-				<li><a href="createByExcel" class="button special icon fa-plus">동문목록 엑셀</a></li>
+				<li><a href="/user/excelUpload" class="button special icon fa-plus">동문목록 엑셀</a></li>
 			</ul>
 		</div>
 
@@ -45,7 +45,7 @@ img{
 			<table>
 				<thead>
 					<tr>
-						<th><input type="checkbox" /></th>
+						<th onclick='event.cancelBubble=true;'><input type="checkbox" id="all" name="all" onClick="allCkeck(this)"/><label for="all"></label></th>
 						<th>기수</th>
 						<th>이미지</th>
 						<th>이름</th>
@@ -82,7 +82,7 @@ img{
 				</tbody>
 			</table>
 		</div>	
-		<a href="#" class="button special" style="float:right;">엑셀다운로드</a>
+		<a href="/user/excelDownload" class="button special" style="float:right;">엑셀다운로드</a>
 		<input type="hidden" name="cp" value="1" />
 
 		<div align="center">
