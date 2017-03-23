@@ -3,28 +3,36 @@
 <style>
 #searchResult tr:hover { background-color: #ffe; cursor: pointer; }
 #searchResult tr.selected { background-color: #fee; font-weight: bold; }
+button.close{
+	width:30px;
+	height:30px;
+}
 </style>
-<div id="addMember" class="modal fade" tabindex="-1">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-		<h3>회원 검색</h3>
-	</div>
-	<div class="modal-body">
-		<form id="searchUser" class="form-inline">
-            <span>이름:</span>
-            <input type="text" name="name" />
-            <button id="search" type="button" class="btn" onclick="searchUser()">검색</button>
-        </form>
-		<div id="searchResult" style="width: 100%; height: 200px;">
-			<table class="table table-bordered">
-				<tr>
-				</tr>
-			</table>
+<div id="addMember" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+			<h3>회원 검색</h3>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<button class="btn" data-dismiss="modal">닫기</button>
-		<button class="btn btn-primary" onclick="selectUser()" data-dismiss="modal">선택</button>
+		<div class="modal-body">
+			<form id="searchUser" class="form-inline">
+	            <span>이름:</span>
+	            <input type="text" name="name" />
+	            <button id="search" type="button" class="btn" onclick="searchUser()">검색</button>
+	        </form>
+			<div id="searchResult" style="width: 100%; height: 200px;">
+				<table class="table table-bordered">
+					<tr>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal">닫기</button>
+			<button class="button special" onclick="selectUser()" data-dismiss="modal">선택</button>
+		</div>
+		</div>
 	</div>
 </div>
 <script>
