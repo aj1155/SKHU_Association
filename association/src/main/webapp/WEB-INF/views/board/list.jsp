@@ -71,9 +71,7 @@
 </div>
 </div>
 <script>
-    function allCkeck(checkbox){
-        $("tbody input").trigger("click");
-    };
+
 
     $(document).on("click","#groupDelete",function(e){
         if($('tbody :checked').size()==0){

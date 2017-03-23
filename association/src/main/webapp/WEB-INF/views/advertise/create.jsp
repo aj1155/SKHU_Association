@@ -10,14 +10,14 @@
 			<h2>광고등록</h2>
 		</header>
 		<section style="padding-top:10px;">
-		<hr />
+		
 			<form method="post" enctype="multipart/form-data">
 				<div class="table-wrapper">
 					<table>
 						<tr>
 							<td>광고분류</td>
 							<td>
-								<select style="width: 800px;">
+								<select name="categoryId" style="width: 800px;">
 									<c:forEach var="category" items="${ category }">
 										<option value="${ category.id }">${ category.name }</option>
 									</c:forEach>

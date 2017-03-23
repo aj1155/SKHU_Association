@@ -68,8 +68,14 @@ public class AdvertiseService {
 		advertiseRepository.delete(id);
 	}
 
-	public void edit(AdvertiseDto advertiseDto){
-		//advertiseRepository.save(advertiseDto);
+	@Transactional(readOnly = false)
+	public void edit(int id, AdvertiseDto advertiseDto,MultipartHttpServletRequest request, MultipartFile file) throws ParseException{
+		String imagePath = fileService.imageUpload(file,request);
+		try{
+			advertiseRepository.save(Advertise.edit(id, advertiseDto, advertiseCategoryRepository.findOne(advertiseDto.getCategoryId()),imagePath));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	public AdvertiseDto findById(int id){

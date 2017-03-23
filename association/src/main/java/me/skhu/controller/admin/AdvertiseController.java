@@ -56,20 +56,20 @@ public class AdvertiseController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String create(Model model,AdvertiseDto advertiseDto, Pagination pagination,MultipartHttpServletRequest request, @RequestParam("image") MultipartFile file) throws ParseException{
 		int category=advertiseService.create(advertiseDto,request,file);
-		advertiseService.create(advertiseDto,request,file);
 		return "redirect:/advertise/list?categoryId="+category;
 	}
 
 	@RequestMapping(value = "edit", method = RequestMethod.GET)
 	public String edit(@RequestParam("id") int id, Model model,Pagination pagination){
+		model.addAttribute("category",advertiseCategoryService.findAll());
 		model.addAttribute("advertiseDto",advertiseService.findById(id));
 		return "advertise/edit";
 	}
 
 	@RequestMapping(value = "edit", method = RequestMethod.POST)
-	public String edit(AdvertiseDto advertiseDto,Pagination pagination){
-		advertiseService.edit(advertiseDto);
-		return "redirect:/advertise/list";
+	public String edit(@RequestParam("id") int id,AdvertiseDto advertiseDto,Pagination pagination,MultipartHttpServletRequest request, @RequestParam("image") MultipartFile file) throws ParseException{
+		advertiseService.edit(id,advertiseDto,request,file);
+		return "redirect:/advertise/list?categoryId="+advertiseDto.getCategoryId();
 	}
 
 	@RequestMapping(value = "deleted")

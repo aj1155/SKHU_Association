@@ -67,6 +67,7 @@ public class Advertise {
 
 	static SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+
 	public static Advertise of(AdvertiseDto advertiseDto,AdvertiseCategory category,String image) throws ParseException{
 		return Advertise.builder()
 				.image(image)
@@ -81,11 +82,19 @@ public class Advertise {
 				.build();
 	}
 
-	public String getContent(){
-		return this.content;
+	public static Advertise edit(int id,AdvertiseDto advertiseDto,AdvertiseCategory category, String imgPath) throws ParseException{
+		return Advertise.builder()
+				.id(id)
+				.image(imgPath)
+				.slogan(advertiseDto.getSlogan())
+				.company(advertiseDto.getCompany())
+				.content(advertiseDto.getContent())
+				.phoneNumber(advertiseDto.getPhoneNumber())
+				.startDate(transFormat.parse(advertiseDto.getStartDate()))
+				.endDate(transFormat.parse(advertiseDto.getEndDate()))
+				.userName(advertiseDto.getUserName())
+				.category(category)
+				.build();
 	}
 
-	public void setContent(String content){
-		this.content = content;
-	}
 }
