@@ -48,9 +48,9 @@
 				<tr>
 					<td colspan="2">작성자:${comment.writer_name}</td>
 				</tr>
-				<tr name="${comment.id}">
+				<tr>
 					<td>댓글:${comment.content}</td>
-					<td><p id="commentDelete" class="btn btn-primary" style="float:right;">삭제</p></td>
+					<td><p id="commentDelete" name="${comment.id}" class="btn btn-primary" style="float:right;" value="${comment.id}">삭제</p></td>
 				</tr>
 			</c:forEach>
 			</table>

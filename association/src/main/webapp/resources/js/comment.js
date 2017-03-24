@@ -37,8 +37,8 @@ $(document).on("click","#commentSubmit",function(){
 });
 
 $(document).on("click","#commentDelete",function(){
+    var id = $(this).attr('value');
     if(confirm("댓글을 삭제하시겠습니까?")==true) {
-        var id = $(this).attr('value');
         $.ajax({
             url: 'commentDelete',
             type: 'GET',
@@ -47,8 +47,14 @@ $(document).on("click","#commentDelete",function(){
                 id: id
             },
             success: function (result) {
-                if (result == 'success') {
-                    var removeTr = $("tr[name=]");
+                var data = $.parseJSON(result);
+                var id;
+                $(data).each(function(index,item){
+                    id = item.id;
+                });
+                if (result != 'null') {
+                    var tag = "p[name="+id+"]";
+                    var removeTr = $(tag).parent().parent();
                     var removeTr2 = removeTr.prev();
                     removeTr.remove();
                     removeTr2.remove();

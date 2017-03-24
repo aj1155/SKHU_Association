@@ -22,6 +22,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        web
             .ignoring()
             .antMatchers("/resources/**","/");
+
        //css js파일등 풀어주기
    }
 
@@ -29,7 +30,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
        http
                .authorizeRequests()
-               		.antMatchers("/resources/**","/")
+               		.antMatchers("/resources/**","/","/admin/introduce")
                		.permitAll()
                     .antMatchers("/**")
                     .authenticated();
