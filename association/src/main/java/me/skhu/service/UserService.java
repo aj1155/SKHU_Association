@@ -83,7 +83,8 @@ public class UserService {
 
     public void create(UserDto userDto){
     	User user = User.of(userDto, adminService.getCurrentAdmin().getCategory(), positionRepository.findOne(userDto.getUser_type()));
-    	boardService.saveBoard(user);
+        System.out.println();
+        boardService.saveBoard(user);
     	userRepository.save(user);
     	userDiscloserRepository.save(UserDiscloser.of(user.getId()));
 
