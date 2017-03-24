@@ -20,7 +20,7 @@ img{
 		<div align="right">
 			<form id="excelForm" method="POST" enctype="multipart/form-data">
 				<input type="file" id="excelFile" name="excelFile" style="display:inline; margin-bottom:20px;"/>
-				<span onclick="excelForm()">엑셀읽기</span>
+				<span class="button" onclick="excelForm()">엑셀읽기</span>
 			</form>
 		</div>
 		<form:form id="excelInsert" method="POST" action="/user/userExcelInsert" modelAttribute="userForm">
