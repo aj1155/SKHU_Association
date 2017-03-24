@@ -4,7 +4,10 @@ import java.io.*;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
@@ -21,7 +24,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 @Component
 public class ExcelRead {
 
-	public void xlsxWriter(List<UserDto> list,HttpServletResponse response) throws IOException{
+	public void xlsxWriter(List<UserDto> list,HttpServletResponse response,HttpServletRequest request) throws IOException{
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet();
 		XSSFRow row = sheet.createRow(0);
@@ -70,7 +73,7 @@ public class ExcelRead {
 			cell = row.createCell(2);
 			row.setHeight((short)(5*215));
 			if(userDto.getImage()!=null)
-				drawImage(workbook,sheet,index,userDto);
+				drawImage(workbook,sheet,index,userDto,request);
 
 			cell = row.createCell(3);
 			cell.setCellValue(userDto.getName());
@@ -102,9 +105,11 @@ public class ExcelRead {
 		response.getOutputStream().close();
 	}
 
-	public void drawImage(XSSFWorkbook workbook, XSSFSheet sheet, int row, UserDto userDto) throws IOException{
+	public void drawImage(XSSFWorkbook workbook, XSSFSheet sheet, int row, UserDto userDto, HttpServletRequest request) throws IOException{
 		try{
-			InputStream inputStream = new FileInputStream(userDto.getImage());
+		    String path2 = userDto.getImage();
+		    String path1 = request.getSession().getServletContext().getRealPath("/");
+			InputStream inputStream = new FileInputStream(path1+path2);
 			byte[] bytes = IOUtils.toByteArray(inputStream);
 			int pictureIndex = workbook.addPicture(bytes,XSSFWorkbook.PICTURE_TYPE_JPEG);
 			inputStream.close();
@@ -167,24 +172,6 @@ public class ExcelRead {
 	}
 
 	public static void readImage(List<Map<String, String>> result,Workbook workbook,String path,Sheet sheet) throws FileNotFoundException, IOException{
-		//result.get(row2-1).replace("D",result.get(row2-1).get("H")+"."+ext);
-		char[] ss = path.toCharArray();
-		StringBuilder str = new StringBuilder();
-		str.append(ss[0]);
-		str.append(ss[1]);
-		str.append(ss[2]);
-		str.append(ss[3]);
-		str.append(ss[4]);
-		str.append(ss[5]);
-		for(int i=5; i<ss.length; i++){
-			if(ss[i-5]=='u' && ss[i-4]=='p' && ss[i-3]=='l' && ss[i-2]=='o' && ss[i-1]=='a' && ss[i]=='d') {
-				str.append(ss[i]);
-				break;
-			}
-			str.append(ss[i]);
-		}
-		String newPath = str.toString()+"\\profileImg\\";
-		System.out.println(newPath);
 		XSSFDrawing drawing = (XSSFDrawing)sheet.createDrawingPatriarch();
 		for(XSSFShape shape : drawing.getShapes()){
 			if (shape instanceof XSSFPicture) {
@@ -200,8 +187,11 @@ public class ExcelRead {
 					os.write(data);
 					os.flush();
 				}
-				System.out.println(path+fileName+"."+ext);
-				System.out.println(result.get(row2-2).replace("D",path+fileName+"."+ext));
+                String[] arg = new String(path).split("webapp");
+                System.out.println(arg[1]);
+                String newPath = arg[1]+fileName+"."+ext;
+                System.out.println(newPath);
+                System.out.println(result.get(row2-2).replace("D",newPath));
 			}
 		}
 	}

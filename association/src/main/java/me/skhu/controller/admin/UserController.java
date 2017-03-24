@@ -177,9 +177,9 @@ public class UserController {
 	}
 
 	@RequestMapping("excelDownload")
-	public void excelDownload(Model model, HttpServletResponse response) throws Exception{
+	public void excelDownload(Model model, HttpServletRequest request,HttpServletResponse response) throws Exception{
 		ExcelRead excel = new ExcelRead();
-		excel.xlsxWriter(adminService.findExcelList(),response);
+		excel.xlsxWriter(adminService.findExcelList(),response, request);
 	}
 
 	@RequestMapping(value = "excelUpload" , method=RequestMethod.GET)

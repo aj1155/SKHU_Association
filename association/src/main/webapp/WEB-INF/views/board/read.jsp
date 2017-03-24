@@ -37,17 +37,17 @@
 		<div>
 			댓글:
 			<textarea id="comment"></textarea><button id = "commentSubmit">댓글달기</button>
-			<input type="hidden" name="boardId" value="${ boardPost.id }"/>
+			<input type="hidden" name="boardPostId" value="${boardPost.id}"/>
 		</div>
 		<div id="commentList">
 			<table>
 			<c:forEach var="comment" items="${ comment.list }">
 				<tr>
-					<td colspan="2">${ comment.writer_name }</td>
+					<td colspan="2">작성자:${comment.writer_name}</td>
 				</tr>
 				<tr>
-					<td>${ comment.content }</td>
-					<td><p id="commentDelete" class="btn btn-primary" value="${ comment.id }">삭제</p></td>
+					<td>댓글:${comment.content}</td>
+					<td><p id="commentDelete" name="${comment.id}" class="btn btn-primary" style="float:right;" value="${comment.id}">삭제</p></td>
 				</tr>
 			</c:forEach>
 			</table>

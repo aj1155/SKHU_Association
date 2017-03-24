@@ -30,7 +30,7 @@ public class FileService {
 	public void upload(int boardPostId, MultipartFile[] files, MultipartHttpServletRequest request){
     	long size;
     	String path;
-    	String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/files/");
+		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/files/");
 		String fileName;
 		Files f;
     	if (files != null && files.length >0) {

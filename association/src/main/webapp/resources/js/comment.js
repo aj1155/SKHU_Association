@@ -1,6 +1,6 @@
 $(document).on("click","#commentSubmit",function(){
     var text = $("#comment").val();
-    var id = $("input[name=boardId]").val();
+    var id = $("input[name=boardPostId]").val();
     $.ajax({
         url : 'commentSave',
         type : 'POST',
@@ -16,15 +16,17 @@ $(document).on("click","#commentSubmit",function(){
             $(data).each(function(index,item){
                 name=item.writer_name;
                 content=item.content;
+                id = item.id;
             });
-            var commentTr ='<tr>'+
-                '<td colspan="2">'+name+'</td>'+
+            var commentTr =
+                '<tr>'+
+                '<td colspan="2">작성자:'+name+'</td>'+
                 '</tr>'+
                 '<tr>'+
-                '<td>'+content+'</td>'+
-                '<td>'+'<p id="commentDelete" class="btn btn-primary">'+'삭제'+'</p>'+'</td>'+
+                '<td>댓글' + content + '</td>'+
+                '<td>' + '<p id="commentDelete" class="btn btn-primary" style="float:right;" value="' + id + '">' + '삭제' + '</p>' + '</td>' +
                 '</tr>';
-            var lastTr=$('#CommentList').last();
+            var lastTr=$('#commentList tbody').last();
             lastTr.after(commentTr);
             $("#comment").val("");
         },
@@ -35,9 +37,8 @@ $(document).on("click","#commentSubmit",function(){
 });
 
 $(document).on("click","#commentDelete",function(){
+    var id = $(this).attr('value');
     if(confirm("댓글을 삭제하시겠습니까?")==true) {
-        var id = $(this).attr('value');
-        alert("id : " +id );
         $.ajax({
             url: 'commentDelete',
             type: 'GET',
@@ -46,13 +47,19 @@ $(document).on("click","#commentDelete",function(){
                 id: id
             },
             success: function (result) {
-                if (result == 'success') {
-                    var removeTr = $("#commentDelete").parent().parent();
+                var data = $.parseJSON(result);
+                var id;
+                $(data).each(function(index,item){
+                    id = item.id;
+                });
+                if (result != 'null') {
+                    var tag = "p[name="+id+"]";
+                    var removeTr = $(tag).parent().parent();
                     var removeTr2 = removeTr.prev();
                     removeTr.remove();
                     removeTr2.remove();
                 } else {
-                    alert("fail");
+                    alert("삭제된 댓글입니다.");
                 }
             },
             error: function (err) {
