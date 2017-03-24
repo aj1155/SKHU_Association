@@ -42,7 +42,7 @@
 					</thead>
 					<tbody>
 						<c:forEach var="list" items="${ list.boardPostList }" varStatus="status">
-							<tr data-url="/board/read?id=${list.id}">
+							<tr data-url="/board/read?id=${list.id}&boardId=${boardId}">
 								<td onclick='event.cancelBubble=true;'><input type="checkbox" value="${list.id}" name="checkList"/><label for="${list.id}"></label></td>
 								<td>${ list.title }</td>
 								<td>${ list.writer_name }</td>

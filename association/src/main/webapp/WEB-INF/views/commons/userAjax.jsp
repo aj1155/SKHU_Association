@@ -7,6 +7,9 @@ button.close{
 	width:30px;
 	height:30px;
 }
+	div#scroll{
+		height: 280px; overflow-y: scroll; border: 1px solid #8F8;
+	}
 </style>
 <div id="addMember" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
@@ -21,11 +24,13 @@ button.close{
 	            <input type="text" name="name" />
 	            <button id="search" type="button" class="btn" onclick="searchUser()">검색</button>
 	        </form>
+			<div id="scroll">
 			<div id="searchResult" style="width: 100%; height: 200px;">
 				<table class="table table-bordered">
 					<tr>
 					</tr>
 				</table>
+			</div>
 			</div>
 		</div>
 		<div class="modal-footer">

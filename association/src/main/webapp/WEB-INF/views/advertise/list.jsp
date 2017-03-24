@@ -26,7 +26,7 @@ button.close{
 		<form:form modelAttribute="pagination">
 		<div align="right">
 			<ul class="actions">
-				<li><a href="#" class="button">삭제</a></li>
+				<li><a id="groupDelete" class="button">삭제</a></li>
 				<li><a href="create" class="button special icon fa-plus">광고추가</a></li>
 				<li><a href="#addCategory" class="button special icon fa-plus" data-toggle="modal">광고 분류 추가</a></li>
 				<li><a href="#deleteCategory" class="button special icon fa-minus" data-toggle="modal">광고 분류 삭제</a></li>
@@ -62,7 +62,7 @@ button.close{
 				<tbody>
 					<c:forEach var="list" items="${ list.advertise }" varStatus="status">
 					<tr data-url="edit?id=${ list.id }">
-						<td><input type="checkbox" /></td>
+						<td onclick='event.cancelBubble=true;'><input type="checkbox" value="${list.id}" name="checkList"/><label for="${list.id}"></label></td>
 						<td>${ list.category.name }</td>
 						<td><img src="${ list.image }"/></td>
 						<td>[ ${ list.company } ] ${ list.slogan }</td>
@@ -74,6 +74,7 @@ button.close{
 				</c:forEach>
 				</tbody>
 			</table>
+			<input type="hidden" name="categoryId" value="${categoryId}"/>
 		</div>
 
 
@@ -184,4 +185,23 @@ button.close{
             location.href = location.href;
         }
 	}
+
+    $(document).on("click","#groupDelete",function(e){
+        if($('tbody :checked').size()==0){
+            alert("삭제할 게시물을 선택해주세요");
+            return false;
+        }else {
+            if(confirm("정말 삭제하시겠습니까?")==true) {
+                var param = "";
+                var categoryId= $("input[name=categoryId]").val();
+                alert(categoryId);
+                $("tbody tr :checked").each(function () {
+                    param += "id=" + $(this).val();
+                    param += "&";
+                });
+                e.preventDefault();
+                document.location.href = "/advertise/groupDelete?" + param + "categoryId=" + categoryId;
+            }
+        }
+    });
 </script>

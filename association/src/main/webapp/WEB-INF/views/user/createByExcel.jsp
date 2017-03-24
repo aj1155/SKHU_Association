@@ -18,9 +18,9 @@ img{
 	</header>
 	<section style="padding-top:50px;">
 		<div align="right">
-			<form method="POST" enctype="multipart/form-data">
-				<input type="file" name="excelFile" style="display:inline; margin-bottom:20px;"/>
-				<button type="submit">엑셀읽기</button>
+			<form id="excelForm" method="POST" enctype="multipart/form-data">
+				<input type="file" id="excelFile" name="excelFile" style="display:inline; margin-bottom:20px;"/>
+				<span onclick="excelForm()">엑셀읽기</span>
 			</form>
 		</div>
 		<form:form id="excelInsert" method="POST" action="/user/userExcelInsert" modelAttribute="userForm">
@@ -62,7 +62,7 @@ img{
 					<td><input type="email" name="list[${status.index}].email" value="${list.email}" /></td>
 				</tr>
 			</c:forEach>
-			<button class="button special" onclick="excelInsert()">동문추가</button>
+			<span class="button special" onclick="excelInsert(this.form)">동문추가</span>
 			</tbody>
 		</table>
 		</form:form>
@@ -78,9 +78,34 @@ img{
                 $("input[type=checkbox]").prop("checked",false);
             }
         })
-    })
+    });
 
-    function excelInsert(){
-        $("#userForm").submit();
-	}
+    function excelInsert(frm){
+        if($('tbody :checked').size()==0) {
+            alert("등록할 회원을 선택해주세요.");
+            return false;
+        }
+        $("#excelInsert").submit();
+	};
+
+	function excelForm(){
+        var file = $("#excelFile").val();
+        if(file == "" || file == null){
+            alert("파일을 선택해야 가능합니다.");
+            return false;
+		}else if(!CheckFileType(file)){
+            alert(".xlsx 파일만 업로드 가능합니다,");
+            return false;
+		}else {
+            $("#excelForm").submit();
+        }
+	};
+
+	function CheckFileType(filePath) {
+        var fileType = filePath.split(".");
+        if (fileType.indexOf('xlsx') > -1) {
+            return true;
+        }
+        return false;
+    }
 </script>
