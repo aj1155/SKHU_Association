@@ -9,20 +9,17 @@
 
 		<!-- Header -->
 		<header id="header">
-			<a href="index.html" class="logo"><strong>커뮤니티</strong></a>
+			<h2>게시글</h2>
 		</header>
-		<br />
-		<h4>읽기</h4>
-		<br/>
 		<input type="hidden" name="boardId" value="${boardId}"/>
 		<table>
 			<tr>
-				<td style="width:80px;">제목:</td>
+				<td style="width:100px;">제목:</td>
 				<td colspan="3" style="text-align:left;">${boardPost.title}</td>
 			</tr>
 			<tr>
 				<td>작성자:</td>
-				<td style="width:500px;">${boardPost.userName }</td>
+				<td style="width:400px;">${boardPost.userName }</td>
 				<td style="width:80px;">작성일</td>
 				<td><joda:format value="${boardPost.modifiedTime}" style="SM"/></td>
 			</tr>
@@ -44,7 +41,7 @@
 		</div>
 		<div id="commentList">
 			<table>
-			<c:forEach var="comment" items="${comment.list}">
+			<c:forEach var="comment" items="${ comment.list }">
 				<tr>
 					<td colspan="2">작성자:${comment.writer_name}</td>
 				</tr>
@@ -56,11 +53,9 @@
 			</table>
 		</div>
 		<div style="float:right;">
-			<button class="btn btn-primary">
-				<i class="icon-ok icon-white"><a href="edit?id=${boardPost.id }&boardId=${boardId}"> 수정하기</a></i>
-			</button>
-			<button class="btn"><a href="list?${ pagination.queryString }&boardId=${boardId}">목록으로</a></button>
-			<button type="submit"><a href="delete?id=${boardPost.id }">삭제</a></button>
+			<a href="edit?id=${boardPost.id }&boardId=${boardId}" class="button special">수정하기</a>
+			<button class="button"><a href="list?${ pagination.queryString }&boardId=${boardId}">목록으로</a></button>
+			<button type="button special"><a href="delete?id=${boardPost.id }">삭제</a></button>
 		</div>
 	</div>
   </div>

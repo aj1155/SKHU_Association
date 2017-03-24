@@ -102,8 +102,8 @@ button.close{
 					<input type="text" name="name"/>
 				</div>
 				<div class="modal-footer">
-					<button class="btn" data-dismiss="modal">닫기</button>
-					<button class="btn btn-primary" onclick="addCategory()" data-dismiss="modal">추가</button>
+					<button class="button" data-dismiss="modal">닫기</button>
+					<button class="button special" onclick="addCategory()" data-dismiss="modal">추가</button>
 				</div>
 				</div>
 			<input type="hidden" name="categoryId" value="${categoryId}"/>
@@ -120,7 +120,7 @@ button.close{
 				<div class="modal-body">
 					<span>카테고리명:</span>
 					<input type="text" name="categoryName"/>
-					<button class="btn" data-dismiss="modal" onclick="deleteCategory()">삭제</button>
+					<button class="button" data-dismiss="modal" onclick="deleteCategory()">삭제</button>
 				</div>
 				</div>
 			</div>

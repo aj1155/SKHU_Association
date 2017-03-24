@@ -15,12 +15,12 @@
     <div class="inner">
         <!-- Header -->
         <header id="header">
-            <a href="index.html" class="logo"><strong>인문학습원 소개</strong></a>
+            <h2>인문학습원 소개</h2>
         </header>
         <br />
         <form:form modelAttribute="introduce" method="POST" action="introduceEdit">
             <textarea id="body" name="content" class="smarteditor2" style="width:inherit;">${introduce.content}</textarea>
-            <button class="btn btn-primary" type="submit">저장하기</button>
+            <button class="button special" type="submit">저장하기</button>
         </form:form>
     </div>
 </div>

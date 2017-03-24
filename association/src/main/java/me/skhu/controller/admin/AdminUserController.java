@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import me.skhu.domain.dto.AdminDto;
 import me.skhu.service.AdminService;
@@ -98,9 +99,12 @@ public class AdminUserController {
 	}
 
 	@RequestMapping(value="/mailSend", method=RequestMethod.POST)
-	public String mailSend(String sendTo, String mailSubject, String mailContent,@RequestParam("file") MultipartFile[] files){
-		mailService.sendMailAddFile(sendTo, mailSubject, mailContent, files);
-		return "admin/mailSend";
+	public String mailSend(RedirectAttributes ra,String sendTo, String mailSubject, String mailContent,@RequestParam("file") MultipartFile[] files){
+		if(!mailService.sendMailAddFile(sendTo, mailSubject, mailContent, files))
+			ra.addFlashAttribute("errorMsg","메일전송에 실패하였습니다.");
+		else
+			ra.addFlashAttribute("successMsg","메일을 성공적으로 전송하였습니다.");
+		return "redirect:/admin/mailSend";
 	}
 
 }
