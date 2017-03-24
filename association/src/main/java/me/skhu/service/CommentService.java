@@ -38,8 +38,9 @@ public class CommentService {
     }
 
     @Transactional(readOnly = false)
-    public void delete(int id){
+    public Comment delete(int id){
        Comment comment = commentRepository.findById(id);
        commentRepository.delete(comment);
+       return comment;
     }
 }

@@ -133,13 +133,12 @@ public class BoardPostController {
 	@RequestMapping(value = "/commentDelete", method = RequestMethod.GET)
 	public
 	@ResponseBody
-	String commentDelete(@RequestParam("id") int id) {
+	Comment commentDelete(@RequestParam("id") int id) {
 		try {
-			commentService.delete(id);
+			return commentService.delete(id);
 		} catch (Exception e) {
-			return "fail";
+			return null;
 		}
-		return "success";
 	}
 
 	@RequestMapping(value = "/groupDelete")
