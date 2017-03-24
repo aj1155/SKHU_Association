@@ -61,11 +61,10 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 		addDefaultLayoutDef("admin/value","admin/value");
 
 		addDefaultLayoutDef("user/userEditList","user/userEditList");
-		addDefaultLayoutDef("user/userEditDetail","user/userEditDetail");
 		addDefaultLayoutDef("user/phoneNumberEditList", "user/phoneNumberEditList");
 
 		addDefaultLayoutDef("admin/introduceEdit","admin/introduceEdit");
-		addDefaultLayoutDef("admin/introduce","admin/introduce");
+		//addDefaultLayoutDef("admin/introduce","admin/introduce");
 
 		addDefaultLayoutDef("user/createByExcel","user/createByExcel");
 
@@ -77,7 +76,7 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 		// Ajax
 		addDefaultAjaxDef("admin/mailList","admin/mailList");
 		addDefaultAjaxDef("home/login","home/login");
-
+		addDefaultAjaxDef("admin/introduce","admin/introduce");
 	}
 
 }

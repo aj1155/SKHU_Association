@@ -22,7 +22,7 @@ button.close{
 			<form id="searchUser" class="form-inline">
 	            <span>이름:</span>
 	            <input type="text" name="name" />
-	            <button id="search" type="button" class="btn" onclick="searchUser()">검색</button>
+	            <button id="search" type="button" class="button special" onclick="searchUser()">검색</button>
 	        </form>
 			<div id="scroll">
 			<div id="searchResult" style="width: 100%; height: 200px;">
