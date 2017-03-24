@@ -3,3 +3,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <tiles:insertAttribute name="content" />
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>

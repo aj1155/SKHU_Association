@@ -27,19 +27,29 @@ button.close{
 		<header id="header">
 			<h2>메일 보내기</h2>
 		</header>
+		<br />
+		<c:if test='${ not empty successMsg }'>
+			<center>
+				<div class="alert alert-success" style="width:900px;">${ successMsg }</div> 
+			</center>
+		</c:if>
+		<c:if test='${ not empty errorMsg }'>
+			<center>
+				<div class="alert alert-danger" style="width:900px;">${ errorMsg }</div> 
+			</center>
+		</c:if>
 		<section style="padding-top:10px;">
-		<hr />
 			<form method="post" enctype="multipart/form-data">
 				<div class="table-wrapper">
 					<table>
 						<tr>
 							<td>받는사람</td>
-							<td><input type="text"  name="sendTo" />
+							<td><textarea name="sendTo" style="width:900px;" rows="5"></textarea>
 								<a href="#searchEmail" class="searchButton button" data-toggle="modal">검색</a></td>
 						</tr>
 						<tr>
 							<td>제목</td>
-							<td><input type="text"  name="mailSubject" /></td>
+							<td><input type="text"  name="mailSubject" style="width:900px;"/></td>
 						</tr>
 						<tr>
 							<td>첨부파일</td>
@@ -109,7 +119,7 @@ $(document).ready(function(){
 		$.each($("input[name='email']:checked"), function(){
 			mailAddress.push($(this).val());
 		});
-		$("input[name='sendTo']").val(mailAddress.join(", "));		
+		$("textarea[name='sendTo']").val(mailAddress.join(", "));		
 	});
 });
 

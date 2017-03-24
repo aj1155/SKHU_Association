@@ -16,24 +16,35 @@ $(function() {
 	<div class="inner">
 		<!-- Header -->
 		<header id="header">
-			<a href="index.html" class="logo"><strong>커뮤니티</strong></a>
+			<h2>글쓰기</h2>
 		</header>
-		<br />
-		<h4>글쓰기</h4>
-		<br/>
+		<section style="padding-top:10px;">
 		<form name="uploadFIle" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="boardId" value="${boardId}"/>
-			<div style="display:inline-block;">
-				<span>제목:</span> <input type="text" name="title" value="${boardPostDto.title}"/><p>${error}</p>
+			<div class="table-wrapper">
+				<table>
+					<tr>
+						<td>제목</td>
+						<td><input type="text" name="title" value="${boardPostDto.title}"/><p>${error}</p></td>
+					</tr>
+					<tr>
+						<td>첨부파일</td>
+						<td><input type="file" name="file"/>
+							<button type="button" class="btn" id="addFile"><i class="icon-plus"></i> 파일추가</button>
+						</td>
+					</tr>
+					<tr>
+						<td>내용</td>
+						<td><textarea id="body" name="content" class="smarteditor2" style="width:900px;min-height:300px;">${boardPostDto.content}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><button type="submit" class="button special">저장</button></td>
+				</table>
 			</div>
-			<div id="files">
-				<span>첨부 파일:</span> <input type="file" name="file"/>
-				<button type="button" class="btn" id="addFile">
-          				<i class="icon-plus"></i> 파일추가
-      				</button>
-			</div>
-			<textarea id="body" name="content" class="smarteditor2" style="width:900px;min-height:300px;">${boardPostDto.content}</textarea>
-			<button type="submit">저장</button>
+				
 		</form>
+		</section>
 	</div>
 </div>

@@ -14,7 +14,7 @@ public class MailService {
 
 	@Autowired private JavaMailSender javaMailSender;
 
-	public void sendMailAddFile(String to, String subject, String msg, MultipartFile[] files){
+	public boolean sendMailAddFile(String to, String subject, String msg, MultipartFile[] files){
 		MimeMessage message = javaMailSender.createMimeMessage();
 		String[] email;
 		email=to.split(", ");
@@ -22,7 +22,7 @@ public class MailService {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			messageHelper.setSubject(subject);
 			messageHelper.setText(msg,true);
-			messageHelper.setFrom("norlights23@gmail.com");
+			messageHelper.setFrom("발신메일주소");
 			messageHelper.setTo(email);
 
 			for(MultipartFile file : files){
@@ -31,12 +31,15 @@ public class MailService {
 				}
 			}
 			javaMailSender.send(message);
+			return true;
 		} catch(MailException e){
 			e.printStackTrace();
 			System.out.println(e);
+			return false;
 		} catch(Throwable e){
 			e.printStackTrace();
 			System.out.println(e);
+			return false;
 		}
 	}
 }
