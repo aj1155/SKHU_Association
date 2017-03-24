@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,8 +22,6 @@ import lombok.Setter;
 import me.skhu.domain.dto.UserDto;
 import me.skhu.domain.dto.UserExcelDto;
 import me.skhu.util.PasswordEncoding;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Created by Manki Ki on 2017-01-18.
@@ -96,7 +97,7 @@ public class User implements Serializable {
     public static User of(UserDto userDto, Category category, Position position){
     	return User.builder()
     			.loginId(userDto.getPhoneNumber())
-    			.password(userDto.getBirth())
+    			.password(passwordEncoder.encode(userDto.getBirth()))
     			.name(userDto.getName())
     			.grade(userDto.getGrade())
     			.phoneNumber(userDto.getPhoneNumber())
@@ -109,7 +110,7 @@ public class User implements Serializable {
                 .image(userDto.getImage())
     			.build();
     }
-
+    /*
     public static User ofCreate2(UserDto userDto,Position position){
         return User.builder()
                 .loginId(userDto.getPhoneNumber())
@@ -123,8 +124,10 @@ public class User implements Serializable {
                 .email(userDto.getEmail())
                 .position(position)
                 .build();
-    }
+    }*/
 
+
+    /*
    public static User ofUpdate2(int id, String loginId, String name, int grade, String birth, String status, String phoneNumber,
 		   String companyNumber, String email, Position position){
 	   return User.builder()
@@ -140,6 +143,9 @@ public class User implements Serializable {
                .position(position)
                .build();
    }
+   */
+
+
     static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     static PasswordEncoding passwordEncoding = new PasswordEncoding(passwordEncoder);
    public static User of(UserExcelDto userExcelDto, Category category, Position position){
