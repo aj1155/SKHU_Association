@@ -11,7 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserExcelDto {
-	private String categoryName;
 	private int grade;
 	private String image;
 	private String name;

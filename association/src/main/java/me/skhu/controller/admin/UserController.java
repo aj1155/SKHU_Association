@@ -1,10 +1,17 @@
 package me.skhu.controller.admin;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import me.skhu.domain.dto.UserExcelDto;
+import me.skhu.domain.dto.UserForm;
+import me.skhu.service.*;
+import me.skhu.util.Excel.ExcelRead;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import me.skhu.domain.dto.OriginUserDto;
 import me.skhu.domain.dto.UserDto;
-import me.skhu.service.OriginUserPhoneService;
-import me.skhu.service.OriginUserService;
-import me.skhu.service.PositionService;
-import me.skhu.service.UserService;
 import me.skhu.util.Pagination;
 import me.skhu.util.PaginationUser;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 @RequestMapping("/user")
@@ -41,6 +45,9 @@ public class UserController {
 	private PositionService positionService;
 
 	//Spring Security session information check
+
+	@Autowired
+	private AdminService adminService;
 
 	@RequestMapping("/list")
 	public String list(Model model, @ModelAttribute("pagination") PaginationUser pagination){
@@ -167,5 +174,32 @@ public class UserController {
 	@RequestMapping("/createByExcel")
 	public String createByExcel(Model model){
 		return "user/createByExcel";
+	}
+
+	@RequestMapping("excelDownload")
+	public void excelDownload(Model model, HttpServletResponse response) throws Exception{
+		ExcelRead excel = new ExcelRead();
+		excel.xlsxWriter(adminService.findExcelList(),response);
+	}
+
+	@RequestMapping(value = "excelUpload" , method=RequestMethod.GET)
+	public String excelUpload(){
+		return "user/createByExcel";
+	}
+
+	@RequestMapping(value = "excelUpload" , method=RequestMethod.POST)
+	public String excelUpload(Model model, @RequestParam("excelFile") MultipartFile files, MultipartHttpServletRequest request) throws IOException {
+		UserForm userForm = new UserForm();
+		userForm.setList(adminService.excelRead(files, request));
+		model.addAttribute("excelList",userForm);
+		return "user/createByExcel";
+	}
+
+	@RequestMapping(value = "userExcelInsert" , method=RequestMethod.POST)
+	public String userExcelInsert(@ModelAttribute UserForm userForm, @ModelAttribute("pagination") PaginationUser pagination, @RequestParam(value="values") List<String> values){
+		for(int i=0; i< userForm.getList().size();i++)
+			System.out.println(userForm.getList().get(i).getImage());
+		adminService.saveuUserList(userForm.getList(),values);
+		return "user/list";
 	}
 }

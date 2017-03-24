@@ -93,4 +93,9 @@ public class AdvertiseController {
 		advertiseService.groupDelete(id);
 		return "redirect:/advertise/list?categoryId="+categoryId;
 	}
+
+	@RequestMapping(value="categoryDelete")
+	public @ResponseBody boolean categoryDelete(@RequestParam("categoryName") String name){
+		return advertiseService.deleteCategoryName(name);
+	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import me.skhu.domain.QAdvertise;
 import me.skhu.domain.QAdvertiseCategory;
+import org.joda.time.DateTime;
 import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 
 import me.skhu.domain.Advertise;
