@@ -68,7 +68,7 @@ public class ExcelRead {
 			cell.setCellValue(userDto.getGrade());
 
 			cell = row.createCell(2);
-			row.setHeight((short)(10*215));
+			row.setHeight((short)(5*215));
 			if(userDto.getImage()!=null)
 				drawImage(workbook,sheet,index,userDto);
 
@@ -117,7 +117,7 @@ public class ExcelRead {
 			anchor.setRow1(row+1);
 
 			XSSFPicture picture = drawing.createPicture(anchor,pictureIndex);
-			double x = 0.15;
+			double x = 0.75;
 
 			picture.resize(x);
 

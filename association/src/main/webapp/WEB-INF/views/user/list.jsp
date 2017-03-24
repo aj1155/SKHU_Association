@@ -22,7 +22,7 @@ img{
 		<div align="right">
 			<ul class="actions">
 				<li><button type="submit" name="cmd" value="delete" class="button">삭제</button></li>
-				<li><a href="create" class="button special icon fa-plus">동문 추가</a></li>
+				<li><a href="/user/create" class="button special icon fa-plus">동문 추가</a></li>
 				<li><a href="/user/excelUpload" class="button special icon fa-plus">동문목록 엑셀</a></li>
 			</ul>
 		</div>

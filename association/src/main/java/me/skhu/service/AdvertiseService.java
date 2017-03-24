@@ -55,7 +55,7 @@ public class AdvertiseService {
 	public int create(AdvertiseDto advertiseDto,MultipartHttpServletRequest request, MultipartFile file) throws ParseException{
 		String imagePath = fileService.imageUpload(file,request);
 		try {
-			advertiseRepository.save(Advertise.of(advertiseDto,advertiseCategoryRepository.findById(advertiseDto.getCategoryId()),imagePath));
+			Advertise advertise = advertiseRepository.save(Advertise.of(advertiseDto,advertiseCategoryRepository.findById(advertiseDto.getCategoryId()),imagePath));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

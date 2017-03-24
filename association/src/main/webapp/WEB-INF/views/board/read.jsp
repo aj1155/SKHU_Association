@@ -59,7 +59,7 @@
 			<button class="btn btn-primary">
 				<i class="icon-ok icon-white"><a href="edit?id=${boardPost.id }&boardId=${boardId}"> 수정하기</a></i>
 			</button>
-			<button class="btn"><a href="list?${ pagination.queryString }">목록으로</a></button>
+			<button class="btn"><a href="list?${ pagination.queryString }&boardId=${boardId}">목록으로</a></button>
 			<button type="submit"><a href="delete?id=${boardPost.id }">삭제</a></button>
 		</div>
 	</div>
