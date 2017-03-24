@@ -1,26 +1,15 @@
 package me.skhu.controller.admin;
 
-import javax.servlet.http.HttpServletResponse;
-
-import me.skhu.domain.Introduce;
-import me.skhu.domain.dto.AdminDto;
-import me.skhu.domain.dto.UserExcelDto;
-import me.skhu.service.IntroduceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import me.skhu.domain.dto.UserDto;
+import me.skhu.domain.Introduce;
+import me.skhu.domain.dto.AdminDto;
 import me.skhu.service.AdminService;
-import me.skhu.util.Excel.ExcelRead;
-
-import java.io.IOException;
-import java.util.List;
+import me.skhu.service.IntroduceService;
 
 @Controller
 @RequestMapping("admin")
@@ -56,7 +45,7 @@ public class AdminController {
 	@RequestMapping(value="introduceEdit", method = RequestMethod.POST)
 	public String introduceEdit(Model model, Introduce introduce){
 		introduceService.save(introduce);
-		return "admin/introduce";
+		return "redirect:/admin/introduceEdit";
 	}
 
 	@RequestMapping(value="introduce",method = RequestMethod.GET)
