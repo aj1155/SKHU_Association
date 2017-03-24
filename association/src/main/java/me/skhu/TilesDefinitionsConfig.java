@@ -55,7 +55,7 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 		addDefaultLayoutDef("board/read","board/read");
 		addDefaultLayoutDef("board/write","board/write");
 
-		//addDefaultLayoutDef("home/login","home/login");
+		addDefaultLayoutDef("user/userEditDetail","user/userEditDetail");
 
 		addDefaultLayoutDef("admin/save","admin/save");
 		addDefaultLayoutDef("admin/value","admin/value");
