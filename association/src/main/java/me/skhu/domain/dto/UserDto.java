@@ -45,4 +45,20 @@ public class UserDto {
 				.build();
 	}
 
+	public static UserDto of(){
+		return UserDto.builder()
+				.loginId("")
+				.name("")
+				.grade(0)
+				.birth("")
+				.phoneNumber("")
+				.email("")
+				.status("")
+				.companyNumber("")
+				.user_type(null)
+				.image(null)
+				.positionName(null)
+				.categoryName(null)
+				.build();
+	}
 }

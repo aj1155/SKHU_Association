@@ -16,6 +16,9 @@ public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
 
+	@Autowired
+	private AdminService adminService;
+
 	public List<BoardDto> findByCategoryId(int categoryId){
 		return boardRepository.findByCategoryId(categoryId);
     }
@@ -33,4 +36,13 @@ public class BoardService {
 		}
 	}
 
+	public Board findByGrade(int grade){
+		String name = grade+"기자유게시판";
+		return boardRepository.findByCategoryIdAndBoardType(adminService.getCurrentAdmin().getCategory().getId(),name);
+	}
+
+	public void saveGrade(int grade){
+		String name =grade+"기 자유게시판";
+		boardRepository.save(Board.ofCreate(name,adminService.getCurrentAdmin().getCategory().getId()));
+	}
 }
