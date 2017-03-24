@@ -40,8 +40,8 @@ public class UserDto {
 				.companyNumber(user.getCompanyNumber())
 				.user_type(user.getPosition()==null ? 0 : user.getPosition().getId())
 				.image(user.getImage())
-				.positionName(user.getPosition().getName())
-				.categoryName(user.getCategory().getName())
+				.positionName(user.getPosition()==null ? "" : user.getPosition().getName())
+				.categoryName(user.getCategory()==null ? "" : user.getCategory().getName())
 				.build();
 	}
 
