@@ -86,6 +86,7 @@ public class UserService {
     	boardService.saveBoard(user);
     	userRepository.save(user);
     	userDiscloserRepository.save(UserDiscloser.of(user.getId()));
+
     }
 
     public UserDto newUserDto(){

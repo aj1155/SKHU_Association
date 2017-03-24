@@ -53,6 +53,9 @@ public class AdminService {
 	@Autowired
 	private AdminService adminService;
 
+	@Autowired
+	private BoardService boardService;
+
 	public Admin findByLoginId(String loginId){
 		return adminRepository.findByLoginId(loginId);
 	}
@@ -88,7 +91,10 @@ public class AdminService {
 	@Transactional(readOnly = false)
 	public void saveuUserList(List<UserExcelDto> list, List<String> values){
 		for(int i=0; i<values.size(); i++) {
-			userRepository.save(User.of(list.get(Integer.parseInt(values.get(i)) - 1), adminService.getCurrentAdmin().getCategory(), positionRepository.findByName("일반회원")));
+			User user=userRepository.save(User.of(list.get(Integer.parseInt(values.get(i)) - 1), adminService.getCurrentAdmin().getCategory(), positionRepository.findByName("일반회원")));
+			if(boardService.findByGrade(user.getGrade())==null){
+				boardService.saveGrade(user.getGrade());
+			}
 		}
 	}
 
