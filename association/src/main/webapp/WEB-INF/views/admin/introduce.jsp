@@ -8,8 +8,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!-- Main -->
+<html>
+<head>
+<%@ include file="/WEB-INF/views/commons/header.jsp" %>
 </head>
+<body>
+<!-- Main -->
 <div id="main">
     <div class="inner">
         <!-- Header -->
@@ -17,9 +21,9 @@
             <a href="index.html" class="logo"><strong>인문학습원 소개</strong></a>
         </header>
        	<section>
-       	<div style="float:right;"><a href="/admin/introduceEdit" class="button special">수정</a></div>
         <div>${introduce.content}</div> 
         </section>
     </div>
 </div>
-
+</body>
+</html>
