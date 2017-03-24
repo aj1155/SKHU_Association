@@ -92,9 +92,7 @@ public class AdminService {
 	public void saveuUserList(List<UserExcelDto> list, List<String> values){
 		for(int i=0; i<values.size(); i++) {
 			User user=userRepository.save(User.of(list.get(Integer.parseInt(values.get(i)) - 1), adminService.getCurrentAdmin().getCategory(), positionRepository.findByName("일반회원")));
-			if(boardService.findByGrade(user.getGrade())==null){
-				boardService.saveGrade(user.getGrade());
-			}
+			boardService.findByGrade(user.getGrade());
 		}
 	}
 
