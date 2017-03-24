@@ -36,9 +36,11 @@ public class BoardService {
 		}
 	}
 
-	public Board findByGrade(int grade){
-		String name = grade+"기자유게시판";
-		return boardRepository.findByCategoryIdAndBoardType(adminService.getCurrentAdmin().getCategory().getId(),name);
+	public void findByGrade(int grade){
+		String name = grade+"기 자유게시판";
+		Board board = boardRepository.findByCategoryIdAndBoardType(adminService.getCurrentAdmin().getCategory().getId(),name);
+		if(board==null)
+			saveGrade(grade);
 	}
 
 	public void saveGrade(int grade){
