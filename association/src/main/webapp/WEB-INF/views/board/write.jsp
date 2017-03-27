@@ -35,7 +35,7 @@ $(function() {
 					</tr>
 					<tr>
 						<td style="vertical-align: middle;">내용</td>
-						<td><textarea id="body" name="content" class="smarteditor2" style="width:900px;min-height:300px;">${boardPostDto.content}</textarea>
+						<td><textarea id="body" name="content" class="smarteditor2" style="width:800px;min-height:300px;">${boardPostDto.content}</textarea>
 						</td>
 					</tr>
 					<tr>

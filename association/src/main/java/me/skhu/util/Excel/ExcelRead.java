@@ -71,7 +71,7 @@ public class ExcelRead {
 			cell.setCellValue(userDto.getGrade());
 
 			cell = row.createCell(2);
-			row.setHeight((short)(5*215));
+			row.setHeight((short)(8*215));
 			if(userDto.getImage()!=null)
 				drawImage(workbook,sheet,index,userDto,request);
 
