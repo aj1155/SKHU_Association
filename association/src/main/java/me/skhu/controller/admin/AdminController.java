@@ -48,10 +48,19 @@ public class AdminController {
 		return "redirect:/admin/introduceEdit";
 	}
 
+
+	//모바일 웹뷰용도
 	@RequestMapping(value="introduce",method = RequestMethod.GET)
 	public String introduce(Model model){
 		model.addAttribute("introduce",introduceService.find());
 		return "admin/introduce";
+	}
+
+	//관리자 페이지용도
+	@RequestMapping(value="introduce2")
+	public String introduce2(Model model){
+		model.addAttribute("introduce",introduceService.find());
+		return "admin/introduce2";
 	}
 
 }

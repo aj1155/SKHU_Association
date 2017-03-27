@@ -181,17 +181,20 @@ public class ExcelRead {
 				int row2 = anchor.getRow2();
 				byte[] data = xssfPictureData.getData();
 				String ext = xssfPictureData.suggestFileExtension();
-				String fileName=result.get(row2-2).get("E");
+				String fileName=null;
+				try {
+					fileName= result.get(row2 - 2).get("E");
 
 				try (FileOutputStream os = new FileOutputStream(path+fileName+"."+ext)) {
 					os.write(data);
 					os.flush();
 				}
                 String[] arg = new String(path).split("webapp");
-                System.out.println(arg[1]);
                 String newPath = arg[1]+fileName+"."+ext;
-                System.out.println(newPath);
-                System.out.println(result.get(row2-2).replace("D",newPath));
+                result.get(row2-2).replace("D",newPath);
+				}catch(Exception e){
+
+				}
 			}
 		}
 	}
