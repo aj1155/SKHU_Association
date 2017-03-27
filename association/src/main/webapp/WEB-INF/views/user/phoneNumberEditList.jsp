@@ -60,8 +60,8 @@
                            <td>${ user.user.grade }</td>
                            <td>${ user.user.name }</td>
                            <td>${ user.user.birth }</td>
-                           <td>${ user.user.phoneNumber }</td>
                            <td>${ user.loginId }</td>
+                           <td>${ user.user.phoneNumber }</td>
                           <c:if test="${ user.agree eq true }">
                               <td><p>승인완료</p></td>
                           </c:if>

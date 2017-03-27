@@ -42,7 +42,7 @@ public class OriginUserPhone  extends BaseEntity implements Serializable {
 
     public static OriginUserPhone of(User user){
         return OriginUserPhone.builder()
-                .loginId(user.getPhoneNumber())
+                .loginId(user.getLoginId())
                 .user(user)
                 .agree(false)
                 .category(user.getCategory())
