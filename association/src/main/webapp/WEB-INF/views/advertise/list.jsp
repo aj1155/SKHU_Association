@@ -186,22 +186,4 @@ button.close{
         }
 	}
 
-    $(document).on("click","#groupDelete",function(e){
-        if($('tbody :checked').size()==0){
-            alert("삭제할 게시물을 선택해주세요");
-            return false;
-        }else {
-            if(confirm("정말 삭제하시겠습니까?")==true) {
-                var param = "";
-                var categoryId= $("input[name=categoryId]").val();
-                alert(categoryId);
-                $("tbody tr :checked").each(function () {
-                    param += "id=" + $(this).val();
-                    param += "&";
-                });
-                e.preventDefault();
-                document.location.href = "/advertise/groupDelete?" + param + "categoryId=" + categoryId;
-            }
-        }
-    });
 </script>

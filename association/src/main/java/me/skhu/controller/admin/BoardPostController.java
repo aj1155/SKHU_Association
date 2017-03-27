@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import me.skhu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +22,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import me.skhu.domain.Comment;
 import me.skhu.domain.dto.BoardPostDto;
 import me.skhu.domain.dto.BoardPostInsertDto;
-import me.skhu.service.BoardImageService;
-import me.skhu.service.BoardPostService;
-import me.skhu.service.CommentService;
-import me.skhu.service.FileService;
 import me.skhu.util.Pagination;
 import me.skhu.util.Validator.BoardPostEditValidator;
 import me.skhu.util.Validator.BoardPostValidator;
@@ -50,6 +47,9 @@ public class BoardPostController {
 
 	@Autowired
 	private BoardPostEditValidator boardPostEditValidator;
+
+	@Autowired
+	private AdminService adminService;
 
 	@RequestMapping("list")
 	public String list(Model model, Pagination pagination, @RequestParam("boardId") int boardId) {
@@ -105,6 +105,7 @@ public class BoardPostController {
 		model.addAttribute("fileList", fileService.findByBoardId(id));
 		model.addAttribute("comment", commentService.findByBoardId(id));
 		model.addAttribute("boardId",boardId);
+		model.addAttribute("adminId",adminService.getCurrentAdmin().getId());
 		return "board/read";
 	}
 
