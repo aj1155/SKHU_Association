@@ -53,7 +53,7 @@ public class UserController {
 
 	@RequestMapping("/list")
 	public String list(Model model, @ModelAttribute("pagination") PaginationUser pagination){
-		//TODO: categoryId 도 넣을 것
+		pagination.setPageSize(10);
 		model.addAttribute("position", positionService.getUserType());
 		model.addAttribute("list",userService.list(pagination));
 		return "user/list";
