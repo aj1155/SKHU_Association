@@ -90,8 +90,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     	//www.google.com/settings/security/lesssecureapps
     	//계정 설정 변경
     	mailSender.setHost("smtp.gmail.com");
-    	mailSender.setUsername("구글계정 아이디");
-    	mailSender.setPassword("비밀번호");
+    	mailSender.setUsername("sumusb34@gmail.com");
+    	mailSender.setPassword("sc5203nv#$");
 
     	Properties javaMailProperties = new Properties();
     	javaMailProperties.setProperty("mail.smtp.starttls.enable","true");

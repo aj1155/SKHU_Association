@@ -53,7 +53,9 @@
 			</table>
 		</div>
 		<div style="float:right;">
+			<c:if test="${boardPost.userId eq adminId}">
 			<a href="edit?id=${boardPost.id }&boardId=${boardId}" class="button special">수정하기</a>
+			</c:if>
 			<button class="button"><a href="list?${ pagination.queryString }&boardId=${boardId}">목록으로</a></button>
 			<button type="button special"><a href="delete?id=${boardPost.id }">삭제</a></button>
 		</div>

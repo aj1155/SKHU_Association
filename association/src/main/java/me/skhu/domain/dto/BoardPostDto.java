@@ -36,6 +36,7 @@ public class BoardPostDto {
 				.createTime(boardPost.getCreatedDate())
 				.modifiedTime(boardPost.getLastModifiedDate())
 				.userName(boardPost.getWriter_name())
+				.userId(boardPost.getWriter_id())
 				.build();
 				/* Todo 객체를 담을지 필요할 때 가져올지 생각
 				.boardName(boardPost.getBoard().getName())
