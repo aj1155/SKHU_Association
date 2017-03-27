@@ -24,18 +24,18 @@ $(function() {
 			<div class="table-wrapper">
 				<table>
 					<tr>
-						<td>제목</td>
+						<td style="vertical-align: middle;">제목</td>
 						<td><input type="text" name="title" value="${boardPostDto.title}"/><p>${error}</p></td>
 					</tr>
 					<tr>
-						<td>첨부파일</td>
+						<td style="vertical-align: middle;">첨부파일</td>
 						<td><input type="file" name="file"/>
 							<button type="button" class="btn" id="addFile"><i class="icon-plus"></i> 파일추가</button>
 						</td>
 					</tr>
 					<tr>
-						<td>내용</td>
-						<td><textarea id="body" name="content" class="smarteditor2" style="width:900px;min-height:300px;">${boardPostDto.content}</textarea>
+						<td style="vertical-align: middle;">내용</td>
+						<td><textarea id="body" name="content" class="smarteditor2" style="width:800px;min-height:300px;">${boardPostDto.content}</textarea>
 						</td>
 					</tr>
 					<tr>

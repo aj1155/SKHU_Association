@@ -4,8 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
 img{
-	max-width:200px;
-	max-height:200px;
+	max-width:100px;
+	max-height:100px;
 }
 button.close{
 	width:30px;
@@ -50,9 +50,9 @@ button.close{
 				<thead>
 					<tr>
 						<th><input type="checkbox" /></th>
-						<th>광고유형</th>
+						<th style="width:100px;">광고유형</th>
 						<th>이미지</th>
-						<th>[ 회사명 ] 광고문구</th>
+						<th style="width:300px;">[ 회사명 ] 광고문구</th>
 						<th>광고자</th>
 						<th>연락처</th>
 						<th>시작일</th>
@@ -62,14 +62,14 @@ button.close{
 				<tbody>
 					<c:forEach var="list" items="${ list.advertise }" varStatus="status">
 					<tr data-url="edit?id=${ list.id }">
-						<td onclick='event.cancelBubble=true;'><input type="checkbox" value="${list.id}" name="checkList"/><label for="${list.id}"></label></td>
-						<td>${ list.category.name }</td>
-						<td><img src="${ list.image }"/></td>
-						<td>[ ${ list.company } ] ${ list.slogan }</td>
-						<td>${ list.userName }</td>
-						<td>${ list.phoneNumber }</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${ list.startDate }" /></td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${ list.endDate }" /></td>
+						<td onclick='event.cancelBubble=true;' style="vertical-align: middle;"><input type="checkbox" value="${list.id}" name="checkList"/><label for="${list.id}"></label></td>
+						<td style="vertical-align: middle;">${ list.category.name }</td>
+						<td style="vertical-align: middle;"><img src="${ list.image }"/></td>
+						<td style="vertical-align: middle;">[ ${ list.company } ] ${ list.slogan }</td>
+						<td style="vertical-align: middle;">${ list.userName }</td>
+						<td style="vertical-align: middle;">${ list.phoneNumber }</td>
+						<td style="vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd" value="${ list.startDate }" /></td>
+						<td style="vertical-align: middle;"><fmt:formatDate pattern="yyyy-MM-dd" value="${ list.endDate }" /></td>
 					</tr>
 				</c:forEach>
 				</tbody>

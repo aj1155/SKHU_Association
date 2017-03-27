@@ -22,7 +22,7 @@ public class MailService {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			messageHelper.setSubject(subject);
 			messageHelper.setText(msg,true);
-			messageHelper.setFrom("발신메일주소");
+			messageHelper.setFrom("sumusb34@gmail.com");
 			messageHelper.setTo(email);
 
 			for(MultipartFile file : files){
