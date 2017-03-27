@@ -18,7 +18,7 @@ button.close{
 
 		<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="logo"><strong>커뮤니티</strong></a>
+		<h2>커뮤니티</h2>
 	</header>
 	<br />
 	<section style="padding-top:50px;">

@@ -64,7 +64,7 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 		addDefaultLayoutDef("user/phoneNumberEditList", "user/phoneNumberEditList");
 
 		addDefaultLayoutDef("admin/introduceEdit","admin/introduceEdit");
-		//addDefaultLayoutDef("admin/introduce","admin/introduce");
+		addDefaultLayoutDef("admin/introduce2","admin/introduce2"); //관리자웹페이지용
 
 		addDefaultLayoutDef("user/createByExcel","user/createByExcel");
 
@@ -76,7 +76,7 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 		// Ajax
 		addDefaultAjaxDef("admin/mailList","admin/mailList");
 		addDefaultAjaxDef("home/login","home/login");
-		addDefaultAjaxDef("admin/introduce","admin/introduce");
+		addDefaultAjaxDef("admin/introduce","admin/introduce"); // 모바일 웹뷰용
 	}
 
 }

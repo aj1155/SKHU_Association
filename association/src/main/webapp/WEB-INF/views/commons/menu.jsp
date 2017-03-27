@@ -15,7 +15,7 @@
           <li><a href="/user/list">동문관리</a></li>
           <li><a href="/user/typeList">회원유형</a></li>
           <li>
-              <a href="/admin/introduceEdit">인문학습원 소개</a>
+              <a href="/admin/introduce2">인문학습원 소개</a>
           </li>
           <li><span class="opener">커뮤니티</span>
 					<ul id="community">
