@@ -77,6 +77,7 @@ public class TilesDefinitionsConfig implements DefinitionsFactory{
 		addDefaultAjaxDef("admin/mailList","admin/mailList");
 		addDefaultAjaxDef("home/login","home/login");
 		addDefaultAjaxDef("admin/introduce","admin/introduce"); // 모바일 웹뷰용
+
 	}
 
 }

@@ -27,6 +27,7 @@ public class UserDto {
 	private String positionName;
 	private String categoryName;
 	private String image;
+	private int userNumber;
 
 	public static UserDto of(User user){
 		return UserDto.builder()
@@ -42,6 +43,7 @@ public class UserDto {
 				.image(user.getImage())
 				.positionName(user.getPosition()==null ? "" : user.getPosition().getName())
 				.categoryName(user.getCategory()==null ? "" : user.getCategory().getName())
+				.userNumber(user.getUserNumber())
 				.build();
 	}
 
@@ -59,6 +61,7 @@ public class UserDto {
 				.image(null)
 				.positionName(null)
 				.categoryName(null)
+				.userNumber(0)
 				.build();
 	}
 }

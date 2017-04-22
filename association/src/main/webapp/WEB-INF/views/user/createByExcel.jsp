@@ -29,7 +29,6 @@ img{
 				<tr>
 					<td onclick='event.cancelBubble=true;'><input type="checkbox" id="all" name="all" onClick="allCkeck(this)"/><label for="all"></label></td>
 					<td>기수</td>
-					<td>이미지</td>
 					<td>핸드폰번호</td>
 					<td>이름</td>
 					<td>생년월일</td>
@@ -43,17 +42,6 @@ img{
 				<tr>
 					<td onclick='event.cancelBubble=true;'><input type="checkbox" value="${status.count}" name="values"/><label for="${status.index}"></label></td>
 					<td><input type="text" name="list[${status.index}].grade" value="${list.grade}" /></td>
-					<td>
-						<c:set var="image" value="${list.image}"/>
-						<c:choose>
-						<c:when test="${empty image}">
-						<img src="/resources/upload/profileImg/user.png" class="img-circle profile_img" id="profileImg" name="image"/></td>
-						</c:when>
-						<c:when test="${!empty image}">
-							<img src="${list.image}" class="img-circle profile_img" id="profileImg" name="list[${status.index}].image" value="${list.image}"/></td>
-							<input type="hidden" name="list[${status.index}].image" value="${list.image}"/>
-						</c:when>
-					</c:choose>
 					<td><input type="text" name="list[${status.index}].phoneNumber" value="${list.phoneNumber}" /></td>
 					<td><input type="text" name="list[${status.index}].name" value="${list.name}" /></td>
 					<td><input type="text" name="list[${status.index}].birth" value="${list.birth}" /></td>

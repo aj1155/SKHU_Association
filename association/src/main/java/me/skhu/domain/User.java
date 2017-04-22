@@ -78,6 +78,9 @@ public class User implements Serializable {
     @JoinColumn(name="user_type")
     private Position position;
 
+    @Column(name = "user_number")
+    private int userNumber;
+
     public static User ofCreate(String loginId,String name,String password){
         return User.builder()
                 .loginId(loginId)
@@ -94,7 +97,7 @@ public class User implements Serializable {
                 .build();
     }
 
-    public static User of(UserDto userDto, Category category, Position position){
+    public static User of(UserDto userDto, Category category, Position position, int userNumber){
     	return User.builder()
     			.loginId(userDto.getPhoneNumber())
     			.password(passwordEncoder.encode(userDto.getBirth()))
@@ -108,6 +111,7 @@ public class User implements Serializable {
     			.category(category)
     			.position(position)
                 .image(userDto.getImage())
+                .userNumber(userNumber+1)
     			.build();
     }
     /*
@@ -148,7 +152,7 @@ public class User implements Serializable {
 
     static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     static PasswordEncoding passwordEncoding = new PasswordEncoding(passwordEncoder);
-   public static User of(UserExcelDto userExcelDto, Category category, Position position){
+   public static User of(UserExcelDto userExcelDto, Category category, Position position,int userNumber){
        return User.builder()
                .loginId(userExcelDto.getPhoneNumber())
                .name(userExcelDto.getName())
@@ -162,6 +166,7 @@ public class User implements Serializable {
                .position(position)
                .category(category)
                .password(passwordEncoding.encode(userExcelDto.getBirth()))
+               .userNumber(userNumber+1)
                .build();
    }
 
