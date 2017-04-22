@@ -3,15 +3,11 @@ package me.skhu.service;
 import java.io.File;
 import java.util.List;
 
+import me.skhu.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import me.skhu.domain.Category;
-import me.skhu.domain.OriginUser;
-import me.skhu.domain.Position;
-import me.skhu.domain.User;
-import me.skhu.domain.UserDiscloser;
 import me.skhu.domain.dto.UserDto;
 import me.skhu.domain.dto.UserListDto;
 import me.skhu.repository.CategoryRepository;
@@ -21,6 +17,7 @@ import me.skhu.repository.UserDiscloserRepository;
 import me.skhu.repository.UserRepository;
 import me.skhu.util.Pagination;
 import me.skhu.util.PaginationUser;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * Created by Manki Kim on 2017-01-18.
@@ -82,8 +79,8 @@ public class UserService {
     }
 
     public void create(UserDto userDto){
-    	User user = User.of(userDto, adminService.getCurrentAdmin().getCategory(), positionRepository.findOne(userDto.getUser_type()));
-        System.out.println();
+        Admin admin = adminService.getCurrentAdmin();
+    	User user = User.of(userDto, admin.getCategory(), positionRepository.findOne(userDto.getUser_type()),userRepository.findMaxNumber(admin.getCategory().getId()));
         boardService.saveBoard(user);
     	userRepository.save(user);
     	userDiscloserRepository.save(UserDiscloser.of(user.getId()));
@@ -92,6 +89,7 @@ public class UserService {
 
     public UserDto newUserDto(){
     	UserDto user = UserDto.of(new User());
+    	user.setUserNumber(userRepository.findMaxNumber(adminService.getCurrentAdmin().getCategory().getId()));
     	return user;
     }
 
@@ -147,4 +145,11 @@ public class UserService {
     	}
     }
 
+    public void imageUpload(String fileName){
+        String rootPath = "\\resources\\upload\\profileImg\\";
+        String[] temp = fileName.split("\\.");
+        User user = userRepository.findByCategoryIdAndUserNumber(adminService.getCurrentAdmin().getCategory().getId(),Integer.parseInt(temp[0]));
+        user.setImage(rootPath+fileName);
+        userRepository.save(user);
+    }
 }

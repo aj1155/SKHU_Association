@@ -1,14 +1,11 @@
 package me.skhu.service;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
+import lombok.extern.slf4j.Slf4j;
+import me.skhu.domain.Files;
+import me.skhu.domain.dto.FilesDto;
+import me.skhu.repository.FilesRepository;
+import net.sf.jazzlib.ZipEntry;
+import net.sf.jazzlib.ZipInputStream;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,15 +13,21 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import me.skhu.domain.Files;
-import me.skhu.domain.dto.FilesDto;
-import me.skhu.repository.FilesRepository;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
+import java.util.List;
 
+@Slf4j
 @Component
 public class FileService {
 
 	@Autowired
 	private FilesRepository fileRepository;
+
+	@Autowired
+	private UserService userService;
 
 	@Transactional(readOnly = false)
 	public void upload(int boardPostId, MultipartFile[] files, MultipartHttpServletRequest request){
@@ -89,27 +92,6 @@ public class FileService {
 	    response.getOutputStream().close();
 	}
 
-	public String imageUpload(MultipartFile file, MultipartHttpServletRequest request){
-		String fileName=null;
-		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/advertiseImage/");
-		String path=null;
-		if(file!=null){
-			try{
-				fileName=file.getOriginalFilename();
-				byte[] bytes = file.getBytes();
-				path = rootPath+fileName;
-				BufferedOutputStream buffStream =
-                        new BufferedOutputStream(new FileOutputStream(new File(path)));
-				buffStream.write(bytes);
-                buffStream.close();
-			}catch (Exception e){
-				System.out.println("Image upload Error : " + e.getMessage());
-			}
-		}
-		System.out.println("path " + path);
-		return "../resources/upload/advertiseImage/"+fileName;
-	}
-
 	public String excelUpload(MultipartFile file, MultipartHttpServletRequest request){
 		String fileName = null;
 		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/excel/");
@@ -126,5 +108,111 @@ public class FileService {
 			System.out.println("Image upload Error : " + e.getMessage());
 		}
 		return path;
+	}
+
+	public void zipUpload(MultipartFile zipFile , MultipartHttpServletRequest request) throws Exception{
+		String fileName = null;
+		String rootPath = request.getSession().getServletContext().getRealPath("/resources/zip/");
+		String path = null;
+		try{
+			fileName = zipFile.getOriginalFilename();
+			byte[] bytes = zipFile.getBytes();
+			path = rootPath+fileName;
+			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(new File(path)));
+			bufferedOutputStream.write(bytes);
+			bufferedOutputStream.close();
+			File newFile = new File(path+zipFile.getOriginalFilename());
+			zipFile.transferTo(newFile);
+			unzip(newFile,request);
+			deleteAllFiles(rootPath);
+			File directory = new File(rootPath);
+			directory.mkdir();
+		}catch(Exception e){
+			log.error("zipUpload error " + e.getMessage(), e);
+		}
+
+	}
+
+	private void unzip(File file, HttpServletRequest request) throws Exception{
+		FileInputStream fileInputStream = null;
+		ZipInputStream zipInputStream = null;
+		ZipEntry zipEntry = null;
+		try{
+			fileInputStream = new FileInputStream(file);
+			zipInputStream = new ZipInputStream(fileInputStream);
+
+			while((zipEntry=zipInputStream.getNextEntry())!=null){
+				String fileName = zipEntry.getName();
+				String[] temp=fileName.split("/");
+
+				if(zipEntry.isDirectory()){
+					File directory = new File(fileName);
+					directory.mkdirs();
+				}else{
+					unzipEntry(zipInputStream,request,temp[temp.length-1]);
+				}
+			}
+		}finally{
+			if(zipInputStream!=null)
+				zipInputStream.close();
+			if(fileInputStream!=null)
+				fileInputStream.close();
+		}
+	}
+
+	private void unzipEntry(ZipInputStream zipInputStream , HttpServletRequest request,String imageName) throws Exception{
+		FileOutputStream fileOutputStream = null;
+		String path = request.getSession().getServletContext().getRealPath("/resources/upload/profileImg/");
+		File file = null;
+		try{
+			file = new File(path+imageName);
+			fileOutputStream = new FileOutputStream(file);
+			byte[] bytes = new byte[256];
+			int len = 0;
+			while((len = zipInputStream.read(bytes))!=-1){
+				fileOutputStream.write(bytes,0,len);
+			}
+			userService.imageUpload(imageName);
+		}finally{
+			if(fileOutputStream!=null)
+				fileOutputStream.close();
+		}
+	}
+
+	public String imageUpload(MultipartFile file, MultipartHttpServletRequest request){
+		String fileName=null;
+		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/advertiseImage/");
+		String path=null;
+		if(file!=null){
+			try{
+				fileName=file.getOriginalFilename();
+				byte[] bytes = file.getBytes();
+				path = rootPath+fileName;
+				BufferedOutputStream buffStream =
+						new BufferedOutputStream(new FileOutputStream(new File(path)));
+				buffStream.write(bytes);
+				buffStream.close();
+			}catch (Exception e){
+				System.out.println("Image upload Error : " + e.getMessage());
+			}
+		}
+		return "../resources/upload/advertiseImage/"+fileName;
+	}
+
+	private void deleteAllFiles(String path){
+		File file = new File(path);
+		File[] tempFile = file.listFiles();
+
+		if(tempFile.length > 0 ){
+			for(int i=0; i<tempFile.length ; i++){
+				if(tempFile[i].isFile()){
+					tempFile[i].delete();
+				}else{
+					deleteAllFiles(tempFile[i].getPath());
+				}
+				tempFile[i].delete();
+			}
+			file.delete();
+		}
 	}
 }
