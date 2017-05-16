@@ -68,21 +68,20 @@ public class AdminService {
 		String path = fileService.excelUpload(file, request);
 		ExcelReadOption excelReadOption = new ExcelReadOption();
 		excelReadOption.setFilePath(path);
-		excelReadOption.setColumns("B","C","D","E","F","G","H","I","J","K");
+		excelReadOption.setColumns("B","C","D","E","F","G","H","I","J");
 		excelReadOption.setStartRow(2);
 		List<Map<String,String>> excelResult = ExcelRead.readExcel(excelReadOption,path);
 		List<UserExcelDto> list = new ArrayList<UserExcelDto>();
 		for(Map<String,String> content : excelResult){
 			UserExcelDto userExcelDto = new UserExcelDto();
 			userExcelDto.setGrade((int)(Double.parseDouble(content.get("B").substring(0,1))));
-			userExcelDto.setImage(content.get("D"));
 			userExcelDto.setName(content.get("C"));
 			userExcelDto.setPositionName("일반회원");
-			userExcelDto.setPhoneNumber(content.get("E"));
-			userExcelDto.setCompanyNumber(content.get("F"));
-			userExcelDto.setStatus(content.get("G"));
-			userExcelDto.setBirth(content.get("H"));
-			userExcelDto.setEmail(content.get("I"));
+			userExcelDto.setPhoneNumber(content.get("D"));
+			userExcelDto.setCompanyNumber(content.get("E"));
+			userExcelDto.setStatus(content.get("F"));
+			userExcelDto.setBirth(content.get("G"));
+			userExcelDto.setEmail(content.get("H"));
 			list.add(userExcelDto);
 		}
 		return list;
@@ -90,8 +89,10 @@ public class AdminService {
 
 	@Transactional(readOnly = false)
 	public void saveuUserList(List<UserExcelDto> list, List<String> values){
+		Category category = adminService.getCurrentAdmin().getCategory();
+		int userNum = userRepository.findMaxNumber(category.getId());
 		for(int i=0; i<values.size(); i++) {
-			User user=userRepository.save(User.of(list.get(Integer.parseInt(values.get(i)) - 1), adminService.getCurrentAdmin().getCategory(), positionRepository.findByName("일반회원")));
+			User user=userRepository.save(User.of(list.get(Integer.parseInt(values.get(i)) - 1), category, positionRepository.findByName("일반회원"),userNum++));
 			boardService.findByGrade(user.getGrade());
 		}
 	}

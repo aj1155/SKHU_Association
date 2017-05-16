@@ -2,11 +2,15 @@ package me.skhu.repository;
 
 import java.util.List;
 
+import me.skhu.repository.custom.OriginUserRepositoryCustom;
+import me.skhu.repository.custom.UserRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import me.skhu.domain.Category;
@@ -19,7 +23,7 @@ import me.skhu.util.PaginationUser;
  * Created by Manki Kim on 2017-01-18.
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> ,UserRepositoryCustom {
 
     List<UserDto> findByCategoryId(int categoryId);
     List<UserDto> findByCategoryIdAndGrade(int categoryId, int grade);
@@ -57,5 +61,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 		return page.getContent();
     }
 
-
+	@Query(value="SELECT Max(u.user_Number) FROM User u WHERE u.category_id = :categoryId", nativeQuery = true)
+	int findMaxNumber(@Param("categoryId") int categoryId);
+    User findByCategoryIdAndUserNumber(int categoryId, int userNumber);
 }

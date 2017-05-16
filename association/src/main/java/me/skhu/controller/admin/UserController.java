@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import me.skhu.repository.UserRepository;
+import me.skhu.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +23,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import me.skhu.domain.dto.OriginUserDto;
 import me.skhu.domain.dto.UserDto;
 import me.skhu.domain.dto.UserForm;
-import me.skhu.service.AdminService;
-import me.skhu.service.OriginUserPhoneService;
-import me.skhu.service.OriginUserService;
-import me.skhu.service.PositionService;
-import me.skhu.service.UserService;
 import me.skhu.util.Pagination;
 import me.skhu.util.PaginationUser;
 import me.skhu.util.Excel.ExcelRead;
@@ -50,6 +47,9 @@ public class UserController {
 
 	@Autowired
 	private AdminService adminService;
+
+	@Autowired
+	private FileService fileService;
 
 	@RequestMapping("/list")
 	public String list(Model model, @ModelAttribute("pagination") PaginationUser pagination){
@@ -199,9 +199,14 @@ public class UserController {
 
 	@RequestMapping(value = "userExcelInsert" , method=RequestMethod.POST)
 	public String userExcelInsert(@ModelAttribute UserForm userForm, @ModelAttribute("pagination") PaginationUser pagination, @RequestParam(value="values") List<String> values){
-		for(int i=0; i< userForm.getList().size();i++)
-			System.out.println(userForm.getList().get(i).getImage());
 		adminService.saveuUserList(userForm.getList(),values);
 		return "redirect:/user/list";
 	}
+
+	@RequestMapping(value = "imageUpload", method = RequestMethod.POST)
+	public String userImageUpload(MultipartFile imageFile, MultipartHttpServletRequest request) throws Exception{
+		fileService.zipUpload(imageFile,request);
+		return "redirect:/user/list";
+	}
+
 }

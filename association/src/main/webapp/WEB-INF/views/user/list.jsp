@@ -24,6 +24,7 @@ img{
 				<li><button type="submit" name="cmd" value="delete" class="button">삭제</button></li>
 				<li><a href="/user/create" class="button special icon fa-plus">동문 추가</a></li>
 				<li><a href="/user/excelUpload" class="button special icon fa-plus">동문목록 엑셀</a></li>
+				<li><a href="#imageUpload" class="button special icon fa-plus" data-toggle="modal">동문 사진 추가</a></li>
 			</ul>
 		</div>
 
@@ -46,6 +47,7 @@ img{
 				<thead>
 					<tr>
 						<th onclick='event.cancelBubble=true;'><input type="checkbox" id="all" name="all" onClick="allCkeck(this)"/><label for="all"></label></th>
+						<th>회원번호</th>
 						<th>기수</th>
 						<th>이미지</th>
 						<th>이름</th>
@@ -61,6 +63,7 @@ img{
 					<c:forEach var="user" items="${ list.user }" >
 						<tr data-url="/user/edit?id=${ user.id }">
 							<td><input type="checkbox" name="del" value="${ user.id }" /></td>
+							<td>${ user.userNumber}</td>
 							<td>${ user.grade }기</td>
 							<td>
 								<c:if test="${ user.image == null }">
@@ -98,7 +101,24 @@ img{
 		</div>
 
 		</form:form>
-			
+		<!-- image upload -->
+		<div id="imageUpload" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h3>회원 사진 등록</h3>
+					</div>
+					<div class="modal-body" style="max-height:650px;">
+						<form id="upload" class="form-inline" action="/user/imageUpload" method="POST" enctype="multipart/form-data">
+							<input type="file" name="imageFile" style="width:200px;"/>
+							<button type="submit" class="btn">저장</button>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
 		</section>
 	</div>
 </div>
