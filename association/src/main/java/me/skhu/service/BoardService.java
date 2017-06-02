@@ -37,7 +37,7 @@ public class BoardService {
 	}
 
 	public void findByGrade(int grade){
-		String name = grade+"기 자유게시판";
+		String name = grade+"기자유게시판";
 		Board board = boardRepository.findByCategoryIdAndBoardType(adminService.getCurrentAdmin().getCategory().getId(),name);
 		if(board==null)
 			saveGrade(grade);

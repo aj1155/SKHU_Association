@@ -152,4 +152,8 @@ public class UserService {
         user.setImage(rootPath+fileName);
         userRepository.save(user);
     }
+
+    public List<User> findByCategoryIdAndImage(int categoryId){
+        return userRepository.findByCategoryIdAndImage(categoryId);
+    }
 }
