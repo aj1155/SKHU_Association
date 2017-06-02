@@ -209,4 +209,8 @@ public class UserController {
 		return "redirect:/user/list";
 	}
 
+	@RequestMapping(value = "imageDownload" ,method = RequestMethod.GET)
+	public void imageDownload(HttpServletResponse response){
+		fileService.imageDownload(response);
+	}
 }

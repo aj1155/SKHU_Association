@@ -84,7 +84,8 @@ img{
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>	
+		</div>
+			<a href="/user/imageDownload" class="button special" style="float:right;">사진 다운로드</a>
 		<a href="/user/excelDownload" class="button special" style="float:right;">엑셀다운로드</a>
 		<input type="hidden" name="cp" value="1" />
 

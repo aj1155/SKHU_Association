@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport
 import javax.persistence.EntityManager;
 import javax.validation.constraints.Max;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by iljun on 2017-04-19.
@@ -35,4 +36,12 @@ public class UserRepositoryImpl extends QueryDslRepositorySupport implements Use
                 .fetchResults();
     }
     */
+
+    @Override
+    public List<User> findByCategoryIdAndImage(int categoryId){
+        return from(qUser)
+                .where(qUser.category.id.eq(categoryId))
+                .where(qUser.image.isNotNull())
+                .fetch();
+    }
 }

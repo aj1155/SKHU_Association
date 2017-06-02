@@ -13,6 +13,7 @@ button.close{
 </style>
 <div id="addMember" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
+
 		<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -20,10 +21,10 @@ button.close{
 		</div>
 		<div class="modal-body">
 			<form id="searchUser" class="form-inline">
-	            <span>이름:</span>
-	            <input type="text" name="name" />
-	            <button id="search" type="button" class="button special" onclick="searchUser()">검색</button>
-	        </form>
+				<span>이름:</span>
+				<input type="text" name="name" />
+				<button id="search" type="button" class="button special" onclick="searchUser()">검색</button>
+			</form>
 			<div id="scroll">
 			<div id="searchResult" style="width: 100%; height: 200px;">
 				<table class="table table-bordered">
