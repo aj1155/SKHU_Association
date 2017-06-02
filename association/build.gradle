@@ -13,6 +13,7 @@ buildscript {
 apply plugin: 'war'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'idea'
+apply plugin: 'eclipse'
 
 jar {
 	baseName = 'association'
@@ -76,6 +77,8 @@ dependencies {
 	compile ("com.querydsl:querydsl-core:$querydslVersion")
 	compile ("com.querydsl:querydsl-apt:$querydslVersion")
 	compile ("com.querydsl:querydsl-jpa:$querydslVersion")
+	compile fileTree(dir: 'lib', include: ['*.jar'])
+
 }	
 	[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 

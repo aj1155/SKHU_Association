@@ -2,6 +2,7 @@ package me.skhu.service;
 
 import lombok.extern.slf4j.Slf4j;
 import me.skhu.domain.Files;
+import me.skhu.domain.User;
 import me.skhu.domain.dto.FilesDto;
 import me.skhu.repository.FilesRepository;
 import net.sf.jazzlib.ZipEntry;
@@ -28,6 +29,9 @@ public class FileService {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private AdminService adminService;
 
 	@Transactional(readOnly = false)
 	public void upload(int boardPostId, MultipartFile[] files, MultipartHttpServletRequest request){
@@ -214,5 +218,25 @@ public class FileService {
 			}
 			file.delete();
 		}
+	}
+
+	public void imageDownload(HttpServletResponse response){
+		//File file = findImage(adminService.getCurrentAdmin().getCategory().getId());
+
+		//byte fileByte[] = FileUtils.readFileToByteArray(new File(file.getPath()));
+		//response.setContentType("application/zip");
+		//response.setContentLength(fileByte.length);
+		//response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(file.getName(),"UTF-8")+"\";");
+		//response.setHeader("Content-Transfer-Encoding", "binary");
+		//response.getOutputStream().write(fileByte);
+
+		//response.getOutputStream().flush();
+		//response.getOutputStream().close();
+	}
+
+	private File findImage(int categoryId) throws Exception{
+		List<User> imageList = userService.findByCategoryIdAndImage(categoryId);
+
+		return null;
 	}
 }
