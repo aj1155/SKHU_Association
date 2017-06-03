@@ -119,7 +119,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "phoneNumberEditList", method = RequestMethod.GET)
-	public String phoneNumberEditList(Model model, Pagination pagination){
+	public String phoneNumberEditList(Model model, @ModelAttribute("pagination") Pagination pagination){
 		model.addAttribute("list",originUserPhoneSerice.pagination(pagination));
 		return "user/phoneNumberEditList";
 	}
