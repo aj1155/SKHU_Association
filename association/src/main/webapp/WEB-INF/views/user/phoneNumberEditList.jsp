@@ -22,7 +22,7 @@
             <h2>아이디 변경 관리</h2>
         </header>
         <section style="padding-top:50px;">
-        	<form:form modelAttribute="pagination" method="POST">
+        	<form:form modelAttribute="pagination" method="GET">
         	<div align="right">
 				<ul class="actions">
 					<li><span id="allAgrees" class="button special" >일괄승인</span></li>			
