@@ -12,7 +12,7 @@ import me.skhu.domain.Board;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardDto {
+public class BoardDto{
 
 	private String boardType;
 	private int boardId;
@@ -26,4 +26,5 @@ public class BoardDto {
 				.categoryName(board.getCategory().getName())
 				*/
 	}
+
 }
