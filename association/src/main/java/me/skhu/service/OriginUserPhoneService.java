@@ -28,6 +28,7 @@ public class OriginUserPhoneService {
     public List<OriginUserPhone> pagination(Pagination pagination){
         int categoryId=adminService.getCurrentAdmin().getCategory().getId();
         pagination.setRecordCount(originUserPhoneRepository.resultCount(pagination,categoryId));
+        System.out.println(originUserPhoneRepository.resultCount(pagination,categoryId));
         return originUserPhoneRepository.pagination(pagination,categoryId);
     }
 
@@ -37,7 +38,7 @@ public class OriginUserPhoneService {
         origin.setAgree(true);
         originUserPhoneRepository.save(origin);
         User user = userService.findByUserId(origin.getUser().getId());
-        user.setLoginId(origin.getLoginId());
+        user.setLoginId(user.getPhoneNumber());
         userService.save(user);
     }
 

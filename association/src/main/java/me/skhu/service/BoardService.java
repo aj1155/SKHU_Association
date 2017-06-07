@@ -1,6 +1,6 @@
 package me.skhu.service;
 
-import java.util.List;
+import java.util.*;
 
 import me.skhu.domain.Board;
 import me.skhu.domain.User;
@@ -20,7 +20,22 @@ public class BoardService {
 	private AdminService adminService;
 
 	public List<BoardDto> findByCategoryId(int categoryId){
-		return boardRepository.findByCategoryId(categoryId);
+		List<BoardDto> list = boardRepository.findByCategoryId(categoryId);
+		Collections.sort(list, new Comparator<BoardDto>() {
+			@Override
+			public int compare(BoardDto o1, BoardDto o2) {
+				if(o1.getBoardType().equals("공지사항") || o1.getBoardType().equals("자유게시판") || o2.getBoardType().equals("공지사항") || o2.getBoardType().equals("자유게시판") )
+					return 1;
+				else{
+					if(o1.getBoardType().charAt(0)>o2.getBoardType().charAt(0))
+						return 1;
+					else
+						return -1;
+				}
+			}
+		});
+		//TODO lambda식으로 교체
+		return list;
     }
 
     public Board find(int boardId){

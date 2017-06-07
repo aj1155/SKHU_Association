@@ -105,13 +105,13 @@ public class UserService {
     	user.setName(userDto.getName());
     	user.setCompanyNumber(userDto.getCompanyNumber());
     	user.setPhoneNumber(userDto.getPhoneNumber());
-    	user.setStatus(userDto.getStatus());
+        user.setStatus(userDto.getStatus());
     	user.setGrade(userDto.getGrade());
     	user.setBirth(userDto.getBirth());
 
     	user.setEmail(userDto.getEmail());
     	user.setPosition(positionRepository.findOne(userDto.getUser_type()));
-        if(!userDto.getPhoneNumber().equals(user.getLoginId()))
+        if(!(userDto.getPhoneNumber().equals(user.getLoginId())))
             originUserPhoneService.save(user);
         originUserService.save(user);
     	userRepository.save(user);

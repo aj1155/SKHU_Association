@@ -18,4 +18,8 @@ public class CategoryService {
 		return categoryRepository.findAll();
 	}
 
+	public Category findOne(String categoryName){
+		return categoryRepository.findByName(categoryName);
+	}
+
 }

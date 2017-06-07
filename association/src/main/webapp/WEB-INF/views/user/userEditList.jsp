@@ -18,7 +18,7 @@
             <h2>회원정보변경 관리</h2>
         </header>
         <section style="padding-top:50px;">
-            <form:form modelAttribute="pagination" method="POST">
+            <form:form modelAttribute="pagination" method="GET">
             	<div class="form-group">
                 	<form:select path="st" style="width:200px;">
 		                <form:option value="0" label="검색조건" />

@@ -22,7 +22,7 @@
             <h2>아이디 변경 관리</h2>
         </header>
         <section style="padding-top:50px;">
-        	<form:form modelAttribute="pagination" method="POST">
+        	<form:form modelAttribute="pagination" method="GET">
         	<div align="right">
 				<ul class="actions">
 					<li><span id="allAgrees" class="button special" >일괄승인</span></li>			
@@ -48,8 +48,8 @@
                    		<th>기수</th>
                    		<th>이름</th>
                     	<th>생년월일</th>
-                    	<th>핸드폰번호</th>
-                    	<th>변경핸드폰 번호</th>
+                    	<th>기존 로그인 아이디</th>
+                    	<th>변경 로그인 아이디</th>
                     	<th>승인여부</th>
                    	</tr>
                    </thead>
@@ -73,19 +73,19 @@
                    </tbody>
                </table>
            </div>
-           
-             <input type="hidden" name="cp" value="1" />
-             <div align="center">
-				<div class="pagination">
-					<nav aria-label="Page navigation">
-						<ul class="pagination">
-							<c:forEach var="p" items="${ pagination.pageIndexList }">
-								<li class='${ p.cssClass }'><a data-page="${ p.number }" href="#">${ p.label }</a></li>
-							</c:forEach>
-						</ul>
-					</nav>
-				</div>
-			</div>
+
+                <input type="hidden" name="cp" value="1" />
+                <div align="center">
+                    <div class="pagination">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <c:forEach var="p" items="${ pagination.pageIndexList }">
+                                    <li class='${ p.cssClass }'><a data-page="${ p.number }" href="#">${ p.label }</a></li>
+                                </c:forEach>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
 
              </form:form>
         </section>
